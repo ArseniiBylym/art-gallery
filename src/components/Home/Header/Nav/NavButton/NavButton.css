@@ -1,0 +1,36 @@
+.navButton {
+	padding: 5px 40px;
+	cursor: pointer;
+}
+
+.navButton div {
+	font-size: 1.5rem;
+	margin: 0;
+	padding: 0;
+	color: rgba(255,255,255,.5);
+	font-family: 'Montserrat', sans-serif;
+	position: relative;
+	transition: all .3s cubic-bezier(.1,.5,.5,1);
+}
+
+.navButton div:hover {
+	color: rgba(255,255,255, 1); 
+}
+
+.navButton div::after {
+	position: absolute;
+	left: 0;
+	bottom: -5px;
+	content: '';
+	height: 2px;
+	width: 100%;
+	border-radius: 1px;
+	background-color: white;
+	opacity: 0;
+	transition: all 3s cubic-bezier(.1,.5,.5,1);
+}
+
+.navButton div:hover::after{
+	opacity: .7;
+	/*transform: translateY(-10px);*/
+}

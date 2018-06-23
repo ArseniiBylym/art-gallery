@@ -1,0 +1,22 @@
+.GalleryPre{
+	margin:0;
+	padding:0;
+	height: 100vh;
+	width: 100%;
+	background: #ffce99;
+}
+
+.GalleryPre div{
+	width: 30%;
+	height: 100%;
+	background-color: rgba(50,50,50,.3);
+}
+
+.GalleryPre h1 {
+	font-family: 'Krona One', sans-serif;
+	font-size: 9rem;
+	text-orientation: sideways-right;
+	letter-spacing: 4rem;
+	color: rgba(0,0,0,.2);
+	margin-left: 20px;
+}

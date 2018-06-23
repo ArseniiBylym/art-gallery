@@ -1,0 +1,98 @@
+.FooterPre {
+	width: 100%;
+	height: 100vh;
+	/*margin-top: 40px;*/
+	padding: 0;
+	position: relative;
+	
+}
+
+.FooterPre__form-container {
+	width: 100%;
+	height: 75vh;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	background: url(./img/footer-img.jpg);
+	position: relative;
+
+}
+
+
+.FooterPre__form {
+	margin-left: 30px;
+	width: 40%;
+	max-width: 600px;
+	padding: 20px 10px;
+	height: auto;
+	border-radius: 10px;
+	background-color: rgba(0,0,0,.3);
+}
+
+.FooterPre__form form {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-between;
+	padding: 0 10px;
+	height: auto;
+}
+
+.FooterPre__form div {
+	color: white;
+	font-size: 1.2rem;
+	margin-bottom: 40px;
+}
+
+.FooterPre__form input, .FooterPre__form textarea {
+	border-radius: 4px;
+	width: 100%;
+	margin-top: 10px;
+	border: none;
+}
+
+.FooterPre__title {
+	position: absolute;
+	top: 40px;
+	right: 30px;
+	font-size: 3rem;
+	color: rgba(0,0,0,.4);
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+
+.FooterPre__info {
+	background: linear-gradient(to bottom, #555, #222);
+	color: white;
+	padding-top: 100px;
+	height: 25vh;
+	position: fixed;
+	bottom: 0;
+	z-index: -1;
+	width: 100%;
+}
+
+.FooterPre__info--container {
+	width: 60%;
+	margin: auto;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: row;
+	align-items: top;
+	justify-content: space-around;
+	/*color: white;*/
+}
+
+.FooterPre__info h3 {
+	font-family: sans-serif;
+	font-size: 1.5rem;
+	flex-grow: 1;
+	font-weight: normal;
+}
+
+.FooterPre__info ul {
+	flex-grow: 1;
+	list-style: none;
+	font-size: 1.5rem;
+	line-height: 1.7rem;
+}
