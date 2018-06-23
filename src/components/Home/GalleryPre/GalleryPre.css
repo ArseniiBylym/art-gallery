@@ -1,22 +1,124 @@
 .GalleryPre{
 	margin:0;
 	padding:0;
-	height: 100vh;
+	height: auto;
 	width: 100%;
-	background: #ffce99;
+	background: linear-gradient(to right, #d6c1a2 30%, #ffce99 30%);
+	position: relative;
 }
 
-.GalleryPre div{
-	width: 30%;
-	height: 100%;
-	background-color: rgba(50,50,50,.3);
-}
 
 .GalleryPre h1 {
 	font-family: 'Krona One', sans-serif;
 	font-size: 9rem;
-	text-orientation: sideways-right;
 	letter-spacing: 4rem;
 	color: rgba(0,0,0,.2);
-	margin-left: 20px;
+	margin-left: 40px;
+}
+
+.GalleryPre__immage-container {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: 0.6fr 3fr 1fr 3fr 3fr;
+
+
+	grid-template-areas: " .    .    .     .  img2 img2 img2"
+						 "img1 img1 img1 img1 img2 img2 img2"
+						 "img1 img1 img1 img1   .   h2   h2"
+						 "img4 img4 img4 img3 img3 img3 img3"
+						 "img4 img4 img4 img3 img3 img3 img3";
+						
+						 
+	grid-gap: 60px;
+	width: 90%;
+	margin: auto;
+	height: auto; 
+}
+
+.GalleryPre .img1 {
+	grid-area: img1;
+	height: 500px;
+}
+.GalleryPre .img1 .inner {
+	background: url(./img/img1.jpg) center/100% auto no-repeat;
+	width: 100%;
+	height:100%;
+}
+
+.GalleryPre .img2 {
+	grid-area: img2;
+	height: auto;
+	margin-top: 40px;
+}
+.GalleryPre .img2 .inner {
+	background: url(./img/img2.jpg) top left/auto 100% no-repeat;
+	width: 100%;
+	height: 100%;
+}
+
+.GalleryPre .img3 {
+	grid-area: img3;
+	height: 500px;
+}
+
+.GalleryPre .img3 .inner {
+	background: url(./img/img3.jpg) center/100% 100% no-repeat;
+	width: 100%;
+	height: 100%;
+}
+
+.GalleryPre .img4 {
+	grid-area: img4;
+	height: 500px;
+	margin-top: 60px;
+}
+.GalleryPre .img4 .inner {
+	background: url(./img/img4.jpg) center/100% auto no-repeat;
+	width: 100%;
+	height: 100%;
+}
+
+.GalleryPre__immage-container div{
+	transition: all 2.5s .2s ease-in-out;
+	overflow: hidden;
+}
+
+.GalleryPre .more {
+	grid-area: h2;
+	font-size: 1.8rem;
+	color: rgba(0,0,0,.5);
+	cursor: pointer;
+	transition: all 1.5s .2s ease-in-out;
+	text-align: left;
+	margin: 40px 0 0 0;
+}
+
+.GalleryPre .more:hover {
+	color: rgba(0,0,0,.9);
+	transform: translateX(15px);
+}
+
+.img1:hover .inner, .img2:hover .inner, .img3:hover .inner, .img4:hover .inner {
+	transform: scale(1.1);
+}
+
+.img1, .img2, .img3, .img4 {
+	box-shadow: 7px 10px 8px rgba(0,0,0,.5);
+	position: relative;
+	cursor: pointer;
+}
+
+.GalleryPre__immage-container p {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 1;
+	color: black;
+	font-size: 1.1rem;
+	opacity: 0;
+	transition: opacity 2s .2s ease-in-out;
+}
+
+.img1:hover p, .img2:hover p, .img3:hover p, .img4:hover p {
+	opacity: .8;
 }

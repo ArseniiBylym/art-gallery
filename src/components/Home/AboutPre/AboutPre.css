@@ -45,7 +45,10 @@
 
 .AboutPre__photo {
 	flex-grow: 1;
-	background: url(./img/self-photo.jpg) left top/120% no-repeat;
+	/*background: url(./img/self-photo.jpg) left top/120% no-repeat;*/
+	background: url(./img/self-photo.jpg);
+	background-size: 120% auto ;
+	background-repeat: no-repeat;
 	filter: grayscale(60%);
 	margin-bottom: 80px;
 }

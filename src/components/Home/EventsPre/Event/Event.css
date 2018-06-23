@@ -1,0 +1,63 @@
+.Event {
+	width: 70%;
+	height: 300px;
+	padding: 0;
+	border-right: none;
+	background: white;
+	margin-bottom: 50px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	box-shadow: -5px 5px 10px #444;
+}
+
+.Event:nth-child(1) .Event__photo {
+	background: url(./img/img1.jpg) top left/100%  auto no-repeat, red;
+	flex-grow: 1;
+	order: 1;
+}
+
+.Event:nth-child(1) {
+	align-self: flex-end;
+}
+
+.Event:nth-child(2) .Event__photo {
+	background: url(./img/img2.jpg) top left/100%  auto no-repeat, red;
+	flex-grow: 1;
+}
+
+.Event:nth-child(2){
+	align-self: flex-start;
+	border-right: 1px solid black;
+	box-shadow: 5px 5px 10px #444;
+}
+
+.Event:nth-child(3) .Event__photo {
+	background: url(./img/img3.jpg) top left/100%  auto no-repeat, red;
+	flex-grow: 1;
+	order: 1;
+}
+
+.Event:nth-child(3){
+	align-self: flex-end;
+}
+
+
+.Event__text {
+	text-align: center;
+	width: 30%;
+	height: 100%;
+}
+
+.Event p {
+	margin: 20px 0;
+}
+
+.Event button {
+	margin-top: 50px;
+	padding: 5px 25px;
+	border: 1px solid rgba(0,0,0,.5);
+	border-radius: 7px;
+	font-size: 1rem;
+	color: black;
+}
