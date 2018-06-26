@@ -4,9 +4,9 @@ import Nav from './Nav/Nav.js';
 
 function header(props) {
 	return(
-		<header className='Header'>
+		<header className='Header' id='Home__Header'>
 			<Nav />
-			<div className='title'>
+			<div className='Header__title'>
 				<h1>Maryna <br />Herasymenko</h1>
 				<p>Art</p>
 			</div>

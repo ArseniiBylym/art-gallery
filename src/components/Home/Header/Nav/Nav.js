@@ -4,12 +4,17 @@ import NavButton from './NavButton/NavButton.js';
 
 function nav (props) {
 
-	const buttons = ['Home', 'Gallery', 'Events', 'About', 'Contacts'].map((i) => {
-		return <NavButton key={i} text={i} />
+	const buttons = [
+	{name: 'Home', href: '/'},
+	{name: 'Gallery', href: '#Home__GalleryPre'},
+	{name: 'Events', href: '#Home__EventsPre'},
+	{name: 'About', href: '#Home__AboutPre'},
+	{name: 'Contacts', href: '#Home__FooterPre'}].map((i) => {
+		return <NavButton key={i.name} text={i.name} href={i.href} />
 	})
 	
 	return (
-		<div className='Nav'>
+		<div className='Nav' id='Header__Nav'>
 			{buttons}
 		</div>
 	)

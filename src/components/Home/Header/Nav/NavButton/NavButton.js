@@ -4,9 +4,9 @@ import './NavButton.css';
 function navButton(props) {
 	return (
 		<div className='navButton'>
-			<div>
+			<a href={props.href}>
 				<p>{props.text}</p>
-			</div>
+			</a>
 		</div>
 	)
 }

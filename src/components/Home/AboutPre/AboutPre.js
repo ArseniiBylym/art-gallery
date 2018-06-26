@@ -3,7 +3,7 @@ import './AboutPre.css';
 
 function aboutPre(props) {
 	return (
-		<div className='AboutPre'>
+		<div className='AboutPre' id='Home__AboutPre'>
 			<div className='AboutPre__info'>
 				<div className="AboutPre__info--header">
 					<h1>About me</h1>

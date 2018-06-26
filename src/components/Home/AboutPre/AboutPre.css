@@ -12,27 +12,45 @@
 
 .AboutPre__info {
 	width: 60%;
-	height: 90%;
+	height: 100%;
 	background-color: #333;
-	margin-bottom: 40px
+	margin-bottom: 40px;
+	position: relative;
+	z-index: 10;
 }
 
 .AboutPre__info--header {
-	margin: 20px 0 0 200px;
+	margin: 20px 0 0 150px;
+	padding: 10px;
+	font-size: 3rem;
+	color: white;
+	transition: all 2s ease-in-out;
+	transform: translateY(20px);
+	opacity: 0;
+
 }
 
-.AboutPre__info--header h1 {
-	font-size: 7rem;
-	color: white;
-	text-shadow: 2px 2px 3px #000;
+.AboutPre__info--header--show {
+	transform: translateY(0);
+	opacity: 1;
 }
 
 .AboutPre__info--biography {
-	margin: 30px 0 -40px 40px;
-	width: 50%;
-	padding: 40px;
+	box-sizing: border-box;
+	margin-left: 70px;
+	width: 60%;
+	padding: 2rem;
+	overflow: hidden;
 	height: auto;
 	background-color: black;
+	position: relative;
+	top: 40px;
+	opacity: 0;
+	transition: all 2s ease-in-out;
+}
+
+.AboutPre__info--biography--show {
+	opacity: 1;
 }
 
 .AboutPre__info--biography p {
@@ -45,10 +63,7 @@
 
 .AboutPre__photo {
 	flex-grow: 1;
-	/*background: url(./img/self-photo.jpg) left top/120% no-repeat;*/
-	background: url(./img/self-photo.jpg);
-	background-size: 120% auto ;
-	background-repeat: no-repeat;
+	background: url(./img/self-photo.jpg) left top/100% no-repeat;
 	filter: grayscale(60%);
-	margin-bottom: 80px;
+	margin-bottom: 100px;
 }

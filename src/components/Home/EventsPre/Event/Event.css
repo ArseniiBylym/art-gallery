@@ -6,58 +6,57 @@
 	background: white;
 	margin-bottom: 50px;
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
 	box-shadow: -5px 5px 10px #444;
+	transition: all 1s .2s ease-in-out;
+	opacity: 0;
+	transform: translateY(40px) ;
 }
 
-.Event:nth-child(1) .Event__photo {
-	background: url(./img/img1.jpg) top left/100%  auto no-repeat, red;
-	flex-grow: 1;
-	order: 1;
+.Event--show {
+	transform: translateY(0) !important;
+	opacity: 1 !important;
 }
 
-.Event:nth-child(1) {
+.Event:nth-child(odd) {
 	align-self: flex-end;
 }
 
-.Event:nth-child(2) .Event__photo {
-	background: url(./img/img2.jpg) top left/100%  auto no-repeat, red;
-	flex-grow: 1;
-}
-
-.Event:nth-child(2){
-	align-self: flex-start;
-	border-right: 1px solid black;
-	box-shadow: 5px 5px 10px #444;
-}
-
-.Event:nth-child(3) .Event__photo {
-	background: url(./img/img3.jpg) top left/100%  auto no-repeat, red;
-	flex-grow: 1;
-	order: 1;
-}
-
-.Event:nth-child(3){
-	align-self: flex-end;
-}
-
-
-.Event__text {
+.Event__info {
 	text-align: center;
 	width: 30%;
+	position: relative;
+	margin-top: 30px;
+}
+
+.Event:nth-child(odd) .Event__info {
+	order: -1;
+}
+
+.Event__info h3 {
+	font-size: 1.4rem;
+}
+
+.Event__info p {
+	margin: 1rem;
+}
+
+.Event__info button {
+	position: absolute;
+	bottom: 10px;
+	width: 80%;
+	left: 10%;
+	font-family: 'IM Fell English SC', serif;
+	font-size: 1.2rem;
+	padding: 5px 0;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.Event__photo {
+	width: 70%;
+}
+
+.Event__photo img {
+	width: 100%;
 	height: 100%;
-}
-
-.Event p {
-	margin: 20px 0;
-}
-
-.Event button {
-	margin-top: 50px;
-	padding: 5px 25px;
-	border: 1px solid rgba(0,0,0,.5);
-	border-radius: 7px;
-	font-size: 1rem;
-	color: black;
 }
