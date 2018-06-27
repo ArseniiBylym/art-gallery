@@ -1,33 +1,38 @@
 .FooterPre {
+	display: none;
 	box-sizing: border-box;
 	width: 100%;
 	height: 100vh;
 	padding: 0;
-	position: relative;
-	margin-top: -40px;
+	position: fixed;
+	bottom: 0;
+	/*margin-top: -40px;*/
+	z-index: -10;
 	
 }
 
 .FooterPre__form-container {
 	width: 100%;
-	height: calc(70vh + 40px);
+	/*height: calc(70vh + 40px);*/
+	height:  70vh;
 	padding: 60px 0 0 0;
 	display: flex;
 	align-items: center;
 	justify-content: left;
-	background: url(./img/footer-img.jpg) 0 0/cover no-repeat;
+	background: url(./img/footer-1-img.jpg) 0 0/cover no-repeat;
+	filter: sepia(50%) grayscale(30%);
 	position: relative;
 }
 
 .FooterPre__form {
 	margin-left: 70px;
-	width: 40%;
+	width: 60%;
 	position: relative;
 	/*max-width: 600px;*/
 	padding: 20px 10px;
 	height: auto;
 	border-radius: 10px;
-	background-color: rgba(0,0,0,.3);
+	background-color: rgba(0,0,0,.5);
 }
 
 .FooterPre__form form {
@@ -36,6 +41,8 @@
 	align-items: stretch;
 	justify-content: space-between;
 	padding: 0 10px;
+	width: 80%;
+	margin: auto;
 	height: auto;
 }
 
@@ -53,12 +60,20 @@
 }
 
 .FooterPre__title {
+
 	position: absolute;
-	top: 40px;
-	right: 40px;
-	font-size: 3rem;
-	color: rgba(0,0,0,.4);
+	/*width:auto;
+	height: auto;*/
+	top: -5%;
+	right: 15vw;
+	/*background-color: pink;*/
+	/*top: 25%;
+	right: 40px;*/
+	font-size: 5vh;
+	color: rgba(0,0,0,.7);
 	font-family: 'Merriweather Sans', sans-serif;
+	transform: rotate(-90deg);
+	transform-origin: right bottom;
 }
 
 .FooterPre__form button {
@@ -69,7 +84,7 @@
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
-	color: rgba(0,0,0,.6);
+	color: rgba(0,0,0,.9);
 }
 
 .FooterPre__info {
@@ -78,6 +93,7 @@
 	min-height: 30vh;
 	width: 100%;
 	font-family: 'Merriweather Sans', sans-serif;
+	position: relative;
 }
 
 .FooterPre__info a {
@@ -123,7 +139,7 @@
 	justify-content: left;
 }
 .FooterPre__info--copyrights {
-	margin: 20px 0;
+	margin: 20px 0 0 0;
 }
 
 .FooterPre__info--copyrights h3 {
@@ -131,8 +147,17 @@
 }
 
 .FooterPre__info--socials ul {
-	margin: 40px 0 0 0;
+	margin: 20px 0 0 0;
 	display: flex;
 	justify-content: flex-start;
 	padding-left: 0;
+}
+
+.FooterPre__creator {
+	position: absolute;
+	bottom: 20px;
+	right: 40px;
+	color: white;
+	font-size: .8rem;
+	font-family: 'Merriweather Sans', sans-serif;
 }

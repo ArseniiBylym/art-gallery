@@ -4,7 +4,8 @@
 	padding-bottom: 30px;
 	height: auto;
 	width: 100%;
-	background: #99aab2;
+	/*background: #99aab2;*/
+	background-color: #aec69d;
 	position: relative;
 }
 
@@ -12,7 +13,7 @@
 	overflow: hidden;
 	background: linear-gradient(90deg, rgba(50,50,50,.2), rgba(50,50,50,0));
 	font-family: 'Krona One', sans-serif;
-	font-size: 6vw;
+	font-size: 5vw;
 	letter-spacing: 3vw;
 	color: rgba(0,0,0,.2);
 	padding: 20px;

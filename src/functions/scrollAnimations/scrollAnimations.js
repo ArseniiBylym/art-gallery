@@ -34,8 +34,12 @@ const animElems = {
 	
 //Functions
 	window.addEventListener('scroll', (e) => {
+		
+		if (window.scrollY + 150 >= elemsTopCoords.about)	{
+			showFooter();
+		}	else hideFooter();
+		
 
-				
 		toggleElem('gallery', 100, animElems.gallery__title);
 		toggleElem('events', 100, animElems.events__title);
 		toggleElem('about', 200, animElems.about__title);
@@ -49,6 +53,18 @@ const animElems = {
 		toggleElem('events__event2', 0, animElems.events__title__eventList[2]);
 
 	})
+
+
+	function showFooter() {
+		if (elems.footer.style.display === 'block') return;
+		elems.footer.style.display = 'block';
+	}
+
+	function hideFooter() {
+		if (window.getComputedStyle(elems.footer).getPropertyValue('display') === 'none') return;
+		elems.footer.style.display = 'none';
+	}
+
 
 	function toggleElem(screen, dellay, elem) {
 		if(window.scrollY + screenH > elemsTopCoords[screen] + dellay) {

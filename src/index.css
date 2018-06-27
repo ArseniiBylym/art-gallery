@@ -26,6 +26,8 @@ html {
 
 body {
   margin: 0;
+  width: calc(100% + 17px);
+  overflow-x: hidden;
 }
 
 /* HTML5 display definitions

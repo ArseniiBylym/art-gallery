@@ -1,23 +1,28 @@
 .Nav {
 	box-sizing: border-box;
-	position: absolute;
+	position: sticky;
 	top: 0;
-	margin: auto;
+	margin: 0;
 	padding: 30px 50px;
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	align-items: top;
-	justify-content: space-around;
+	justify-content: center;
 	opacity: 0;
-	animation: show-navbar .5s 1.5s ease-in-out forwards;
+	/*transform: scale(1);*/
+	animation: show-navbar 2s 2s ease-in-out forwards;
+
+	z-index: 20;
 }
 
 @keyframes show-navbar {
 	0% {
 		opacity: 0;
+		transform: scale(1.14);
 	}
 	100% {
 		opacity: 1;
+		transform: scale(1);
 	}
 }

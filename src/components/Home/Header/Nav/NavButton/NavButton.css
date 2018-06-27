@@ -1,20 +1,28 @@
 .navButton {
 	padding: 5px 40px;
 	cursor: pointer;
+	border-left: 1px solid #564a42;
+
+}
+
+.navButton:first-child {
+	border: none;
 }
 
 .navButton a {
 	font-size: 1.5rem;
 	margin: 0;
 	padding: 0;
-	color: rgba(255,255,255,.5);
+	color: #564a42;
 	font-family: 'IM Fell English SC', serif;
 	letter-spacing: .3rem;
 	position: relative;
 	transition: all .3s linear;
 	text-decoration: none;
+
+
 }
 
 .navButton a:hover {
-	color: rgba(255,255,255, 1); 
+	color: white; 
 }
