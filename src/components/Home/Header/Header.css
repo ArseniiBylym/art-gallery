@@ -18,6 +18,7 @@
 	animation: show-header 1.5s ease-in-out forwards;
 }
 
+
 .Header__title{
 	position: absolute;
 	top: 30vh;
@@ -30,7 +31,9 @@
 	opacity: 0;
 	animation: show-title 1.8s 1.3s ease forwards;
 	transform: scale(1);
+
 }
+
 
 .Header__title::before, .Header__title::after {
 	content: '';
@@ -49,11 +52,11 @@
 @keyframes show-header {
 	0% {
 		opacity: 0;
-		/*transform: translateY(-20px);*/
+		transform: translateY(-20px);
 	}
 	100% {
 		opacity: 1;
-		/*transform: translateY(0);*/
+		transform: translateY(0);
 	}
 }
 

@@ -1,0 +1,33 @@
+.Picture {
+	width: 100%;
+	height: 90%;
+	position: relative;
+	/*background: rgba(4,4,4,.3);*/
+}
+
+.Picture__info {
+	width: 100%;
+	height: 10%;
+	display: flex;
+	flex-flow: column no-wrap;
+	align-items: flex-end;
+	justify-content: center;
+	/*padding: 0 40px;*/
+	/*text-align: center;
+	color: rgba(149, 165, 166, 1);*/
+}
+
+.Picture__info pre {
+	font-family: 'IM Fell English SC', serif;
+	font-size: 2.5vmin;	
+	text-align: center;
+	color: rgba(149, 165, 166, 1);
+}
+.Picture__img {
+	width: 100%;
+	height: 90%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	/*background-color: black;*/
+}
