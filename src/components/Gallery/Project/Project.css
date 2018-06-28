@@ -1,0 +1,76 @@
+.Project {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	padding: 10px 0;
+	position: relative;
+	/*background: rgba(253, 227, 167, 1);*/
+	background: Beige;
+}
+.Project__name {
+	width: 100vh;
+	position: absolute;
+	/*background-color: pink;*/
+	transform: translateX(-100vh) rotate(-90deg);
+	transform-origin: right top;
+	font-family: 'IM Fell English SC', serif;
+
+	font-size: 3rem;
+	letter-spacing: 1rem;
+	text-align: center;
+	color: rgba(0,0,0,.1);
+}
+.Project__name > * {
+	display: inline-block;
+}
+.Project__name p {
+	color: rgba(0,0,0,.4);
+}
+
+.Project__wrapper {
+	position: relative;
+	width: 80%;
+	height: 100%;
+	/*background: rgba(1,2,3,.3);*/
+	/*background-color: pink;*/
+	/*opacity: .7;*/
+	margin: auto;
+}
+
+.Project__controls {
+	position: relative;
+	width: 100%;
+	height: 10%;
+	display: flex;
+	flex-flow: row no-wrap;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 40px;
+	font-size: 3vmin;
+	font-family: 'IM Fell English SC', serif;
+	color: rgba(149, 165, 166, 1);
+}
+.Project__controls--prev, .Project__controls--next {
+	cursor: pointer;
+}
+.Project__controls--prev:hover, .Project__controls--next:hover{
+	color: DarkCyan;
+}
+.Project__controls--counter pre {
+	font-size: 3vmin;
+	font-family: 'IM Fell English SC', serif;
+	color: rgba(149, 165, 166, 1);	
+}
+.Project__controls--line {
+	position: absolute;
+	width: 15%;
+	height: 2px;
+	background-color: rgba(149, 165, 166, 1);
+	top: calc(50% - 1px);
+}
+.Project__controls--line.right {
+	right: 30%;
+}
+.Project__controls--line.left {
+	left: 30%;
+}

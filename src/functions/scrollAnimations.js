@@ -14,6 +14,7 @@ const elems = {
 
 const elemsTopCoords = {
 	header: elems.header.getBoundingClientRect().top + window.scrollY,
+	header__title: parseInt(window.getComputedStyle(document.querySelector('.Header__title')).getPropertyValue("top")),
 	gallery: elems.gallery.getBoundingClientRect().top + window.scrollY,
 	events: elems.events.getBoundingClientRect().top + window.scrollY,
 	about: elems.about.getBoundingClientRect().top + window.scrollY,
@@ -22,6 +23,7 @@ const elemsTopCoords = {
 	events__event1: elems.events__list[1].getBoundingClientRect().top + window.scrollY,
 	events__event2: elems.events__list[2].getBoundingClientRect().top + window.scrollY,
 };
+console.log(elemsTopCoords.header__title);
 	
 const animElems = {
 	gallery__title: document.querySelector('.Home__Gallery__title'),
@@ -38,21 +40,22 @@ const animElems = {
 		if (window.scrollY + 150 >= elemsTopCoords.about)	{
 			showFooter();
 		}	else hideFooter();
-		
-
+				
 		toggleElem('gallery', 100, animElems.gallery__title);
 		toggleElem('events', 100, animElems.events__title);
 		toggleElem('about', 200, animElems.about__title);
 		toggleElem('about', 400, animElems.about__biography);
-
-		if (window.scrollY < elemsTopCoords.gallery) {
-			animElems.header__title.style.marginTop = `${window.scrollY/1.5}px`;
-		}
 		toggleElem('events__event0', 0, animElems.events__title__eventList[0]);
 		toggleElem('events__event1', 0, animElems.events__title__eventList[1]);
 		toggleElem('events__event2', 0, animElems.events__title__eventList[2]);
+		moveHeaderTitle();
 
 	})
+
+	function moveHeaderTitle() {
+		if (window.scrollY >= elemsTopCoords.gallery) return;
+		animElems.header__title.style.top = `${elemsTopCoords.header__title + window.scrollY/1.5}px`;
+	}
 
 
 	function showFooter() {
