@@ -3,7 +3,7 @@
 	height: 90%;
 	position: absolute;
 	opacity: 0;
-	transform: translateX(100%);
+	transform: translateX(100%) scale(.7);
 	overflow: hidden;
 	transition: all 1s cubic-bezier(.5,0,.5,1);
 }
@@ -33,13 +33,13 @@
 
 .current {
 	opacity: 1;
-	transform: translateX(0);
+	transform: translateX(0) scale(1);
 }
 .prev {
 	opacity: 0;
-	transform: translateX(-100%);
+	transform: translateX(-100%) scale(.7);
 }
 .next {
 	opacity: 0;
-	transform: translateX(100%);
+	transform: translateX(100%) scale(.7);
 }

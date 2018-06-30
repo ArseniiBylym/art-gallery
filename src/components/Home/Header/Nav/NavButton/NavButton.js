@@ -1,12 +1,13 @@
 import React from 'react';
 import './NavButton.css';
+import {Link} from 'react-router-dom';
 
 function navButton(props) {
 	return (
 		<div className='navButton'>
-			<a href={props.href}>
+			<Link to={props.href}>
 				<p>{props.text}</p>
-			</a>
+			</Link>
 		</div>
 	)
 }

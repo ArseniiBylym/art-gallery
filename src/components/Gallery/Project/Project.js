@@ -29,6 +29,10 @@ export default class Project extends Component {
 		};
 	}
 
+	componentDidMount = () => {
+		console.log(this.props);
+	}
+
 	showNext = () => {
 		let images = [...document.getElementsByClassName('Picture')];
 
@@ -58,6 +62,12 @@ export default class Project extends Component {
 		})
 	};
 
+	scrollImages = (e) => {
+		if (e.deltaY > 0) {
+			this.showNext();
+		} else this.showPrev();
+	}
+
 	render() {
 		let images = null;
 		if (this.state.pictures) {
@@ -69,7 +79,7 @@ export default class Project extends Component {
 		}
 
 		return(
-			<div className='Project'>
+			<div className='Project' onWheel={this.scrollImages}>
 				<div className='Project__name'>
 					<h1>Project: </h1>
 					<p>{this.props.projectName}</p>

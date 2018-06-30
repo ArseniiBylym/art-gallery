@@ -5,8 +5,8 @@ import NavButton from './NavButton/NavButton.js';
 function nav (props) {
 
 	const buttons = [
-	{name: 'Home', href: '/'},
-	{name: 'Gallery', href: '#Home__GalleryPre'},
+	{name: 'Home', href: '/Home'},
+	{name: 'Gallery', href: '/Gallery'},
 	{name: 'Events', href: '#Home__EventsPre'},
 	{name: 'About', href: '#Home__AboutPre'},
 	{name: 'Contacts', href: '#Home__FooterPre'}].map((i) => {
