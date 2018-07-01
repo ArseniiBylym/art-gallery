@@ -13,10 +13,11 @@
 	transform: translateX(-100vh) rotate(-90deg);
 	transform-origin: right top;
 	font-family: 'IM Fell English SC', serif;
-	font-size: 3rem;
+	font-size: 2rem;
 	letter-spacing: 1rem;
-	text-align: center;
-	color: rgba(0,0,0,.3);
+	text-align: left;
+	padding-left: 3rem;
+	color: rgba(54, 55, 62, 1);
 }
 .Gallery__wrapper {
 	position: absolute;
@@ -38,7 +39,7 @@
 	align-items: center;
 	justify-content: center;
 	align-content: center;
-	font-size: 3rem;
+	font-size: 4rem;
 	line-height: 4rem;
 }
 
@@ -46,15 +47,16 @@
 	text-decoration: none;
 	font-family: 'Russo One', sans-serif;
 	letter-spacing: .3rem;
-	color: black;
+	color: #8CA4A5;
 	text-align: center;
 	z-index: 10;
 	padding: 0 20px;
 }
 .Gallery__projects--description {
 	font-size: 1.2rem;
-	line-height: 1.5rem;
+	line-height: 1.9rem;
 	font-family: 'Roboto Mono', sans-serif;
+	color: rgba(54, 55, 62, 1);
 	text-align: right;
 	position: relative;
 	height: 50%;	
@@ -68,8 +70,11 @@
 	right: 0;
 	bottom: 0;
 	opacity: 0;
-	/*animation: description 1s linear forwards;*/
 	transition: opacity .7s linear;
+}
+.Gallery__projects--description div p {
+	border-right: 2px solid #8CA4A5;
+	padding-right: 30px;
 }
 
 .Gallery__projects--description div.showDescription {
@@ -82,22 +87,39 @@
 	width: 90%;
 	height: 12rem;
 	margin-bottom: 20%;
-
+	overflow: hidden;
 }
+.Gallery__projects--wrapper svg {
+	position: absolute;
+	width: 3rem;
+	height: 3rem;
+	top: 4.5rem;
+	right: -1.5rem;
+	fill: rgba(54, 55, 62, .6);
+	transform: rotate(0);
+	transition: all .5s ease;
+}
+.Gallery__projects--wrapper svg.goUp {
+	transform: rotate(90deg);
+}
+.Gallery__projects--wrapper svg.goDown {
+	transform: rotate(-90deg);	
+}
+
 .Gallery__projects--item {
 	position: absolute;
 	top: 4rem;
 	left: 10%;
 	right:10%;
 	height: 4rem;
-	text-align: center;
-	transform: translateY(-200%) scale(.9);
+	text-align: right;
+	transform: translateY(-100%) scale(.6);
 	z-index: 100;
 	opacity: 0;
 	transition: all .5s ease;
 }
 .Gallery__projects--item.top {
-	transform: translateY(-100%) scale(.9);
+	transform: translateY(-70%) scale(.9);
 	opacity: .3;
 }
 .Gallery__projects--item.center {
@@ -105,11 +127,11 @@
 	opacity: 1;
 }
 .Gallery__projects--item.bottom {
-	transform: translateY(100%) scale(.9);
+	transform: translateY(70%) scale(.9);
 	opacity: .3;
 }
 .Gallery__projects--item.under {
-	transform: translateY(200%) scale(.9);
+	transform: translateY(100%) scale(.6);
 	opacity: 0;
 }
 

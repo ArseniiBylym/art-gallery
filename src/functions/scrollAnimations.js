@@ -14,7 +14,7 @@ const elems = {
 
 const elemsTopCoords = {
 	header: elems.header.getBoundingClientRect().top + window.scrollY,
-	header__title: parseInt(window.getComputedStyle(document.querySelector('.Header__title')).getPropertyValue("top")),
+	header__title: parseInt(window.getComputedStyle(document.querySelector('.Header__title')).getPropertyValue("top"), 10),
 	gallery: elems.gallery.getBoundingClientRect().top + window.scrollY,
 	events: elems.events.getBoundingClientRect().top + window.scrollY,
 	about: elems.about.getBoundingClientRect().top + window.scrollY,

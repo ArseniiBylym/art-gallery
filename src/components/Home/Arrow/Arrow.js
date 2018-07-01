@@ -41,23 +41,23 @@ function getScreensCoords() {
 	return [
 		{
 			elem: document.getElementById('Home__Header'),
-			top: parseInt(document.getElementById('Home__Header').getBoundingClientRect().top),
-			bottom: parseInt(document.getElementById('Home__Header').getBoundingClientRect().bottom)
+			top: parseInt(document.getElementById('Home__Header').getBoundingClientRect().top, 10),
+			bottom: parseInt(document.getElementById('Home__Header').getBoundingClientRect().bottom, 10)
 		},	
 		{
 			elem: document.getElementById('Home__Gallery'),
-			top: parseInt(document.getElementById('Home__Gallery').getBoundingClientRect().top),
-			bottom: parseInt(document.getElementById('Home__Gallery').getBoundingClientRect().bottom)
+			top: parseInt(document.getElementById('Home__Gallery').getBoundingClientRect().top, 10),
+			bottom: parseInt(document.getElementById('Home__Gallery').getBoundingClientRect().bottom, 10)
 		},
 		{
 			elem: document.getElementById('Home__EventsPre'),
-			top: parseInt(document.getElementById('Home__EventsPre').getBoundingClientRect().top),
-			bottom: parseInt(document.getElementById('Home__EventsPre').getBoundingClientRect().bottom)
+			top: parseInt(document.getElementById('Home__EventsPre').getBoundingClientRect().top, 10),
+			bottom: parseInt(document.getElementById('Home__EventsPre').getBoundingClientRect().bottom, 10)
 		},
 		{
 			elem: document.getElementById('Home__AboutPre'),
-			top: parseInt(document.getElementById('Home__AboutPre').getBoundingClientRect().top),
-			bottom: parseInt(document.getElementById('Home__AboutPre').getBoundingClientRect().bottom)
+			top: parseInt(document.getElementById('Home__AboutPre').getBoundingClientRect().top, 10),
+			bottom: parseInt(document.getElementById('Home__AboutPre').getBoundingClientRect().bottom, 10)
 		},
 		{
 			elem: document.getElementById('Home__FooterPre'),
