@@ -7,6 +7,7 @@ import './App.css';
 import Home from './Home/Home.js';
 import Gallery from './Gallery/Gallery.js';
 import Project from './Gallery/Project/Project.js';
+import About__Contact from './About/About__Contacts';
 
 class App extends Component {
 
@@ -18,14 +19,23 @@ class App extends Component {
 	      		<Route path='/Home' component={Home}/>
 		    	<Route path='/Gallery' component={Gallery}/>
 		    	<Route path='/Grid-project' render={(props) => (
-		    		<Project {...props} projectName='Grid' />
+		    		<Project {...props} projectName='grid' />
 		    		)}
 		    	/>
 		    	<Route path='/Connection' render={(props) => (
-		    		<Project {...props} projectName='Connection' />
+		    		<Project {...props} projectName='connection' />
 		    		)}
 		    	/>
+	      		<Route path='/About' render={(props) => (
+	      			<About__Contact {...props} side='left' />
+	      			)}
+	      		/>
+	      		<Route path='/Contact' render={(props) => (
+	      			<About__Contact {...props} side='right' />
+	      			)}
+	      		/>
 	      		<Route path='/' exact component={Home} />
+
 	      	</div>
       	</BrowserRouter>
     );

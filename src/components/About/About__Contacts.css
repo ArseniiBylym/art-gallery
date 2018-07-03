@@ -1,0 +1,323 @@
+.zoomWrapper {
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	overflow: hidden;
+}
+.About__Contacts {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	position: relative;
+	background-color: white;
+	transition: transform .5s ease;
+}
+
+.About {
+	position: absolute;
+	width: 100vw;
+	height: 93vh;
+	top: 7vh;
+	background: url(./img/about_img/img1.jpg) -250% center/70% auto no-repeat;
+	animation: picture .9s .5s ease forwards;
+	transition: transform 1s ease;
+}
+
+.aboutHide {
+	transform: translateX(-100%);
+}
+
+
+@keyframes picture { 
+	0%{
+		background-position: -250% center;
+	} 
+	100% {
+		background-position: -10rem center;
+	}
+}
+
+.About__container--logo {
+	position: relative;
+	left: 3rem;
+	top: 2rem;
+	font-family: 'Wendy One', sans-serif;
+	font-size: 3.5rem;
+	color: #252526;
+	opacity: 0;
+	animation: logo .8s 1.5s linear forwards; 
+}
+@keyframes logo {
+0% {
+	transform: translateY(10px);
+	opacity: 0;
+}
+100% {
+	transform: translateY(0);
+	opacity: 1;
+}
+}
+.About__Contacts .header {
+	width: 100%;
+	height: 7vh;
+	background-color: #2D2D2D;
+	color: white;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	font-size: 3vh;
+	font-family: 'Russo One', sans-serif;
+	animation: header .4s linear forwards;
+}
+@keyframes header {
+0% {
+	transform: translateY(-7vh);
+}
+100% {
+	transform: translateY(0);
+}
+}
+.header div:hover {
+	color: gray;
+}
+.header div:first-child {
+	border-right: 3px solid white;
+	padding-right: 30px;
+}
+.header div:last-child {
+	padding-left: 30px;
+}
+.button {
+	cursor: pointer;
+}
+.activeButton {
+	color: gray;
+	text-decoration: underline;
+}
+
+.About__container--info {
+	position: absolute;
+	width: 35%;
+	height: 85vmin;
+	background-color: #2D2D2D;
+	top: 10%;
+	right: 4rem;
+	color: white;
+	overflow: hidden;
+	font-size: 1rem;
+	font-family: 'Merriweather Sans';
+	transform: translateX(40vw);
+	animation: info .7s .8s ease forwards;
+
+}
+@keyframes info {
+	0% {
+		transform: translateX(40vw);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+.About__container--info .text {
+	position: absolute;
+	width: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	top: 0;
+	transition: all 1s cubic-bezier(.5,0,.5,1);
+}
+
+.Contacts {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-image: url(./img/contacts_img/img1.jpg);
+	background-color: pink;
+	transform: translateX(100%);
+	transition: transform 1s ease;
+}
+.contactsShow {
+	transform: translateX(0);
+}
+.Contacts .contacts__header {
+	width: 100%;
+	height: 13vh;
+	text-align: center;
+	font-family: 'Special Elite'; 
+	font-size: 3rem;
+	line-height: 6rem;
+}
+.Contacts .aside {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 10vw;
+	width: 93vh;
+	transform: rotate(-90deg) translateX(-93vh);
+	transform-origin: left top;
+	border-bottom: 2px dashed black;
+	font-family: 'Special Elite';
+	font-size: 2rem;
+}
+.Contacts .aside p {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	right: 20%;
+}
+.Contacts .main-container {
+	width: 90vw;
+	height: 65vh;
+	margin-left: 10vw;
+}
+
+
+
+.main-container .from-container {
+	position: relative;
+	width: 50%;
+	height: 35%;
+	display: flex;
+	flex-flow: column nowrap;
+	padding: 15px;
+}
+.from-container > div {
+	width: 100%;
+	height: 3rem;
+	display: flex; 
+	flex-flow: row nowrap;
+	align-items: flex-end;
+	font-family: 'Special Elite';
+	font-size: 1.5rem;
+	text-align: bottom;
+	border-bottom: 2px solid black;
+
+}
+.main-container .from-container--message {
+	border-bottom: none;
+	height: 100%;
+	align-items: flex-start;
+	margin-top: .5rem;
+}
+.from-container input, .from-container textarea {
+	border: none;
+	width: 100%;
+	background: rgba(218, 192, 153, .5);
+	font-family: 'Special Elite';
+	margin-left: 10px;
+	font-size: 1.3rem;
+}
+.from-container textarea {
+	display: block;
+
+}
+.from-container input:focus, .from-container textarea:focus {
+	border: none;
+	outline: none;
+}
+
+
+/*Container with adres of reciever*/
+.main-container .to-container {
+	position: relative;
+	margin: 0 8rem 0 auto;
+	width: 40%;
+	display: flex;
+	flex-flow: column nowrap;
+	padding: 15px;
+	font-family: 'Special Elite';
+	font-size: 1.5rem;
+	line-height: 2rem;
+}
+.main-container .to-container > div {
+	display: flex;;
+	flex-flow: row nowrap;
+	margin-bottom: 1rem;
+}
+.to-container--reciever-title, .to-container--phone-icon, .to-container--email-icon {
+	padding: 0 2rem;
+	color: rgba(0,0,0,.8);
+}
+
+
+/*Button Sent*/
+.main-container .sent-button {
+	height: 15%;
+	padding-top: 2rem;
+}
+.main-container .sent-button button{
+	position: relative;
+	left: 20%;
+	font-family: 'Special Elite';
+	font-size: 1.8rem;
+	padding: 5px 5rem;
+	border: 2px solid #1F4274;
+	background: rgba(0, 0, 0, 0);
+	transform: rotate(-7deg) translateY(100%); 
+	cursor: pointer;
+	color: #1F4274;
+}
+
+.to-container--email-adres a{
+	text-decoration: none;
+	color: #1F4274;
+}
+
+
+
+.Contacts .icons-container {
+	position: relative;
+	left: 10%;
+	width: 90%;
+	height: 15vh;
+	margin-top: auto;
+	border-top: 2px solid rgba(0,0,0,.6);
+	display: flex;
+	align-items: stretch;
+}
+.icons-container > div {
+	width: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgba(0,0,0,.6);
+}
+.icons-container > div >i:hover {
+	color: black;
+	cursor: pointer;
+}
+.icons-container > div:last-child {
+	border: none;
+}
+
+.aside .developer-contacts {
+	position: absolute;
+	/*right: 20px;*/
+	/*top: 0;*/
+	top: 0;
+	left: -27%;
+	height: 2rem;
+	width: 100%;
+	text-align: left;
+	/*align-content: left;*/
+	/*bottom: 0;*/
+	/*transform: rotate(-90deg); */
+	/*transform-origin: right bottom;*/
+	font-family:  sans-serif;
+	font-size: 1rem;
+	color: black;
+	/*color: rgba(0,0,0,.6);*/
+}
+.developer-contacts span {
+	font-size: 1.4rem;
+	/*color: rgba(0,0,0,.8);*/
+	color: black;
+}
+.developer-contacts a {
+	text-decoration: none;
+	/*color: rgba(0,0,0,.6);*/
+	color: black;
+}

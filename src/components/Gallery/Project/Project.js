@@ -1,36 +1,17 @@
 import React, {Component} from 'react';
 import './Project.css';
 import Picture from './Picture/Picture.js';
+import {projects} from '../../../functions/dataObjects.js';
+import MenuButton from '../../MenuButton/MenuButton.js';
 
 export default class Project extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			url: './img/Gallery/GridProject/img1.jpg',
-			pictures: [
-				{
-					url: './img/Gallery/GridProject/img1.jpg',
-					info: 'Horizon 100x110 acrylic on canvas 2018' 
-				},
-				{
-					url: './img/Gallery/GridProject/img2.jpg',
-					info: 'Northern Lights 100x110 acrylic on canvas 2018' 
-				},
-				{
-					url: './img/Gallery/GridProject/img3.jpg',
-					info: 'Hole 60x80 acrylic on canvas 2017' 
-				},
-				{
-					url: './img/Gallery/GridProject/img4.jpg',
-					info: 'Frame 60x80 acrylic on canvas 2017' 
-				},
-			],
-			currentPictureIndex: 0
+			pictures: projects[this.props.projectName].pictures,
+			currentPictureIndex: 0,
+			isFullSize: false
 		};
-	}
-
-	componentDidMount = () => {
-		console.log(this.props);
 	}
 
 	showNext = () => {
@@ -42,6 +23,7 @@ export default class Project extends Component {
 		images[this.state.currentPictureIndex].classList.add("prev");
 		images[this.state.currentPictureIndex + 1].classList.remove("next");
 		images[this.state.currentPictureIndex + 1].classList.add("current");
+
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex + 1}
 		})
@@ -57,6 +39,7 @@ export default class Project extends Component {
 		images[this.state.currentPictureIndex].classList.add("next");
 		images[this.state.currentPictureIndex - 1].classList.add("current");
 		images[this.state.currentPictureIndex - 1].classList.remove("prev");
+		
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex - 1}
 		})
@@ -68,33 +51,53 @@ export default class Project extends Component {
 		} else this.showPrev();
 	}
 
+	fullSizeImg = () => {
+		let container = document.getElementById('Project');
+		container.classList.toggle('Project--zoomed');
+		let button = document.getElementById('MenuOpenButton').classList.toggle('hide-menuButton');
+	}
+
 	render() {
 		let images = null;
 		if (this.state.pictures) {
 			images = this.state.pictures.map((img, i) => {
 				return (
-					<Picture key={img.url} url={img.url} info={img.info} pos={i}/>	
+					<Picture key={img.url} url={img.url} info={img.info} pos={i} click={this.fullSizeImg}/>	
 				)
 			})
 		}
 
 		return(
-			<div className='Project' onWheel={this.scrollImages}>
-				<div className='Project__name'>
-					<h1>Project: </h1>
-					<p>{this.props.projectName}</p>
-				</div>
-				<div className='Project__wrapper'>
-					{images}
-					<div className='Project__controls'> 
-						<div className='Project__controls--prev' onClick={this.showPrev}>Prev</div>
-						<div className='Project__controls--counter'><pre>{this.state.currentPictureIndex + 1}/{this.state.pictures.length}</pre></div>
-						<div className='Project__controls--next' onClick={this.showNext}>Next</div>
-						<div className='Project__controls--line left' />
-						<div className='Project__controls--line right' />
+		<React.Fragment>
+			<MenuButton color='black'/>
+			<div className='zoomWrapper'>
+				<div className='Wrapper'>
+					<div id="Project" className='Project' onWheel={this.scrollImages}>
+						<div className='Project__name'>
+							<h1>Project: </h1>
+							<p>{this.props.projectName}</p>
+						</div>
+						<div className='Project__description'> 
+							<p>{this.state.pictures[this.state.currentPictureIndex].name}</p>
+							<p>{this.state.pictures[this.state.currentPictureIndex].info}</p>
+						</div>
+						<div className='Project__wrapper'>
+							<div className='Project__wrapper--logo'> 
+								<p>Maryna Herasymenko</p>
+							</div>
+							{images}
+							<div className='Project__controls'> 
+								<div className='Project__controls--prev' onClick={this.showPrev}>Prev</div>
+								<div className='Project__controls--counter'><pre>{this.state.currentPictureIndex + 1}/{this.state.pictures.length}</pre></div>
+								<div className='Project__controls--next' onClick={this.showNext}>Next</div>
+								<div className='Project__controls--line left' />
+								<div className='Project__controls--line right' />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</React.Fragment>
 		)
 	}
 }

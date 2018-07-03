@@ -1,0 +1,99 @@
+/*Button with toggle side nav menu*/
+.MenuOpenButton {
+	position: fixed;
+	z-index: 200;
+	width: 4rem;
+	height: 6vh;
+	cursor: pointer;
+	padding: 5px;
+	top: .5vh;
+	left: 20px;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+	justify-content: space-around;
+}
+.MenuOpenButton.hide-menuButton {
+	z-index: -100;
+}
+.MenuOpenButton > div {
+	width: 60%;
+	height: 15%;
+	max-height: 5px;
+	background-color: white;
+	transition: all .5s ease;
+}
+.MenuOpenButton > div:nth-child(1) {
+	width: 80%;
+}
+.MenuOpenButton > div:nth-child(2) {
+	width: 65%;
+}
+.MenuOpenButton > div:nth-child(3) {
+	width: 60%;
+}
+.MenuOpenButton:hover > div {
+	width: 100%;
+}
+/*Button with toggle side nav menu*/
+
+/*Layout with dark screen*/
+.MenuOpenLayout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,.5);
+	z-index: 100;
+	transform: translateX(-100%);
+	overflow: hidden;
+}
+.MenuOpenLayout.show__layout {
+	transform: translateX(0);
+}
+/*Layout with dark screen*/
+
+/*Slideside container with nav buttons*/
+.MenuOpenLayout__container {
+	position: absolute;
+	width: 45%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,1);
+	z-index: 200;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: stretch;
+	justify-content: center;
+	transform: translateX(-100%);
+	transition: all .5s ease;
+}
+.MenuOpenLayout__container.show__menu {
+	transform: translateX(0);
+
+}
+.MenuOpenLayout__container > div {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.MenuOpenLayout__container > div:hover {
+	background-color: #3B3B3B;
+}
+.MenuOpenLayout__container > div > a {
+	color: white;
+	font-size: 4vh;
+	text-decoration: none;
+}
+/*Slideside container with nav buttons*/
+
+/*Class for main layouts on each page. Use for div inside zoomWrapper elem*/ 
+.zoomedLayout {
+	transform: scale(1.17) !important;
+	overflow: hidden;
+}
