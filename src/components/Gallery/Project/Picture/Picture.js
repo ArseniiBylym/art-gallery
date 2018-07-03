@@ -1,20 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Picture.css';
 
-export default function Picture (props) {
-	
-	const backgroundUrl = `url(${props.url})`;
-	let classList = 'Picture';
-	if (props.pos == 0) {
-		classList += ' current';
+export default class Picture extends Component {
+	constructor(props) {
+		super(props);
 	}
 
-	return (
-		<div className={classList}>
-			<div className='Picture__info'>
-				<div><p>{props.info}</p></div>
+	showOnFullSize = (e) => {
+		e.target.classList.toggle('fullSize');
+	}
+
+	render() {
+		const backgroundUrl = `url(${this.props.url})`;
+		let classList = 'Picture';
+		if (this.props.pos == 0) {
+			classList += ' current';
+		}
+
+		return (
+			<div className={classList} >
+				<div className='Picture__img' 
+					style={{backgroundImage: backgroundUrl}} 
+					onClick={this.props.click}>
+				</div>	
 			</div>
-			<div className='Picture__img' style={{backgroundImage: backgroundUrl}} />
-		</div>
-	)
+		)
+	}
 }
