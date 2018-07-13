@@ -1,0 +1,33 @@
+.Picture {
+	width: 100%;
+	height: 83.33%;
+	position: absolute;
+	top: 8.33%;
+	opacity: 0;
+	transform: translateX(120%) scale(.8);
+	overflow: hidden;
+	transition: all .8s cubic-bezier(.5,0,.5,1);
+	
+}	
+
+.Picture__img {
+	width: 100%;
+	height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor: pointer;
+}
+
+.current {
+	opacity: 1;
+	transform: translateX(0) translateY(0) scale(1);
+}
+.prev {
+	opacity: 0;
+	transform: translateX(-120%) translateY(0) scale(.8);
+}
+.next {
+	opacity: 0;
+	transform: translateX(120%) translateY(0)scale(.8);
+}

@@ -1,0 +1,130 @@
+.zoomWrapper {
+	position: absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	overflow: hidden;
+	transition: transform .5s ease;
+}
+.Project {
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(2, .5fr) repeat(8, 1fr) repeat(2, .5fr);
+	grid-template-rows: repeat(12, 1fr);
+	background:#3C4E5C;
+	transform: scale(1);
+	transform-origin: center center;
+	transition: all .5s ease;
+}
+.Project--zoomed {
+	transform: scale(1.2);
+	background-color: rgba(30,30,30,1);
+
+}
+.Project__name {
+	grid-column: 1 / 2;
+	grid-row: 2 / -2;
+	position: relative;
+}
+.Project__name > div {
+	width: 80vh;
+	height: 5vw;
+	position: absolute;
+	transform: rotate(-90deg) translateX(-100%);
+	transform-origin: left top;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	border-bottom: 1px solid black;
+
+}
+.Project__name p {
+	display: inline-block;
+	color: rgba(0,0,0,.6);
+	font-size: 3vh;
+	letter-spacing: 1.5vh;
+	font-family: 'Krona One', sans-serif;
+}
+.Project__name p:last-child {
+	color: white;
+}
+
+
+.Project__description {
+	grid-column: -2 / -1;
+	grid-row: 2 / -2;
+}
+.Project__description div {
+	position: absolute;
+	width: 80vh;
+	height: 5vw;
+	transform: rotate(90deg) translateY(-100%);
+	transform-origin: left top;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: flex-end;
+	justify-content: space-around;
+	border-bottom: 1px solid black;
+	font-family: 'Krona One', sans-serif;
+}
+
+.Project__description p {
+	color: black;
+	font-size: 2vh;
+}
+.Project__description p:first-child {
+	font-size: 3vh;
+	color: white;
+}
+
+
+.Project__logo {
+	grid-column: 3 / -1;
+	grid-row: 1 / 2;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-size: 2vh;
+	font-family: 'Krona One', sans-serif;
+	color: rgba(0,0,0,.7);
+	letter-spacing: .1rem;
+	word-spacing: 1rem;
+	transform: translateY(0);
+}
+.Project__picture {
+	grid-column: 2 / -2;
+	grid-row: 2 / -2;
+}
+
+
+
+.Project__controls {
+	grid-column: 4 / -4;
+	grid-row: -2 / -1;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 3vmin;
+	font-family: 'IM Fell English SC', serif;
+	color: white;
+}
+.Project__controls--prev, .Project__controls--next {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+}
+.Project__controls--prev:hover, .Project__controls--next:hover{
+	color: black;
+}
+.Project__controls--prev > svg, .Project__controls--next > svg {
+	transform: translateY(2px);
+}
+.Project__controls svg {
+	fill: white;
+	width: 2vmin;
+	height: 2vmin;
+}
+

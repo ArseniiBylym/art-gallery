@@ -1,44 +1,33 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 
 
 // Components
 import Home from './Home/Home.js';
-import Gallery from './Gallery/Gallery.js';
-import Project from './Gallery/Project/Project.js';
-import About__Contact from './About/About__Contacts';
+import Projects from './Projects/Projects.js';
+import Project from './Projects/Project/Project.js';
+import About__Contacts from './About__Contacts/About__Contacts';
+import Events from './Events/Events';
+
+
 
 class App extends Component {
-
-	
   render() {
     return (
     	<BrowserRouter>
 	      	<div className="App">
-	      		<Route path='/Home' component={Home}/>
-		    	<Route path='/Gallery' component={Gallery}/>
-		    	<Route path='/Grid-project' render={(props) => (
-		    		<Project {...props} projectName='grid' />
-		    		)}
-		    	/>
-		    	<Route path='/Connection' render={(props) => (
-		    		<Project {...props} projectName='connection' />
-		    		)}
-		    	/>
-	      		<Route path='/About' render={(props) => (
-	      			<About__Contact {...props} side='left' />
-	      			)}
-	      		/>
-	      		<Route path='/Contact' render={(props) => (
-	      			<About__Contact {...props} side='right' />
-	      			)}
-	      		/>
-	      		<Route path='/' exact component={Home} />
-
+      			<Switch>
+			      	<Route path='/Home' component={Home}/>
+				    	<Route path='/Projects' exact component={Projects}/>
+				    	<Route path='/Projects/:projectName' component={Project} />
+				    	<Route path='/Events' component={Events} />
+		      		<Route path='/About__Contacts/:side' component={About__Contacts} /> 
+		      		<Redirect from='/' to='/Home' />
+	      		</Switch>
 	      	</div>
       	</BrowserRouter>
-    );
+    )
   }
 }
 

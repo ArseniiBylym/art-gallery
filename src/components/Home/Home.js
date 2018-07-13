@@ -1,38 +1,53 @@
-import React, { Component } from 'react';
-
-import Header from './Header/Header.js';
-import HomeGallery from './Home__Gallery/Home__Gallery.js';
-import EventsPre from './EventsPre/EventsPre.js';
-import AboutPre from './AboutPre/AboutPre.js';
-import FooterPre from './FooterPre/FooterPre.js';
-import Arrow from './Arrow/Arrow.js';
-
-//Functions
-import scrollAnimations from '../../functions/scrollAnimations.js';
-
-
+import React, {Component} from 'react';
 import './Home.css';
 
+export default class Home extends Component {
+	
+	navClick = (e) => {
+		let path = e.target.dataset.path;
+		if(path === this.props.location.pathname) return;
 
-class Home extends Component {
+		let container = document.querySelector('.Home__container');
+		let left = document.querySelector('.Home__blind-left');
+		let right = document.querySelector('.Home__blind-right');
 
-	componentDidMount() {
-		scrollAnimations();
+		setTimeout(() => {
+			this.props.history.push(path)
+		}, 900)
+		left.classList.add('Home__blind-left--close');
+		right.classList.add('Home__blind-right--close');
+		container.classList.add('on-exit')
+
 	}
 
 	render() {
-		return (
-			<div className='Home' id='Home'>
-				<Header />
-				<HomeGallery />
-				<EventsPre />
-				<AboutPre />
-				<FooterPre />
-				<Arrow dirrection='arrowUp' />
-				<Arrow dirrection='arrowDown' />
+
+		return(
+			<div className='Home__MainWrapper'> 
+				<div className='Home__blind-left Home__blind-left--open' />
+				<div className='Home__blind-right Home__blind-right--open' />
+				<div className='Home__container'>
+					<div className='Title-box'>
+						<div className='Title-box__name'>
+							<p>MARYNA</p>
+						</div>
+						<div className='Title-box__surname'>
+							<p>HERASYMENKO</p>
+						</div>
+						<div className='Title-box__art'>
+							<p>ART</p>
+						</div>
+					</div>
+					<div className='Nav-box'>
+						<div><span data-path='/Home' onClick={this.navClick}>HOME</span><div className='linkBlindBox'/></div>
+						<div><span data-path='/Projects' onClick={this.navClick}>PROJECTS</span><div className='linkBlindBox'/></div>
+						<div><span data-path='/Events' onClick={this.navClick}>EVENTS</span><div className='linkBlindBox'/></div>
+						<div><span data-path='/About__Contacts/about' onClick={this.navClick}>ABOUT</span><div className='linkBlindBox'/></div>
+						<div><span data-path='/About__Contacts/contact' onClick={this.navClick}>CONTACT</span><div className='linkBlindBox'/></div>
+					</div>
+				</div>
 			</div>
-		);
+
+		)
 	}
 }
-
-export default Home;

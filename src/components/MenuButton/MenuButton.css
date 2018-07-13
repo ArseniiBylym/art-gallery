@@ -1,25 +1,37 @@
+#NavMenuButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	left: 1rem;
+	width: 8.33vh;
+	height: 8.33vh;
+	z-index: 100;
+	cursor: pointer;
+
+}
 /*Button with toggle side nav menu*/
 .MenuOpenButton {
-	position: fixed;
-	z-index: 200;
-	width: 4rem;
-	height: 6vh;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
 	cursor: pointer;
-	padding: 5px;
-	top: .5vh;
-	left: 20px;
+	padding: 2.5vmin 1vw;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: stretch;
-	justify-content: space-around;
+	justify-content: center;
 }
 .MenuOpenButton.hide-menuButton {
-	z-index: -100;
+	display: none;
 }
+
 .MenuOpenButton > div {
-	width: 60%;
-	height: 15%;
-	max-height: 5px;
+	width: 50%;
+	height: 2px;
+	margin: 2px 0;
 	background-color: white;
 	transition: all .5s ease;
 }
@@ -45,50 +57,68 @@
 	right: 0;
 	bottom: 0;
 	background-color: rgba(0,0,0,.5);
-	z-index: 100;
-	transform: translateX(-100%);
+	z-index: 250;
 	overflow: hidden;
-}
-.MenuOpenLayout.show__layout {
-	transform: translateX(0);
+	cursor: auto;
 }
 /*Layout with dark screen*/
 
 /*Slideside container with nav buttons*/
 .MenuOpenLayout__container {
-	position: absolute;
-	width: 45%;
+	position: fixed;
+	width: 45vw;
 	height: 100%;
 	top: 0;
 	left: 0;
 	background-color: rgba(0,0,0,1);
-	z-index: 200;
+	z-index: 300;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: stretch;
 	justify-content: center;
 	transform: translateX(-100%);
-	transition: all .5s ease;
+	/*transition: all .5s ease;*/
+	animation: show-menu .5s ease forwards;
 }
-.MenuOpenLayout__container.show__menu {
-	transform: translateX(0);
+@keyframes show-menu {
+	0%{
+		transform: translateX(-100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+.MenuOpenLayout__container.hide__menu {
+	animation: hide-menu .5s ease forwards;
+}
+@keyframes hide-menu {
+	0%{
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
 
-}
 .MenuOpenLayout__container > div {
 	width: 100%;
 	height: 100px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	
 	cursor: pointer;
 }
 .MenuOpenLayout__container > div:hover {
 	background-color: #3B3B3B;
 }
-.MenuOpenLayout__container > div > a {
+.MenuOpenLayout__container > div > a, .MenuOpenLayout__container > div > span {
+	display: block;
+	width: 100%;
+	height: 100%;
 	color: white;
 	font-size: 4vh;
 	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 /*Slideside container with nav buttons*/
 
