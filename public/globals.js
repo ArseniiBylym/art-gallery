@@ -23,7 +23,7 @@ var GLOBAL_DATA = {
 		},
 		{
 			name: 'OIL',
-			href: '/Home',
+			href: '/CONNECTION',
 			description: '3 Nemo eaque placeat pariatur repellat veritatis quia aliquid totam assumenda reprehenderit accusamus! Iste ut, sint quidem deleniti ipsa temporibus blanditiis nisi accusantium unde eligendi ullam soluta sunt mollitia voluptatibus voluptatum aliquam quos obcaecati.',
 			urls: {
 				img1: './img/Gallery/GridProject/rsz_img4.jpg',
@@ -37,52 +37,52 @@ var GLOBAL_DATA = {
 		GRID: {
 			pictures: [
 				{
-					url: '/img/Gallery/GridProject/img1.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img1.jpg',
 					name: 'Error',
 					info: '70x90 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img2.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img2.jpg',
 					name: 'Hole',
 					info: '60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img3.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img3.jpg',
 					name: 'Frame',
 					info: '60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img4.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img4.jpg',
 					name: 'Сoordinate',
 					info: '60x70 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img5.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img5.jpg',
 					name: 'Line',
 					info: '80x60 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img6.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img6.jpg',
 					name: 'Element diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img7.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img7.jpg',
 					name: 'Element 2 diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img8.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img8.jpg',
 					name: 'Border diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img9.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img9.jpg',
 					name: 'Section',
 					info: '80x60 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/GridProject/img10.jpg',
+					url: '/MGArt/img/Gallery/GridProject/img10.jpg',
 					name: 'Grid 2',
 					info: '70x100 acrylic on canvas 2017' 
 				},
@@ -91,52 +91,52 @@ var GLOBAL_DATA = {
 		CONNECTION: {
 			pictures: [
 				{
-					url: '/img/Gallery/ConnectionProject/img1.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img1.jpg',
 					name: 'Free',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img2.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img2.jpg',
 					name: 'Horizon',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img3.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img3.jpg',
 					name: 'Music',
 					info: '100x110 acrylic on canvas 2017' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img4.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img4.jpg',
 					name: 'Be silent',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img5.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img5.jpg',
 					name: 'Sound',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img6.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img6.jpg',
 					name: 'Northern Lights',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img7.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img7.jpg',
 					name: 'Horizon 2',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img8.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img8.jpg',
 					name: 'First',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img9.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img9.jpg',
 					name: 'Feedback',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/img/Gallery/ConnectionProject/img10.jpg',
+					url: '/MGArt/img/Gallery/ConnectionProject/img10.jpg',
 					name: 'On the verge',
 					info: '100x110 acrylic on canvas 2018' 
 				},

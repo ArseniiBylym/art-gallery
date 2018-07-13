@@ -15,7 +15,7 @@ import Events from './Events/Events';
 class App extends Component {
   render() {
     return (
-    	<BrowserRouter>
+    	<BrowserRouter basename="/art-gallery/">
 	      	<div className="App">
       			<Switch>
 			      	<Route path='/Home' component={Home}/>
