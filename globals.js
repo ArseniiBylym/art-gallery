@@ -23,7 +23,7 @@ var GLOBAL_DATA = {
 		},
 		{
 			name: 'OIL',
-			href: '/Home',
+			href: '/CONNECTION',
 			description: '3 Nemo eaque placeat pariatur repellat veritatis quia aliquid totam assumenda reprehenderit accusamus! Iste ut, sint quidem deleniti ipsa temporibus blanditiis nisi accusantium unde eligendi ullam soluta sunt mollitia voluptatibus voluptatum aliquam quos obcaecati.',
 			urls: {
 				img1: './img/Gallery/GridProject/rsz_img4.jpg',
