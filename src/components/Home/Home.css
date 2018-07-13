@@ -1,0 +1,309 @@
+.Home__MainWrapper {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	
+}
+.Home__container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: url(./img/img1_rsz.jpg) left top/100% 100% no-repeat;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+	animation: Home__enter-animation 2.5s ease forwards;
+}
+
+@keyframes Home__enter-animation {
+	0%{
+		transform: scale(1.3);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+.Home__container.on-exit {
+		animation: Home__exit-animation .7s ease forwards;
+}
+
+@keyframes Home__exit-animation {
+	0%{
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.3);
+	}
+}
+
+
+.Home__blind-left, .Home__blind-right {
+	position: absolute;
+	width: 100vw;
+	height: 50vh;
+	left: 0;
+	background-color: black;
+	z-index: 300;
+	transform: translateX(0);
+}
+.Home__blind-left {
+	top: 0;
+}
+.Home__blind-right {
+	bottom: 0;
+}
+
+
+.Home__blind-left--open {
+	animation: blind-left__move 1s .5s ease forwards;
+}
+@keyframes blind-left__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(-100%);
+	}
+}
+
+.Home__blind-left--close {
+	animation: blind-left__move-show .7s cubic-bezier(.73,0,.66,.88) forwards;
+}
+@keyframes blind-left__move-show {
+	0%{
+		transform: translateX(-100%);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+.Home__blind-right--open {
+	animation: blind-right__move 1s .5s ease forwards;
+}
+
+@keyframes blind-right__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(100%);
+	}
+}
+.Home__blind-right--close {
+	animation: blind-right__move-show .7s cubic-bezier(.73,0,.66,.88) forwards;
+}
+@keyframes blind-right__move-show {
+	0%{
+		transform: translateX(100%);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+
+
+/*
+.Home__MainWrapper .Wrapper__blind-left--open {
+	animation: Home__blind-left__move 1s .5s ease forwards;
+}
+@keyframes Home__blind-left__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(-110%);
+	}
+}
+
+.Home__MainWrapper .Wrapper__blind-right--open {
+	animation: Home__blind-right__move 1s .5s ease forwards;
+}
+@keyframes Home__blind-right__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(110%);
+	}
+}*/
+/*
+.Home__blind-left {
+	position: absolute;
+	width: 100vw;
+	height: 50vh;
+	top: 0;
+	left: 0;
+	opacity: 1;
+	background-color: black;
+	z-index: 100;
+	transform: translateX(0);
+	
+} 
+.Home__blind-left--open {
+	animation: blind-left__move .8s .2s ease forwards;
+}
+@keyframes blind-left__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(-100%);
+	}
+}
+.Home__blind-left--close {
+	animation: blind-left__move-show .5s ease forwards;
+}
+@keyframes blind-left__move-show {
+	0%{
+		transform: translateX(-100%);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+.Home__blind-right {
+	position: absolute;
+	width: 100vw;
+	height: 50vh;
+	bottom: 0;
+	left: 0;
+	opacity: 1;
+	background-color: black;
+	z-index: 100;
+	transform: translateX(0);
+	
+}
+.Home__blind-right--open {
+	animation: blind-right__move .8s .2s ease forwards;
+}
+
+@keyframes blind-right__move {
+	0%{
+		transform: translateX(0);
+	}
+	100%{
+		transform: translateX(100%);
+	}
+}
+.Home__blind-right--close {
+	animation: blind-right__move-show .5s ease forwards;
+}
+@keyframes blind-right__move-show {
+	0%{
+		transform: translateX(100%);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}*/
+
+/*@keyframes Home__container--enter {
+	0%{
+		transform: scale(1.3);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+.Home__container--zoomed {
+	animation: Home__container--exit 1s ease forwards;
+}
+@keyframes Home__container--exit {
+	0%{
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.3);
+	}
+}*/
+
+
+
+
+.Home__container .Title-box {
+	margin-left: 20vmin;
+	width: 70%;
+	height: 50%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+	justify-content: flex-start;
+	z-index: 1;
+	font-weight: bold;
+}
+.Title-box__name {
+	width: 100%;
+	height: 33.33%;
+	font-size: 10vmin;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+}
+.Title-box__surname {
+	width: 100%;
+	height: 33.33%;
+	font-size: 10vmin;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+}
+.Title-box__art {
+	width: 100%;
+	height: 30%;
+	font-size: 8vmin;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+}
+
+.Nav-box {
+	align-self: stretch;
+	width: 25%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.Nav-box > div {
+	width: 100%;
+	height: 12vh;
+	position: relative;
+}
+.Nav-box .linkBlindBox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	transform: translateX(100%);
+	transition: transform .5s ease;
+}
+.Nav-box > div:hover > div {
+	transform: translateX(0);
+}
+.Nav-box > div > span {
+	position: absolute;
+	top: 0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	cursor: pointer;
+
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 5vmin;
+	color: black;
+	z-index: 300 !important;
+}
+.Nav-box > div > span:hover {
+	color: white;
+	font-weight: bold;
+}
