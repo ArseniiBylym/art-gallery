@@ -119,6 +119,8 @@
 	color: rgba(0,0,0,.8);
 	text-align: right;
 	position: relative;
+	opacity: 1;
+	/*animation: Gallery__show-description .5s ease forwards;*/
 }
 
 .Gallery__projects--description div {
@@ -129,19 +131,28 @@
 	bottom: 0;
 	display: flex;
 	align-items: center;
-	opacity: 0;
-	transition: all .4s ease-in-out;
+	/*opacity: 0;*/
+	/*transition: all .4s ease-in-out;*/
 }
-.Gallery__projects--description div p {
+.Gallery__projects--description p {
 	border-right: 1px solid rgba(54, 55, 62, 1);
 	padding-right: 20px;
 	line-height: 1.8rem;
 
 }
-
+/*
 .Gallery__projects--description div.showDescription {
-	opacity: 1; 
+	animation: Gallery__show-description .5s ease forwards;
+	opacity: 0; 
 }
+@keyframes Gallery__show-description{
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}*/
 
 
 .toTheGallery {

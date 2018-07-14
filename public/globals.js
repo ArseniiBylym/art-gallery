@@ -6,9 +6,9 @@ var GLOBAL_DATA = {
 			href: '/GRID',
 			description: 'The Grid project is an attempt to translate the feeling that such information connections are in the plane of visual perception, the generalization of this process to a graphical form: lines, spots, colors. It is also a way of identifying oneself in the surrounding information network, of which we are part, while I am interested in the aspect of the multifaceted nature of such informational links, the presence of casual crashes or errors in them, which in turn serves as the reason for the creation of a new type of information.',
 			urls: {
-				img1: './img/Gallery/GridProject/rsz_img1.jpg',
-				img2: './img/Gallery/GridProject/rsz_img2.jpg',
-				img3: './img/Gallery/GridProject/rsz_img3.jpg',
+				img1: '/img/Gallery/GridProject/rsz_img1.jpg',
+				img2: '/img/Gallery/GridProject/rsz_img2.jpg',
+				img3: '/img/Gallery/GridProject/rsz_img3.jpg',
 			}
 		},
 		{
@@ -16,9 +16,9 @@ var GLOBAL_DATA = {
 			href: '/CONNECTION',
 			description: '2 Obcaecati quis quo alias placeat incidunt aspernatur possimus ducimus officiis, numquam quam? Quam, totam repellat ad autem delectus minus veniam iste laudantium nisi exercitationem harum, tempore voluptas reprehenderit debitis quidem earum itaque natus facere!',
 			urls: {
-				img1: './img/Gallery/ConnectionProject/rsz_img3.jpg',
-				img2: './img/Gallery/ConnectionProject/rsz_img1.jpg',
-				img3: './img/Gallery/ConnectionProject/rsz_img2.jpg',
+				img1: '/img/Gallery/ConnectionProject/rsz_img3.jpg',
+				img2: '/img/Gallery/ConnectionProject/rsz_img1.jpg',
+				img3: '/img/Gallery/ConnectionProject/rsz_img2.jpg',
 			}
 		},
 		{
@@ -26,9 +26,9 @@ var GLOBAL_DATA = {
 			href: '/Home',
 			description: '3 Nemo eaque placeat pariatur repellat veritatis quia aliquid totam assumenda reprehenderit accusamus! Iste ut, sint quidem deleniti ipsa temporibus blanditiis nisi accusantium unde eligendi ullam soluta sunt mollitia voluptatibus voluptatum aliquam quos obcaecati.',
 			urls: {
-				img1: './img/Gallery/GridProject/rsz_img4.jpg',
-				img2: './img/Gallery/GridProject/rsz_img2.jpg',
-				img3: './img/Gallery/GridProject/rsz_img1.jpg',
+				img1: '/img/Gallery/GridProject/rsz_img4.jpg',
+				img2: '/img/Gallery/GridProject/rsz_img2.jpg',
+				img3: '/img/Gallery/GridProject/rsz_img1.jpg',
 			}
 		}
 	],

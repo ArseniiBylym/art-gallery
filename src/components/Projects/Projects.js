@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './Projects.css';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuButton from '../MenuButton/MenuButton.js';
 
 export default class Projects extends Component {
@@ -8,32 +8,18 @@ export default class Projects extends Component {
 	state = {
 		proj: window.GLOBAL_DATA.PROJECT_LIST,
 		index: 1,
-		timerStop: false,
 		moving: null,
 		wheelRotation: 0
 	}
 
 	scrollProjectsItems = (e) => {
-		if (this.state.timerStop) return;
-
-		this.setState(() => {
-			return {timerStop: true};
-		})
-
-		setTimeout(() => {
-			this.setState(() => {
-				return {timerStop: false};
-				})
-		}, 600);
-		
+				
 		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
 
 		if (e.deltaY < 0) {
 			if(this.state.index === 0) return;
 
-			scrollToTop(projects, this.state.index);
 			this.moveImgUp();
-			this.showDescription();
 			this.turnWheel('down');
 
 			this.setState((prevState) => {
@@ -46,9 +32,7 @@ export default class Projects extends Component {
 
 		if (e.deltaY > 0) {
 			if(this.state.index === projects.length - 1) return;
-			scrollToBottom(projects, this.state.index);
 			this.moveImgDown();
-			this.showDescription();
 			this.turnWheel('up');
 			
 			this.setState((prevState) => {
@@ -76,18 +60,6 @@ export default class Projects extends Component {
 			}
 			default: break;
 		}
-	}
-
-	showDescription = () => {
-		let text = [...document.querySelectorAll('.Gallery__projects--description div')];
-
-		let description = document.querySelector('.Gallery__projects--description div.showDescription');
-		description.classList.remove('showDescription');
-
-		description.addEventListener("transitionend", () => {
-			text[this.state.index].classList.add('showDescription');
-		})
-		
 	}
 
 	moveImgDown = (e) => {
@@ -142,26 +114,17 @@ export default class Projects extends Component {
 						<div className='Gallery__projects--wrapper'>
 							<div className='Gallery__projects--wrapperForItems'>
 								<SvgElem />
-								<div className='Gallery__projects--item top'>{this.state.proj[0].name}</div>
-								<div className='Gallery__projects--item center'>{this.state.proj[1].name}</div>
-								<div className='Gallery__projects--item bottom'>{this.state.proj[2].name}</div>
+								<ProjectsName mainClass='Gallery__projects--item' projects={this.state.proj} index={this.state.index} />
+								
 							</div>
 						</div>
 						<div className='Gallery__projects--description'>
-						 	<div><p>{this.state.proj[0].description}</p></div>
-							<div className='showDescription'><p>{this.state.proj[1].description}</p></div>
-							<div><p>{this.state.proj[2].description}</p></div>
+							<Description desc={this.state.proj[this.state.index].description} />
+
 						</div>
 						<div className='Gallery__posters '> 
-							<img className='img1 hide-top' src={this.state.proj[0].urls.img1} alt='img'/>
-							<img className='img2 hide-top' src={this.state.proj[0].urls.img2} alt='img'/>
-							<img className='img3 hide-top' src={this.state.proj[0].urls.img3} alt='img'/>
-							<img className='img1' src={this.state.proj[1].urls.img1} alt='img'/>
-							<img className='img2' src={this.state.proj[1].urls.img2} alt='img'/>
-							<img className='img3' src={this.state.proj[1].urls.img3} alt='img'/>
-							<img className='img1 hide-bottom' src={this.state.proj[2].urls.img1} alt='img'/>
-							<img className='img2 hide-bottom' src={this.state.proj[2].urls.img2} alt='img'/>
-							<img className='img3 hide-bottom' src={this.state.proj[2].urls.img3} alt='img'/>
+							<Posters imgArr={this.state.proj} />
+
 						</div>
 						<div className='toTheGallery showGalleryButton'>
 							<Link to={`/Projects${this.state.proj[this.state.index].href}`}><p>TO THE GALLERY</p><SvgArrowRight/></Link>
@@ -174,39 +137,47 @@ export default class Projects extends Component {
 	}
 }
 
+function ProjectsName(props) {
+	let length = props.projects.length;
 
-function scrollToTop(projects, index) {
-	if (projects[index - 2]) {
-		projects[index - 2].classList.add('top');
-	}
+	let projects = props.projects.map((item, i) => {
+		let currentClass = props.mainClass;
 
-	projects[index - 1].classList.remove('top');
-	projects[index - 1].classList.add('center');
+		if (props.index > 0 && i === props.index - 1) currentClass += ' top';
+		if (i === props.index) currentClass += ' center';
+		if (length > props.index && i === props.index + 1) currentClass += ' bottom';
+		if (length > props.index + 1 && i === props.index + 2) currentClass += ' under';
 
-	projects[index].classList.remove('center');
-	projects[index].classList.add('bottom');
+			return(
+				<div key={item.name} className={currentClass} >{item.name}</div>
+			)
+		})
+		
+	return projects;
+}
 
-	if(projects[index + 1]) {
-		projects[index + 1].classList.remove('bottom');
-		projects[index + 1].classList.add('under');
-	}
-};
+function Description(props) {
+	return(
+		<div className='showDescription'><p>{props.desc}</p></div>
+		)
+}
 
-function scrollToBottom(projects, index) {
-	if (projects[index - 1]){
-		projects[index - 1].classList.remove('top');
-	}
+function Posters(props) {
 
-	projects[index].classList.remove('center');
-	projects[index].classList.add('top');
+	let posters = props.imgArr.map((item, i) => {
+		let addedClass = null;
+		if (i === 0) addedClass = 'hide-top';
+		if (i >= 2) addedClass = 'hide-bottom';
+		return (
+			<React.Fragment key={item.name}>
+				<img className={`img1 ${addedClass}`} src={props.imgArr[i].urls.img1} alt='img'/>
+				<img className={`img2 ${addedClass}`} src={props.imgArr[i].urls.img2} alt='img'/>
+				<img className={`img3 ${addedClass}`} src={props.imgArr[i].urls.img3} alt='img'/>
+			</React.Fragment>
+			)
+	})
 
-	projects[index + 1].classList.remove('bottom');
-	projects[index + 1].classList.add('center');
-	
-	if (projects[index + 2]){
-		projects[index + 2].classList.remove('under');
-		projects[index + 2].classList.add('bottom');			
-	}
+	return posters;
 }
 
 function SvgArrowRight() {
