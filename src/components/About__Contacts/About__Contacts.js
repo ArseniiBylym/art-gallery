@@ -10,9 +10,21 @@ export default class About__Contacts extends Component {
 		side: this.props.match.params.side
 	}
 
+	componentDidMount = () => {
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick)
+	}
+
+	scrollOnClick = (e) => {
+		let event = new MouseEvent("click", {bubbles: true});
+		if(e.key === 'ArrowDown') document.getElementById('contactButton').dispatchEvent(event);
+		if(e.key === 'ArrowUp') document.getElementById('aboutButton').dispatchEvent(event);
+	}
+
 
 	toggleSides = (e) => {
-		console.log('clicked')
 		if (e.target.classList.contains('activeButton')) {
 			return};
 

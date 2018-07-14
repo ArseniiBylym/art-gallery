@@ -127,3 +127,27 @@
 	transform: scale(1.17) !important;
 	overflow: hidden;
 }
+#MenuProjectsContainer {
+	position: fixed;
+	top: 0;
+	/*right: 0;*/
+	left: 45vw;
+	width: 30%;
+	height: auto;
+	background-color: black;
+	color: white;
+	z-index: 250;
+	opacity: 0;
+	transform: translateX(-100%);
+	animation: showProjectList 1s 0s ease forwards;
+}
+@keyframes showProjectList {
+	0%{
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}

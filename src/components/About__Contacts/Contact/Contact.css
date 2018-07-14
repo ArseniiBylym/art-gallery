@@ -43,7 +43,7 @@
 .Contact .aside__from p {
 	transform: rotate(-90deg);
 	transform-origin: bottom right;
-	font-size: 2vw;
+	font-size: 3.5vmin;
 	color: black;
 
 }
@@ -107,6 +107,7 @@
 .from-container input:focus, .from-container textarea:focus {
 	border: none;
 	outline: none;
+	background: rgba(218, 192, 153, 1);
 }
 
 
@@ -238,7 +239,7 @@
 	grid-row: -2 / -1;
 	margin-top: auto;
 	margin-bottom: 10px;
-
+	font-size: 2vmin;
 }
 .creatorInfo {
 	font-family: 'Krona One';
@@ -246,7 +247,7 @@
 	grid-row: -2 / -1;
 	margin: auto 0 10px 10px;
 	text-align: right;
-
+	font-size: 2vmin;
 }
 .creatorInfo a {
 	font-size: 80%;

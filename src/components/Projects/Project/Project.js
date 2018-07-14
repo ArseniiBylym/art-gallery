@@ -8,42 +8,31 @@ export default class Project extends Component {
 	state = {
 		pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures,
 		currentPictureIndex: 0,
-		prevPictureIndex: null,
 		isFullSize: false,
-		isLoadTime: false
+		isLoadTime: true,
 	}
-	componentDidMount = () => {
-		setTimeout(() => {
-			this.setState({isLoadTime: true})
-		}, 500)
+
+	componentWillUpdate = (prevState, prevProps) => {
+		if (this.props.match.params.projectName !== prevState.match.params.projectName) {
+	
+			this.setState((prevState) => {
+			return({pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures})
+			})
+		}
 	}
+	
 
 	showNext = () => {
-		let images = [...document.getElementsByClassName('Picture')];
-
-		if(this.state.currentPictureIndex === images.length - 1) return;
-
-		images[this.state.currentPictureIndex].classList.remove("current");
-		images[this.state.currentPictureIndex].classList.add("prev");
-		images[this.state.currentPictureIndex + 1].classList.remove("next");
-		images[this.state.currentPictureIndex + 1].classList.add("current");
+		if(this.state.currentPictureIndex === this.state.pictures - 1) return;
 
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex + 1}
 		})
-	
 	};
 
 	showPrev = () => {
 		if(this.state.currentPictureIndex === 0) return;
 
-		let images = [...document.getElementsByClassName('Picture')];
-
-		images[this.state.currentPictureIndex].classList.remove("current");
-		images[this.state.currentPictureIndex].classList.add("next");
-		images[this.state.currentPictureIndex - 1].classList.add("current");
-		images[this.state.currentPictureIndex - 1].classList.remove("prev");
-		
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex - 1}
 		})
@@ -63,13 +52,14 @@ export default class Project extends Component {
 	render() {
 		let images = null;
 		if (this.state.pictures && this.state.isLoadTime) {
-			images = this.state.pictures.slice(1).map((img, i) => {
+			images = this.state.pictures.map((img, i) => {
 				
 				return (
 					<Picture key={img.url} 
 							 url={img.url}
 							 info={img.info}
-							 pos={i + 1}
+							 pos={i}
+							 currentIndex={this.state.currentPictureIndex}
 							 click={this.fullSizeImg}
 					 />	
 				)
@@ -97,7 +87,7 @@ export default class Project extends Component {
 							<p>Maryna Herasymenko Art</p>
 						</div>
 						<div className='Project__picture' >
-							<Picture url={this.state.pictures[0].url} info={this.state.pictures[0].info} pos={0} click={this.fullSizeImg}/>
+							{/*<Picture  url={this.state.pictures[0].url} info={this.state.pictures[0].info} pos={0} click={this.fullSizeImg}/>*/}
 							{images}
 						</div>
 						<div className='Project__controls'> 

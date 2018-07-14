@@ -3,6 +3,8 @@ import './Projects.css';
 import { Link } from 'react-router-dom';
 import MenuButton from '../MenuButton/MenuButton.js';
 
+
+
 export default class Projects extends Component {
 	
 	state = {
@@ -12,39 +14,57 @@ export default class Projects extends Component {
 		wheelRotation: 0
 	}
 
+	componentDidMount = () => {
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick)
+	}
+
+	scrollOnClick = (e) => {
+		if(e.key === 'ArrowUp') this.moveToTop();
+		if(e.key === 'ArrowDown') this.moveToDown();
+	}
+
 	scrollProjectsItems = (e) => {
 				
-		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
-
 		if (e.deltaY < 0) {
-			if(this.state.index === 0) return;
-
-			this.moveImgUp();
-			this.turnWheel('down');
-
-			this.setState((prevState) => {
-				return {
-					index: prevState.index - 1,
-					wheelRotation: prevState.wheelRotation - 30 
-				};
-			})
+			this.moveToTop();
 		}
 
 		if (e.deltaY > 0) {
-			if(this.state.index === projects.length - 1) return;
-			this.moveImgDown();
-			this.turnWheel('up');
-			
-			this.setState((prevState) => {
-				return {
-					index: prevState.index + 1,
-					wheelRotation: prevState.wheelRotation + 30 
-				};
-			})
+			this.moveToDown();
 		}
 	}
 
-	turnWheel = (deg) => {
+	moveToTop = () => {
+		if(this.state.index === 0) return;
+		this.moveImgUp();
+		this.turnSvgWheel('down');
+
+		this.setState((prevState) => {
+			return {
+				index: prevState.index - 1,
+				wheelRotation: prevState.wheelRotation - 30 
+			};
+		})
+	}
+
+	moveToDown = () => {
+		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
+		if(this.state.index === projects.length - 1) return;
+		this.moveImgDown();
+		this.turnSvgWheel('up');
+		
+		this.setState((prevState) => {
+			return {
+				index: prevState.index + 1,
+				wheelRotation: prevState.wheelRotation + 30 
+			};
+		})
+	}
+
+	turnSvgWheel = (deg) => {
 		switch(deg) {
 			case 'up': {
 				
@@ -98,13 +118,15 @@ export default class Projects extends Component {
 		}
 	}	
 
+	
+
 	render() {
 		return (
-			<div className='MainWrapper on-enter'>
+			<div className='MainWrapper on-enter' onKeyDown={this.keyProjectsItems}>
 				
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
-					<div className='Gallery' onWheel={this.scrollProjectsItems}>
+					<div className='Gallery' onWheel={this.scrollProjectsItems} >
 						<div className='Gallery__logo'>
 							<p>Maryna Herasymenko Art</p>
 						</div>
@@ -136,6 +158,8 @@ export default class Projects extends Component {
 		)
 	}
 }
+
+
 
 function ProjectsName(props) {
 	let length = props.projects.length;

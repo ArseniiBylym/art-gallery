@@ -11,6 +11,18 @@ export default class Events extends Component {
 		timer: false
 	}
 
+	componentDidMount = () => {
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick)
+	}
+
+	scrollOnClick = (e) => {
+		if(e.key === 'ArrowUp') this.moveToTop();
+		if(e.key === 'ArrowDown') this.moveToDown();
+	}
+
 	
 	toggleToCurrentEvent = (e) => {
 		let arr = [...document.getElementsByClassName('EventItem')];
@@ -31,28 +43,40 @@ export default class Events extends Component {
 			})
 		}, 350)
 
+
+		if(e.deltaY > 0) this.moveToDown();
+		else this.moveToTop();
+		
+	}
+
+	moveToTop = () => {
 		let events = [...document.getElementsByClassName('EventItem')];
 		let currentElem = events[this.state.currentEventIndex];
 
 		if(!currentElem) return;
 
-		if(e.deltaY > 0) {
-			if(events.indexOf(currentElem) === events.length - 1) return;
-			this.setState((prevState) => {
-				return{prevEventIndex: prevState.currentEventIndex,
-					currentEventIndex: prevState.currentEventIndex + 1,
-					timer: true
-				}
-			})
-		} else {
-			if(events.indexOf(currentElem) === 0) return;
-			this.setState((prevState) => {
-				return{prevEventIndex: prevState.currentEventIndex,
-					currentEventIndex: prevState.currentEventIndex - 1,
-					timer: true
-				}
-			})
-		}
+		if(events.indexOf(currentElem) === 0) return;
+		this.setState((prevState) => {
+			return{prevEventIndex: prevState.currentEventIndex,
+				currentEventIndex: prevState.currentEventIndex - 1,
+				timer: true
+			}
+		})
+	}
+
+	moveToDown = () => {
+		let events = [...document.getElementsByClassName('EventItem')];
+		let currentElem = events[this.state.currentEventIndex];
+
+		if(!currentElem) return;
+
+		if(events.indexOf(currentElem) === events.length - 1) return;
+		this.setState((prevState) => {
+			return{prevEventIndex: prevState.currentEventIndex,
+				currentEventIndex: prevState.currentEventIndex + 1,
+				timer: true
+			}
+		})
 	}
 
 	render() {

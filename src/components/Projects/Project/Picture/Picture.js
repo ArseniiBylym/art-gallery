@@ -3,7 +3,14 @@ import './Picture.css';
 
 export default function picture (props) {
 	
-	let classList = props.pos === 0 ? 'Picture current' : 'Picture';
+	let classList = 'Picture';
+
+	if(props.pos < props.currentIndex) {
+		classList += ' prev';
+	}
+	if(props.pos === props.currentIndex) {
+		classList += ' current';
+	}
 
 	return (
 		<div className={classList} >

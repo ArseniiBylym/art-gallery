@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import './MenuButton.css';
+import SubMenuProjects from './SubMenuProjects/SubMenuProjects';
 
 class MenuButton extends Component {
 	
 	state = {
-		isClicked: false
+		isClicked: false,
+		projectList: window.GLOBAL_DATA.PROJECT_LIST,
+		showProjectsMenu: false
 	}
 
 	showMenu = () => {
@@ -13,6 +16,15 @@ class MenuButton extends Component {
 		document.getElementById('MenuOpenButton').classList.add('hide-menuButton');
 
 		this.setState({isClicked: true})
+	}
+
+	toggleProjectsShow = () => {
+		this.setState((prevState) => {
+			return {showProjectsMenu: true};
+		})
+	}
+	toggleProjectsHide = () => {
+		this.setState({showProjectsMenu: false})
 	}
 
 	hideMenu = () => {
@@ -25,9 +37,12 @@ class MenuButton extends Component {
 		}, 350)
 	}
 
-	goToEvents = (e) => {
-
+	goTo = (e) => {
+		if (this.state.showProjectsMenu) {
+			this.setState({showProjectsMenu: false})
+		}
 		let path = e.target.dataset.path;
+		// console.log(path)
 
 		if((this.props.match.url === '/About__Contacts/about' 
 			|| this.props.match.url === '/About__Contacts/contact') && 
@@ -70,23 +85,30 @@ class MenuButton extends Component {
 				return;
 			}
 		} else  {
-			this.props.history.push(path);	
+			this.props.history.push(path);
+			this.hideMenu();
 		}
 	}
 
 	render () {
+
 		let menu = null;
 		if(this.state.isClicked){
 			menu = (<div>
 				<div id='MenuOpenLayout' className='MenuOpenLayout' onClick={this.hideMenu}>
 				</div>
 				<div id='MenuContainer' className='MenuOpenLayout__container'>
-					<div><span data-path='/Home' onClick={this.goToEvents}>HOME</span></div> 
-					<div><span data-path='/Projects' onClick={this.goToEvents}>PROJECTS</span></div> 
-					<div><span data-path='/Events' onClick={this.goToEvents}>EVENTS</span></div> 
-					<div><span data-path='/About__Contacts/about' onClick={this.goToEvents}>ABOUT</span></div> 
-					<div><span data-path='/About__Contacts/contact' onClick={this.goToEvents}>CONTACT</span></div> 
+					<div><span data-path='/Home' onClick={this.goTo}>HOME</span></div> 
+					<div><span data-path='/Projects' onClick={this.goTo} onMouseEnter={this.toggleProjectsShow} onMouseLeave={this.toggleProjectsHide}>PROJECTS</span></div> 
+					<div><span data-path='/Events' onClick={this.goTo}>EVENTS</span></div> 
+					<div><span data-path='/About__Contacts/about' onClick={this.goTo}>ABOUT</span></div> 
+					<div><span data-path='/About__Contacts/contact' onClick={this.goTo}>CONTACT</span></div> 
 				</div>
+				{this.state.showProjectsMenu ? 
+					<SubMenuProjects projects={this.state.projectList} 
+					show={this.toggleProjectsShow} hide={this.toggleProjectsHide} 
+					click={this.goTo} hideMenu={this.hideMenu}/> 
+					: null}
 				</div>
 			);
 		}
@@ -103,6 +125,8 @@ class MenuButton extends Component {
 		)
 	}
 } 
+
+
 
 function zoomeLayoutIn() {
 	let layout = document.querySelector('.zoomWrapper').firstElementChild;

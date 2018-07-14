@@ -112,21 +112,21 @@
 
 
 .Gallery__projects--description {
-	grid-column: 3 / 8;
+	grid-column: 2 / 8;
 	grid-row: 7 / 11;
 	font-size: 1.0rem;
 	line-height: 1.4rem;
 	color: rgba(0,0,0,.8);
 	text-align: right;
 	position: relative;
-	opacity: 1;
+	/*opacity: 1;*/
 	/*animation: Gallery__show-description .5s ease forwards;*/
 }
 
 .Gallery__projects--description div {
 	position: absolute;
 	top: 0;
-	left:20%;
+	left:15%;
 	right: 10%;
 	bottom: 0;
 	display: flex;
@@ -162,6 +162,7 @@
 	width: 60%;
 	background:linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.8) 50%, rgba(0,0,0,.5));
 	color: white;
+	font-size: 2vh;
 	position: relative;
 	right: 4.25%;
 	display: flex;
@@ -198,9 +199,9 @@
 	align-items: center;
 	justify-content: space-around;
 }
-.toTheGallery.showGalleryButton:hover {
+/*.toTheGallery.showGalleryButton:hover {
 	transform: translateX(20px);
-}
+}*/
 .toTheGallery svg {
 	fill: white;
 	margin-left: 5px;
