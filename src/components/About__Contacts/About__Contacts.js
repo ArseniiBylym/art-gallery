@@ -7,7 +7,7 @@ import Contact from './Contact/Contact';
 export default class About__Contacts extends Component {
 
 	state = {
-		side: this.props.match.params.side
+		side: this.props.match.params.side,
 	}
 
 	componentDidMount = () => {
@@ -62,7 +62,7 @@ export default class About__Contacts extends Component {
 				<div className='About__Contacts'>
 					<Header side={this.state.side} click={this.toggleSides} />
 					<About side={this.state.side}/>
-					<Contact side={this.state.side}/>
+					<Contact side={this.state.side} modal={this.toggleModale}/>
 				</div>
 				</div>
 			</div>
