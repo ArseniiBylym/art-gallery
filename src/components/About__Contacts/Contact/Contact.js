@@ -47,6 +47,7 @@ export default class Contact extends Component {
 	}
 
 
+
 	render() {
 
 		let classList = this.props.side === 'contact' ? 'Contact show' : 'Contact';

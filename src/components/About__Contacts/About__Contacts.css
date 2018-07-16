@@ -67,3 +67,15 @@
 	color: black;
 	text-decoration: underline;
 }
+
+
+.LogInButton {
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	color: black;
+	font-size: 1rem;
+	font-family: 'Krona One';
+	z-index: 100;
+	cursor: pointer;
+}

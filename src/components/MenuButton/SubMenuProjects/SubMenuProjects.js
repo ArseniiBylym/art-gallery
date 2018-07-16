@@ -10,12 +10,12 @@ export default function SubMenuProjects(props) {
 		return (
 			<div id='MenuProjectsContainer' className='MenuOpenLayout__projects' 
 					style={{top: `${top}px`}}
-					onMouseEnter={this.props.show} onMouseLeave={this.props.hide}>
+					onMouseEnter={props.show} onMouseLeave={props.hide}>
 					
-				{this.props.projects.map((project) => {
+				{props.projects.map((project) => {
 					return(
 						<div key={project.name} data-path={`/Projects/${project.name}`} 
-									onClick={this.props.click} >
+									onClick={props.click} >
 							{project.name}
 						</div> 
 						)
