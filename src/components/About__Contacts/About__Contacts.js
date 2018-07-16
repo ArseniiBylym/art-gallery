@@ -51,6 +51,10 @@ export default class About__Contacts extends Component {
 		this.setState({side: side});
 	}
 
+	goToLoginForm = () => {
+		this.props.history.push('/Admin');
+	}
+
 	render() {
 		return(
 			<div className='About__Contacts__MainWrapper' onWheel={this.wheelClick}>
@@ -61,6 +65,7 @@ export default class About__Contacts extends Component {
 				<div className='zoomWrapper'>
 				<div className='About__Contacts'>
 					<Header side={this.state.side} click={this.toggleSides} />
+					<LogInButton click={this.goToLoginForm} />
 					<About side={this.state.side}/>
 					<Contact side={this.state.side} modal={this.toggleModale}/>
 				</div>
@@ -77,4 +82,10 @@ function Header(props) {
 			<div id="contactButton" className={props.side === 'contact' ? 'button activeButton' : 'button'} onClick={props.click}>Contact</div>
 		</div>
 	)
+}
+
+function LogInButton(props) {
+	return(
+		<div className='LogInButton' onClick={props.click}> Log in </div>
+		)
 }
