@@ -27,52 +27,52 @@ var GLOBAL_DATA = {
 		GRID: {
 			pictures: [
 				{
-					url: '/MGArt/img/Gallery/GRID/img1.jpg',
+					url: './img/Gallery/GRID/img1.jpg',
 					name: 'Error',
 					info: '70x90 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img2.jpg',
+					url: './img/Gallery/GRID/img2.jpg',
 					name: 'Hole',
 					info: '60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img3.jpg',
+					url: './img/Gallery/GRID/img3.jpg',
 					name: 'Frame',
 					info: '60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img4.jpg',
+					url: './img/Gallery/GRID/img4.jpg',
 					name: 'Сoordinate',
 					info: '60x70 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img5.jpg',
+					url: './img/Gallery/GRID/img5.jpg',
 					name: 'Line',
 					info: '80x60 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img6.jpg',
+					url: './img/Gallery/GRID/img6.jpg',
 					name: 'Element diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img7.jpg',
+					url: './img/Gallery/GRID/img7.jpg',
 					name: 'Element 2 diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img8.jpg',
+					url: './img/Gallery/GRID/img8.jpg',
 					name: 'Border diptych',
 					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img9.jpg',
+					url: './img/Gallery/GRID/img9.jpg',
 					name: 'Section',
 					info: '80x60 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/GRID/img10.jpg',
+					url: './img/Gallery/GRID/img10.jpg',
 					name: 'Grid 2',
 					info: '70x100 acrylic on canvas 2017' 
 				},
@@ -81,52 +81,52 @@ var GLOBAL_DATA = {
 		CONNECTION: {
 			pictures: [
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img1.jpg',
+					url: './img/Gallery/CONNECTION/img1.jpg',
 					name: 'Free',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img2.jpg',
+					url: './img/Gallery/CONNECTION/img2.jpg',
 					name: 'Horizon',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img3.jpg',
+					url: './img/Gallery/CONNECTION/img3.jpg',
 					name: 'Music',
 					info: '100x110 acrylic on canvas 2017' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img4.jpg',
+					url: './img/Gallery/CONNECTION/img4.jpg',
 					name: 'Be silent',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img5.jpg',
+					url: './img/Gallery/CONNECTION/img5.jpg',
 					name: 'Sound',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img6.jpg',
+					url: './img/Gallery/CONNECTION/img6.jpg',
 					name: 'Northern Lights',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img7.jpg',
+					url: './img/Gallery/CONNECTION/img7.jpg',
 					name: 'Horizon 2',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img8.jpg',
+					url: './img/Gallery/CONNECTION/img8.jpg',
 					name: 'First',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img9.jpg',
+					url: './img/Gallery/CONNECTION/img9.jpg',
 					name: 'Feedback',
 					info: '100x110 acrylic on canvas 2018' 
 				},
 				{
-					url: '/MGArt/img/Gallery/CONNECTION/img10.jpg',
+					url: './img/Gallery/CONNECTION/img10.jpg',
 					name: 'On the verge',
 					info: '100x110 acrylic on canvas 2018' 
 				},
@@ -143,7 +143,7 @@ var GLOBAL_DATA = {
 			date: new Date(2018, 7, 4, 15, 0),
 			place: 'Art Gallery, Poltava',
 			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem fugit libero a possimus quidem, placeat, error nemo accusamus voluptatum ullam voluptatem impedit sed ab vero sequi totam perspiciatis odit doloribus at nihil provident! Aut modi quidem enim ipsam veritatis maxime est accusantium eligendi, at. Error fugiat mollitia amet, recusandae doloribus, labore.',
-			poster: 'url(/img/Events/rsz_img3.jpg)'
+			poster: 'url(./img/Events/rsz_img3.jpg)'
 		},
 		{
 			name: 'Exhibition',
