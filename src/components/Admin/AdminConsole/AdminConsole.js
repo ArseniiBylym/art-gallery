@@ -9,7 +9,7 @@ export default class AdminConsole extends Component {
 	}
 
 	componentWillMount = () => {
-		firebaseDB.ref('messages/').once('value')
+		firebaseDB.ref('messages/').orderByChild('date').once('value')
 		.then((snapshot) => {
 			let messages = [];
 				snapshot.forEach((item, i) => {
@@ -18,7 +18,7 @@ export default class AdminConsole extends Component {
 						...item.val()
 					})
 				})
-			this.setState({messages: messages})
+			this.setState({messages: messages.reverse()})
 		})
 	}
 
@@ -26,8 +26,6 @@ export default class AdminConsole extends Component {
 		e.preventDefault();
 		let password_v1 = document.getElementById('newPassword-1');
 		let password_v2 = document.getElementById('newPassword-2');
-		// console.log(password_v1, password_v2);
-		// console.log(password_v1 === password_v2);
 		if (password_v1.value === password_v2.value) {
 			firebaseAuth.currentUser.updatePassword(password_v2.value)
 			.then(()=>{
@@ -45,7 +43,7 @@ export default class AdminConsole extends Component {
 		e.preventDefault();
 		let event = {
 			name: document.querySelector('.addEvent--name input').value,
-			date: document.querySelector('.addEvent--date input').value,
+			date: +new Date(document.querySelector('.addEvent--date input').value),
 			place: document.querySelector('.addEvent--place input').value,
 			description: document.querySelector('.addEvent--description textarea').value,
 			poster: document.querySelector('.addEvent--poster input').value
@@ -125,6 +123,7 @@ export default class AdminConsole extends Component {
 				<div key={item.id} className='userMessageItem'>
 					<div className='userMessageItem--name'>{item.username}</div>
 					<div className='userMessageItem--email'>{item.email}</div>
+					<div className='userMessageItem--date'>{new Date(item.date).toDateString()}</div>
 					<div className='userMessageItem--message'>{item.text}</div>
 				</div>
 			)
@@ -138,8 +137,9 @@ export default class AdminConsole extends Component {
 				<div className='AdminConsole__messages'>
 					<h3> Your messages </h3>
 					<div className='messages--header'>
-						<div className='userMessageItem--name'>User name</div>
+						<div className='userMessageItem--name'>Name</div>
 						<div className='userMessageItem--email'>Email</div>
+						<div className='userMessageItem--date'>Date</div>
 						<div className='userMessageItem--message'>Message</div>
 					</div>
 					{messagesArr}

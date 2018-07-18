@@ -18,7 +18,7 @@ export default class Admin extends Component {
 		firebaseAuth.signInWithEmailAndPassword(email, password)
 		.then(() => {this.setState({isAuth: true})})
 		.catch((error) => {
-			alert("Sorry, you don't have admin rights to enter");
+			alert("Sorry, you don't have admin rights for enter");
 			this.props.history.goBack();
 		})
 	}
@@ -33,13 +33,17 @@ export default class Admin extends Component {
 		})
 	}
 
+	// goBack = () => {
+	// 	this.props.history.goBack();
+	// }
+
 	render() {
 		console.log(this.props)
 		let elem = null;
 		if(this.state.isAuth) {
 			elem = <AdminConsole click={this.adminLogOut}/>
 		} else {
-			elem = <AdminForm click={this.adminLogIn}/>
+			elem = <AdminForm clickIn={this.adminLogIn} clickOut={() => (this.props.history.goBack())}/>
 		}
 
 		return(
@@ -58,7 +62,10 @@ function AdminForm(props) {
 				<input type='email' name='email' placeholder='Enter your email'/>
 				<h1>Your password</h1>
 				<input type='password' name='password' placeholder='Enter your password' />
-				<button type='submit' onClick={props.click}>Log in</button>
+				<div>
+					<button type='submit' onClick={props.clickIn}>Log in</button>
+					<button type='submit' onClick={props.clickOut}>Go back</button>
+				</div>
 				<p>*access allowed only for users with admin rights</p>
 			</div>
 		</div>

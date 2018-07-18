@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './SubMenuProjects.css';
 
 export default function SubMenuProjects(props) {

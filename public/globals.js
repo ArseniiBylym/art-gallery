@@ -20,16 +20,6 @@ var GLOBAL_DATA = {
 				img2: '/img/Gallery/CONNECTION/Previews/rsz_img1.jpg',
 				img3: '/img/Gallery/CONNECTION/Previews/rsz_img2.jpg',
 			}
-		},
-		{
-			name: 'OIL',
-			href: '/Home',
-			description: '3 Nemo eaque placeat pariatur repellat veritatis quia aliquid totam assumenda reprehenderit accusamus! Iste ut, sint quidem deleniti ipsa temporibus blanditiis nisi accusantium unde eligendi ullam soluta sunt mollitia voluptatibus voluptatum aliquam quos obcaecati.',
-			urls: {
-				img1: '/img/Gallery/GRID/Previews/rsz_img4.jpg',
-				img2: '/img/Gallery/GRID/Previews/rsz_img2.jpg',
-				img3: '/img/Gallery/GRID/Previews/rsz_img1.jpg',
-			}
 		}
 	],
 
