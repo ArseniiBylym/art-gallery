@@ -131,9 +131,6 @@ var GLOBAL_DATA = {
 					info: '100x110 acrylic on canvas 2018' 
 				},
 			]
-		},
-		oil: {
-
 		}
 	},
 
