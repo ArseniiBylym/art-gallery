@@ -239,12 +239,7 @@
 	grid-row: -2 / -1;
 	margin-top: auto;
 	margin-bottom: 10px;
-<<<<<<< HEAD
-	font-size: 80%;
-
-=======
 	font-size: 2vmin;
->>>>>>> dev
 }
 .creatorInfo {
 	font-family: 'Krona One';
@@ -252,11 +247,7 @@
 	grid-row: -2 / -1;
 	margin: auto 0 10px 10px;
 	text-align: right;
-<<<<<<< HEAD
-font-size: 80%;
-=======
 	font-size: 2vmin;
->>>>>>> dev
 }
 .creatorInfo a {
 	font-size: 80%;

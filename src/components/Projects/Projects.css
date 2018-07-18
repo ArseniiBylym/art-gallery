@@ -171,15 +171,12 @@
 	align-items: center;
 	justify-content: space-around;
 }
-<<<<<<< HEAD
-.toTheGallery.showGalleryButton:hover {
-	background-color: black;
-=======
+
 .toTheGallery a:hover {
 	background-color: rgba(0,0,0,.7);
 	color: white;
->>>>>>> dev
 }
+
 .toTheGallery svg {
 	fill: white;
 	margin-left: 5px;
