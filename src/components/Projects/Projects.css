@@ -48,7 +48,7 @@
 	transform-origin: left top;
 }
 .Gallery__projects--wrapper {
-	grid-column: 3 / 8;
+	grid-column: 4 / 8;
 	grid-row: 2 / 6;
 	overflow: hidden;
 	position: relative;
@@ -129,30 +129,22 @@
 	bottom: 0;
 	display: flex;
 	align-items: center;
-	opacity: 0;
-	transition: all .4s ease-in-out;
 }
-.Gallery__projects--description div p {
+.Gallery__projects--description p {
 	border-right: 1px solid rgba(54, 55, 62, 1);
 	padding-right: 20px;
 	line-height: 1.8rem;
 
 }
 
-.Gallery__projects--description div.showDescription {
-	opacity: 1; 
-}
-
-
 .toTheGallery {
-	grid-column: 6 / 9;
+	grid-column: 4 / 7;
 	grid-row: 6 / 7;
 	height: 50%;
-	width: 60%;
-	background:linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.8) 50%, rgba(0,0,0,.5));
+	width: 100%;
 	color: white;
+	font-size: 2vh;
 	position: relative;
-	right: 4.25%;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
@@ -160,27 +152,18 @@
 	cursor: pointer;
 	z-index: 100;
 	transition: all 1s ease;
-	opacity: 0;
+	opacity: 1;
 
 }
-.toTheGallery.showGalleryButton {
-	animation: showGalleryButton 1s 2s ease forwards;
-}
-@keyframes showGalleryButton {
-	0%{
-		opacity: 0;
-		transform: translateX(-20px);
-	}
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
 .toTheGallery a {
+	position: absolute;
+	border: 1px solid rgba(0,0,0,.7);
+	top: 0;
+	right: 0;
 	display: block;
-	width: 80%;
 	height: 100%;
-	color: white;
+	padding: 0 20px;
+	color: black;
 	text-decoration: none;
 	font-size: 2vh;
 	display: flex;
@@ -188,8 +171,14 @@
 	align-items: center;
 	justify-content: space-around;
 }
+<<<<<<< HEAD
 .toTheGallery.showGalleryButton:hover {
 	background-color: black;
+=======
+.toTheGallery a:hover {
+	background-color: rgba(0,0,0,.7);
+	color: white;
+>>>>>>> dev
 }
 .toTheGallery svg {
 	fill: white;
@@ -267,11 +256,20 @@
 	opacity: .5;
 }
 
-@keyframes description {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+
+svg.Gallery__arrowUp {
+	grid-column: 3 / 4;
+	grid-row: 3 / 4;
+	width: 50%;
+	height: 100%;
+	transform: scale(.5) translateY(-45%);
+	color: rgba(0,0,0,.4);
+}
+svg.Gallery__arrowDown {
+	grid-column: 3 / 4;
+	grid-row: 4 / 5;
+	width: 50%;
+	height: 100%;
+	transform: scale(.5) translateY(-45%);
+	color: rgba(0,0,0,.4);
 }

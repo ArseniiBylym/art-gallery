@@ -9,6 +9,7 @@ import Projects from './Projects/Projects.js';
 import Project from './Projects/Project/Project.js';
 import About__Contacts from './About__Contacts/About__Contacts';
 import Events from './Events/Events';
+import Admin from './Admin/Admin';
 
 
 
@@ -23,6 +24,7 @@ class App extends Component {
 				    	<Route path='/Projects/:projectName' component={Project} />
 				    	<Route path='/Events' component={Events} />
 		      		<Route path='/About__Contacts/:side' component={About__Contacts} /> 
+		      		<Route path='/Admin' component={Admin} />
 		      		<Redirect from='/' to='/Home' />
 	      		</Switch>
 	      	</div>

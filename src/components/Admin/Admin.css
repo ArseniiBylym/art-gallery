@@ -1,0 +1,44 @@
+.AdminForm__container {
+	display: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.AdminForm__box {
+	width: 40%;
+	height: auto;
+	background-color: white;
+	border-radius: 10px;
+	padding: 20px;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.AdminForm__box h1 {
+	font-size: 1.2rem;
+	padding: 10px auto;
+	text-align: center;
+	padding: 10px 0;
+}
+
+.AdminForm__box input {
+	width: 100%;
+	font-size: 1rem;
+	padding: 10px;
+}
+
+.AdminForm__box button {
+	font-size: 1.2rem;
+	margin: 10px;
+	padding: 10px 40px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	background-color: #6BA6D0;
+}

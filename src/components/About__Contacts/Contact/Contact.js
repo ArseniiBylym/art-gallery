@@ -1,80 +1,150 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Contact.css';
+import {firebaseDB} from '../../../functions/firebase';
+import ModalMessage from './ModalMessage/ModalMessage';
 
 
-export default function Contact(props) {
+export default class Contact extends Component {
 
-	let classList = props.side === 'contact' ? 'Contact show' : 'Contact';
-	
-	return(
-		<div className ={classList}> 
-			<div className='contacts__header'>
-				<p>CONTACT</p>
-			</div>
-			<div className='cork'/>
-			<div className='aside' />
-			<div className='aside__from'>
-				<p>From:</p>
-			</div>
-			<div className='main-container'>
-				<div className='from-container'>
-					<div className='from-container--name'>
-						<p>Name:</p><input form='sentEmailForm' name='name'></input>
-					</div>
-					<div className='from-container--email'>
-						<p>Email:</p><input form='sentEmailForm' name='email'></input>
-					</div>
-					<div className='from-container--message'>
-						<p>Message:</p><textarea rows='5' form='sentEmailForm' name='massage'></textarea>
-					</div>
+	state = {
+		isSended: false,
+		isValid: false,
+		name: '',
+		email: '',
+		message: ''
+	}
+
+	inputValue = (e) => {
+		let elem = e.target.name;
+
+		this.setState({[elem]: e.target.value})
+	}
+
+	isValid = () => {
+		if (this.state.name.trim() !== '' && this.state.email.trim() !== '' && this.state.message.trim() !== '') return true;
+	 	else return false;
+	}
+
+	submitMessage = (e) => {
+		e.preventDefault();
+		if(this.isValid()) {
+			let message = {
+				name: document.querySelector('.from-container--name input').value,
+				email: document.querySelector('.from-container--email input').value,
+				text: document.querySelector('.from-container--message textarea').value,
+				date: +new Date()
+			}
+			firebaseDB.ref('messages/').push({
+					date: message.date,
+					username: message.name,
+					email: message.email,
+					text: message.text
+			}).then(() => { 
+				console.log('message has sended')
+				this.setState({isSended: true, isValid: true}); 
+			})
+			.catch((e) => {alert('Ups! Something went wrong. Try it agian.')})
+		}
+		else {
+			this.setState({isSended: true})
+		}
+
+		e.preventDefault();
+	}
+
+
+
+	render() {
+
+		let classList = this.props.side === 'contact' ? 'Contact show' : 'Contact';
+
+		let modalLayout = null;
+		if (this.state.isSended) {
+			if (this.state.isValid){
+				modalLayout = <ModalMessage click={(e)=>{this.setState({isSended: false, isValid: false, name: '', email: '', message: ''})}}>
+												<p> Thank you for your message! </p>
+												<p> I'll get back you soon </p>
+											</ModalMessage>
+			}
+			else {
+				modalLayout = <ModalMessage click={(e)=>{this.setState({isSended: false, isValid: false})}}>
+												<p> Please, enter the correct values and try again! </p>
+											</ModalMessage>
+			}
+		}
+		
+		return(
+			
+			<div className ={classList}> 
+				{modalLayout}
+				<div className='contacts__header'>
+					<p>CONTACT</p>
 				</div>
-				<div className='sent-button'>
-					<form id='sentEmailForm' action='mailto:senjah7@gmail.com'>
-						<button>SENT</button>
-					</form>
+				<div className='cork'/>
+				<div className='aside' />
+				<div className='aside__from'>
+					<p>From:</p>
 				</div>
-				<div className='to-container'> 
-					<div className='to-container--reciever'>
-						<div className='to-container--reciever-title'>
-							<p>To:</p>
+				<div className='main-container'>
+					<div className='from-container'>
+						<div className='from-container--name'>
+							<p>Name:</p><input form='sentEmailForm' name='name'  value={this.state.name} onChange={this.inputValue}></input>
 						</div>
-						<div className='to-container--reciever-info'>
-							<h3>Maryna Herasymenko</h3>
-							<p>21 Sobornosty Street,</p>
-							<h3>Poltava, Ukraine</h3>
+						<div className='from-container--email'>
+							<p>Email:</p><input form='sentEmailForm' name='email' value={this.state.email} onChange={this.inputValue}></input>
 						</div>
-					</div>
-					<div className='to-container--phone'>
-						<div className='to-container--phone-icon'>
-							<SvgPhone/>
-						</div>
-						<div className='to-container--phone-number'>
-							<p>+38 097 1234567</p>
+						<div className='from-container--message'>
+							<p>Message:</p><textarea rows='5' form='sentEmailForm' name='message' value={this.state.message} onChange={this.inputValue}></textarea>
 						</div>
 					</div>
-					<div className='to-container--email'>
-						<div className='to-container--email-icon'>
-							<SvgMail/>
+					<div className='sent-button'>
+						<form id='sentEmailForm' onSubmit={this.submitMessage}>
+							<button type='submit'>SENT</button>
+						</form>
+					</div>
+					<div className='to-container'> 
+						<div className='to-container--reciever'>
+							<div className='to-container--reciever-title'>
+								<p>To:</p>
+							</div>
+							<div className='to-container--reciever-info'>
+								<h3>Maryna Herasymenko</h3>
+								<p>21 Sobornosty Street,</p>
+								<h3>Poltava, Ukraine</h3>
+							</div>
 						</div>
-						<div className='to-container--email-adres'>
-							<a href='mailto:some_adres'>some_adres@gmail.com</a>
+						<div className='to-container--phone'>
+							<div className='to-container--phone-icon'>
+								<SvgPhone/>
+							</div>
+							<div className='to-container--phone-number'>
+								<p>+38 097 1234567</p>
+							</div>
+						</div>
+						<div className='to-container--email'>
+							<div className='to-container--email-icon'>
+								<SvgMail/>
+							</div>
+							<div className='to-container--email-adres'>
+								<a href='mailto:some_adres'>some_adres@gmail.com</a>
+							</div>
 						</div>
 					</div>
+					<div id='fb-icon'><SvgFb/></div>
+					<div id='tw-icon'><SvgTw/></div>
+					<div id='in-icon'><SvgIn/></div>
+					<div id='inst-icon'><SvgInst/></div>
+					
 				</div>
-				<div id='fb-icon'><SvgFb/></div>
-				<div id='tw-icon'><SvgTw/></div>
-				<div id='in-icon'><SvgIn/></div>
-				<div id='inst-icon'><SvgInst/></div>
-				
+				<div className='copyrights'> 
+					<p>{'\u00A9Maryna Herasymenko 2018 All rights reserved'}</p>
+				</div>
+				<div className='creatorInfo'>
+					<p>Created by Arsenii Bylym <a href='mailto:arseniibylym@gmail.com'>arseniibylym@gmail.com</a></p>
+				</div>
 			</div>
-			<div className='copyrights'> 
-				<p>{'\u00A9Maryna Herasymenko 2018 All rights reserved'}</p>
-			</div>
-			<div className='creatorInfo'>
-				<p>Created by Arsenii Bylym <a href='mailto:arseniibylym@gmail.com'>arseniibylym@gmail.com</a></p>
-			</div>
-		</div>
-	)
+		)
+	}
 }
 
 function SvgFb() {

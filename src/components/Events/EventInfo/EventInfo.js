@@ -1,57 +1,44 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './EventInfo.css';
 
-export default class EventInfo extends Component {
+export default function EventInfo (props) {
 
-	state = {
-		isOpen: false
-	}
 
-	hideShowInfo = () => {
-		this.setState((prevState) => {
-			return {isOpen: !prevState.isOpen}
-		})
-	}
 
-	render() {
+	
 		let showButton = null;
-		let classForMenu = this.state.isOpen ? 'EventInfo open' : 'EventInfo';
-		if (!this.state.isOpen) {
+		let classForMenu = props.isOpen ? 'EventInfo open' : 'EventInfo';
+
+		if (!props.isOpen) {
 			showButton = (
-				<div className='hideShowButton' onClick={this.hideShowInfo}>
+				<div className='hideShowButton' onClick={props.click}>
 					<p>Show info</p>
-					<div><EventInfoAngleUp/></div>
+					<div><EventInfoAngleDown/></div>
 				</div>
 			)
 		} else {
 			showButton = (
-				<div className='hideShowButton openButton' onClick={this.hideShowInfo}>
+				<div className='hideShowButton openButton' onClick={props.click}>
 					<p>Hide info</p>
-					<div><EventInfoAngleDown/></div>
+					<div><EventInfoAngleUp/></div>
 				</div>
 			)
 		}
 
-
 		return (
 			<div className={classForMenu}>
 				<div className='eventPlace'>
-					<p>Place</p>
-					<p>{this.props.place}</p>
+					<p>Place:</p>
+					<p>{props.place}</p>
 				</div>
 				<div className='eventTime'>
-					<p>Time</p>
-					<p>{this.props.date.toLocaleString('ru', {hour:'2-digit',minute:'2-digit'})}</p>
+					<p>Time:</p>
+					<p>{new Date(props.date).toLocaleString('ru', {hour:'2-digit',minute:'2-digit'})}</p>
 				</div>
-					{showButton}
-				<div className='eventDescription--wrapper'>
-					<div className='eventDescription'>
-						<p>{this.props.description}</p>
-					</div>
-				</div>
+				{showButton}
 			</div>
 		)
-	}
+	
 }
 
 function EventInfoAngleUp() {

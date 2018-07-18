@@ -1,66 +1,87 @@
 import React, {Component} from 'react';
 import './Projects.css';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import MenuButton from '../MenuButton/MenuButton.js';
+import { firebaseDB } from '../../functions/firebase';
+
+
 
 export default class Projects extends Component {
 	
 	state = {
 		proj: window.GLOBAL_DATA.PROJECT_LIST,
-		index: 1,
-		timerStop: false,
+		index: 0,
 		moving: null,
 		wheelRotation: 0
 	}
 
+	// componentWillMount = () => {
+	// 	firebaseDB.ref('projectList/').once('value')
+	// 	.then((snapshot) => {
+	// 		let arr = [];
+	// 		snapshot.forEach((item,i) => {
+	// 			arr.push(item.val())
+	// 		})
+	// 		this.setState({proj: arr})
+
+	// 	})
+	// }
+
+	componentDidMount = () => {
+		console.log('Projects did mount')
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		console.log('Projects will unmount');
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+		// firebaseDB.ref('projectList/').off();
+	}
+
+	scrollOnClick = (e) => {
+		console.log('key press')
+		if(e.key === 'ArrowUp') this.moveToTop();
+		if(e.key === 'ArrowDown') this.moveToDown();
+	}
+
 	scrollProjectsItems = (e) => {
-		if (this.state.timerStop) return;
-
-		this.setState(() => {
-			return {timerStop: true};
-		})
-
-		setTimeout(() => {
-			this.setState(() => {
-				return {timerStop: false};
-				})
-		}, 600);
-		
-		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
-
+				
 		if (e.deltaY < 0) {
-			if(this.state.index === 0) return;
-
-			scrollToTop(projects, this.state.index);
-			this.moveImgUp();
-			this.showDescription();
-			this.turnWheel('down');
-
-			this.setState((prevState) => {
-				return {
-					index: prevState.index - 1,
-					wheelRotation: prevState.wheelRotation - 30 
-				};
-			})
+			this.moveToTop();
 		}
 
 		if (e.deltaY > 0) {
-			if(this.state.index === projects.length - 1) return;
-			scrollToBottom(projects, this.state.index);
-			this.moveImgDown();
-			this.showDescription();
-			this.turnWheel('up');
-			
-			this.setState((prevState) => {
-				return {
-					index: prevState.index + 1,
-					wheelRotation: prevState.wheelRotation + 30 
-				};
-			})
+			this.moveToDown();
 		}
 	}
 
-	turnWheel = (deg) => {
+	moveToTop = () => {
+		if(this.state.index === 0) return;
+		this.moveImgUp();
+		this.turnSvgWheel('down');
+
+		this.setState((prevState) => {
+			return {
+				index: prevState.index - 1,
+				wheelRotation: prevState.wheelRotation - 30 
+			};
+		})
+	}
+
+	moveToDown = () => {
+		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
+		if(this.state.index === projects.length - 1) return;
+		this.moveImgDown();
+		this.turnSvgWheel('up');
+		
+		this.setState((prevState) => {
+			return {
+				index: prevState.index + 1,
+				wheelRotation: prevState.wheelRotation + 30 
+			};
+		})
+	}
+
+	turnSvgWheel = (deg) => {
 		switch(deg) {
 			case 'up': {
 				
@@ -76,18 +97,6 @@ export default class Projects extends Component {
 			}
 			default: break;
 		}
-	}
-
-	showDescription = () => {
-		let text = [...document.querySelectorAll('.Gallery__projects--description div')];
-
-		let description = document.querySelector('.Gallery__projects--description div.showDescription');
-		description.classList.remove('showDescription');
-
-		description.addEventListener("transitionend", () => {
-			text[this.state.index].classList.add('showDescription');
-		})
-		
 	}
 
 	moveImgDown = (e) => {
@@ -126,13 +135,17 @@ export default class Projects extends Component {
 		}
 	}	
 
+	
+
 	render() {
+		if (this.state.proj) {
 		return (
-			<div className='MainWrapper on-enter'>
+			
+			<div className='MainWrapper on-enter' onKeyDown={this.keyProjectsItems}>
 				
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
-					<div className='Gallery' onWheel={this.scrollProjectsItems}>
+					<div className='Gallery' onWheel={this.scrollProjectsItems} >
 						<div className='Gallery__logo'>
 							<p>Maryna Herasymenko Art</p>
 						</div>
@@ -142,71 +155,76 @@ export default class Projects extends Component {
 						<div className='Gallery__projects--wrapper'>
 							<div className='Gallery__projects--wrapperForItems'>
 								<SvgElem />
-								<div className='Gallery__projects--item top'>{this.state.proj[0].name}</div>
-								<div className='Gallery__projects--item center'>{this.state.proj[1].name}</div>
-								<div className='Gallery__projects--item bottom'>{this.state.proj[2].name}</div>
+								<ProjectsName mainClass='Gallery__projects--item' projects={this.state.proj} index={this.state.index} />
 							</div>
 						</div>
+						<EventInfoAngleUp  />
+						<EventInfoAngleDown />
 						<div className='Gallery__projects--description'>
-						 	<div><p>{this.state.proj[0].description}</p></div>
-							<div className='showDescription'><p>{this.state.proj[1].description}</p></div>
-							<div><p>{this.state.proj[2].description}</p></div>
+							<Description desc={this.state.proj[this.state.index].description} />
+
 						</div>
 						<div className='Gallery__posters '> 
-							<img className='img1 hide-top' src={this.state.proj[0].urls.img1} alt='img'/>
-							<img className='img2 hide-top' src={this.state.proj[0].urls.img2} alt='img'/>
-							<img className='img3 hide-top' src={this.state.proj[0].urls.img3} alt='img'/>
-							<img className='img1' src={this.state.proj[1].urls.img1} alt='img'/>
-							<img className='img2' src={this.state.proj[1].urls.img2} alt='img'/>
-							<img className='img3' src={this.state.proj[1].urls.img3} alt='img'/>
-							<img className='img1 hide-bottom' src={this.state.proj[2].urls.img1} alt='img'/>
-							<img className='img2 hide-bottom' src={this.state.proj[2].urls.img2} alt='img'/>
-							<img className='img3 hide-bottom' src={this.state.proj[2].urls.img3} alt='img'/>
+							<Posters imgArr={this.state.proj} index={this.state.index}/>
+
 						</div>
-						<div className='toTheGallery showGalleryButton'>
+						<div className='toTheGallery'>
 							<Link to={`/Projects${this.state.proj[this.state.index].href}`}><p>TO THE GALLERY</p><SvgArrowRight/></Link>
 						</div>
 					
 					</div>
 				</div>
 			</div>
+			
 		)
+	} else return null
+
 	}
 }
 
 
-function scrollToTop(projects, index) {
-	if (projects[index - 2]) {
-		projects[index - 2].classList.add('top');
-	}
 
-	projects[index - 1].classList.remove('top');
-	projects[index - 1].classList.add('center');
+function ProjectsName(props) {
+	let length = props.projects.length;
 
-	projects[index].classList.remove('center');
-	projects[index].classList.add('bottom');
+	let projects = props.projects.map((item, i) => {
+		let currentClass = props.mainClass;
 
-	if(projects[index + 1]) {
-		projects[index + 1].classList.remove('bottom');
-		projects[index + 1].classList.add('under');
-	}
-};
+		if (props.index > 0 && i === props.index - 1) currentClass += ' top';
+		if (i === props.index) currentClass += ' center';
+		if (length > props.index && i === props.index + 1) currentClass += ' bottom';
+		if (length > props.index + 1 && i === props.index + 2) currentClass += ' under';
 
-function scrollToBottom(projects, index) {
-	if (projects[index - 1]){
-		projects[index - 1].classList.remove('top');
-	}
+			return(
+				<div key={item.name} className={currentClass} >{item.name}</div>
+			)
+		})
+		
+	return projects;
+}
 
-	projects[index].classList.remove('center');
-	projects[index].classList.add('top');
+function Description(props) {
+	return(
+		<div className='showDescription'><p>{props.desc}</p></div>
+		)
+}
 
-	projects[index + 1].classList.remove('bottom');
-	projects[index + 1].classList.add('center');
-	
-	if (projects[index + 2]){
-		projects[index + 2].classList.remove('under');
-		projects[index + 2].classList.add('bottom');			
-	}
+function Posters(props) {
+
+	let posters = props.imgArr.map((item, i) => {
+		let addedClass = null;
+		if (i > props.index) addedClass = 'hide-top';
+		if (i < props.index) addedClass = 'hide-bottom';
+		return (
+			<React.Fragment key={item.name}>
+				<img className={`img1 ${addedClass}`} src={props.imgArr[i].urls.img1} alt='img'/>
+				<img className={`img2 ${addedClass}`} src={props.imgArr[i].urls.img2} alt='img'/>
+				<img className={`img3 ${addedClass}`} src={props.imgArr[i].urls.img3} alt='img'/>
+			</React.Fragment>
+			)
+	})
+
+	return posters;
 }
 
 function SvgArrowRight() {
@@ -218,6 +236,19 @@ function SvgArrowRight() {
 			</svg>
 		)
 }
+
+function EventInfoAngleUp() {
+	return(
+<svg className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
+		)
+}
+
+function EventInfoAngleDown() {
+	return(
+<svg className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
+		)
+}
+
 function SvgElem(props) {
 	return(
 		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 478.703 478.703"  >

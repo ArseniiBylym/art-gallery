@@ -1,14 +1,47 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './Events.css';
 import MenuButton from '../MenuButton/MenuButton.js';
 import EventInfo from './EventInfo/EventInfo.js';
+import { firebaseDB } from '../../functions/firebase';
 
 export default class Events extends Component {
 	state = {
 		events: window.GLOBAL_DATA.EVENTS,
 		currentEventIndex: 0,
 		prevEventIndex: null,
-		timer: false
+		timer: false,
+		isOpenDescription: false
+	}
+
+	// componentWillMount = () => {
+	// 	firebaseDB.ref('Events/').once('value')
+	// 	.then((snapshot) => {
+	// 		let arr = []
+	// 		snapshot.forEach((item, i) => {
+	// 			arr.push(item.val())
+	// 		})
+
+	// 		this.setState({events: arr})
+	// 	})
+	// }
+
+	componentDidMount = () => {
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+		// firebaseDB.ref('Events/').off();
+	}
+
+	scrollOnClick = (e) => {
+		if(this.state.timer) return;
+		setTimeout(() => {
+			this.setState(() => {
+				return {timer: false}
+			})
+		}, 350)
+		if(e.key === 'ArrowUp') this.moveToTop();
+		if(e.key === 'ArrowDown') this.moveToDown();
 	}
 
 	
@@ -24,6 +57,7 @@ export default class Events extends Component {
 	}
 
 	wheelToCurrentEvent = (e) => {
+		console.log('wheel works')
 		if(this.state.timer) return;
 		setTimeout(() => {
 			this.setState(() => {
@@ -31,28 +65,46 @@ export default class Events extends Component {
 			})
 		}, 350)
 
+
+		if(e.deltaY > 0) this.moveToDown();
+		else this.moveToTop();
+		
+	}
+
+	moveToTop = () => {
 		let events = [...document.getElementsByClassName('EventItem')];
 		let currentElem = events[this.state.currentEventIndex];
 
 		if(!currentElem) return;
 
-		if(e.deltaY > 0) {
-			if(events.indexOf(currentElem) === events.length - 1) return;
-			this.setState((prevState) => {
-				return{prevEventIndex: prevState.currentEventIndex,
-					currentEventIndex: prevState.currentEventIndex + 1,
-					timer: true
-				}
-			})
-		} else {
-			if(events.indexOf(currentElem) === 0) return;
-			this.setState((prevState) => {
-				return{prevEventIndex: prevState.currentEventIndex,
-					currentEventIndex: prevState.currentEventIndex - 1,
-					timer: true
-				}
-			})
-		}
+		if(events.indexOf(currentElem) === 0) return;
+		this.setState((prevState) => {
+			return{prevEventIndex: prevState.currentEventIndex,
+				currentEventIndex: prevState.currentEventIndex - 1,
+				timer: true
+			}
+		})
+	}
+
+	moveToDown = () => {
+		let events = [...document.getElementsByClassName('EventItem')];
+		let currentElem = events[this.state.currentEventIndex];
+
+		if(!currentElem) return;
+
+		if(events.indexOf(currentElem) === events.length - 1) return;
+		this.setState((prevState) => {
+			return{prevEventIndex: prevState.currentEventIndex,
+				currentEventIndex: prevState.currentEventIndex + 1,
+				timer: true
+			}
+		})
+	}
+
+	isOpenToggle = () => {
+		this.setState((prevState) => {
+			return {isOpenDescription: !prevState.isOpenDescription}
+		})
 	}
 
 	render() {
@@ -72,7 +124,7 @@ export default class Events extends Component {
 					<div key={index}
 					onClick={this.toggleToCurrentEvent} className={currentClass}>
 						<div className='EventItem__name'>{event.name}</div>
-						<div className='EventItem__date' style={{color: dateColor}}>{event.date.toLocaleString('en-Us',{day:'numeric', month:'long', year: 'numeric'})}</div>
+						<div className='EventItem__date' style={{color: dateColor}}>{new Date(event.date).toLocaleString('en-Us',{day:'numeric', month:'long', year: 'numeric'})}</div>
 					</div>
 				)
 			})
@@ -97,25 +149,24 @@ export default class Events extends Component {
 			})
 		}
 
-		let eventInfo = null;
-		if (this.state.events) {
-			eventInfo = this.state.events.map((event, index) => {
-				let curentInfoClass = 'Events__infoTable';
-				if(index === this.state.currentEventIndex) {
-					curentInfoClass += ' curentInfoTable';
-				}
-				return (
-					<div className={curentInfoClass} key={index}>
-						<EventInfo place={event.place} 
-								   date={event.date} 
-								   description={event.description}>
-					    </EventInfo>
-				    </div>
-				)
-			})
+		let infoTable = null;
+		if(this.state.isOpenDescription) {
+			infoTable = <div className='eventDescription--wrapper open'>
+										<div className='eventDescription'>
+											<p>{this.state.events[this.state.currentEventIndex].description}</p>
+										</div>
+									</div>
+		} else {
+			infoTable = <div className='eventDescription--wrapper'>
+										<div className='eventDescription'>
+											<p>{this.state.events[this.state.currentEventIndex].description}</p>
+										</div>
+									</div>
 		}
 
-		return(
+
+		if(this.state.events) { 
+			return(
 			<div id='Events' className='MainWrapper on-enter'>
 				
 				<MenuButton color='black'/>
@@ -141,12 +192,22 @@ export default class Events extends Component {
 							<div className='Events__viewport'>
 								{eventImages}
 							</div>
-							{eventInfo}							
+							{this.state.events ? 
+								<div className='Events__infoTable' >
+									<EventInfo place={this.state.events[this.state.currentEventIndex].place} 
+									date={this.state.events[this.state.currentEventIndex].date} 
+									description={this.state.events[this.state.currentEventIndex].description} 
+									click={this.isOpenToggle}
+									isOpen={this.state.isOpenDescription} />
+						    </div> : null
+						  }
+						 	{infoTable}		
 						</div>
 					</div>
 				</div>
 			</div>
-		)
+		)}
+		else return null
 	}
 }
 

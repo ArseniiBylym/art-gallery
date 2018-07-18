@@ -23,6 +23,7 @@
 	box-sizing: border-box;
 	grid-column: 3 / -1;
 	grid-row: 1 / 2;
+	z-index: 6;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
@@ -69,10 +70,11 @@
 .EvnetItem__wrapper {
 	width: 100%;
 	height: 100%;
+	padding: 50px 0;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	color: rgba(0,0,0,.8);
 }
 .EventItem {
@@ -124,7 +126,8 @@
 /*container for photo of the current event*/
 .Events__viewport {
 	grid-column: 7 / -1;
-	grid-row: 2 / -1;
+	grid-row: 3 / -1;
+	z-index: 4;
 	background-color: white;
 	overflow: hidden;
 	position: relative;
@@ -153,13 +156,32 @@
 
 
 .Events__infoTable {
-	grid-column: 6 / -1; 
-	grid-row: 4 / -1;
-	transform: translateY(100%);
-	transition: transform .8s .8s ease-in-out;
+	grid-column: 7 / -1; 
+	grid-row: 2 / 3;
 	z-index: 200;
 }
 
-.Events__infoTable.curentInfoTable {
+
+.eventDescription--wrapper {
+	grid-column: 7 / -1;
+	grid-row: 3 / 8;
+	z-index: 5;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: flex-start;
+	opacity: 0;
+	padding-top: 1rem;
+	position: relative;
+	transform: translateY(-100%);
+	transition: all .8s ease;
+}
+.eventDescription--wrapper.open {
+	background-color: white;
 	transform: translateY(0);
+	opacity: 1;
+}
+.eventDescription {
+	padding: 30px;
+
 }

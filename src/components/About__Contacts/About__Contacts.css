@@ -2,21 +2,7 @@
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	/*opacity: .2;*/
 }
-/*
-.About__Contacts__on-enter{
-	animation: about__contacts--enter 1.2s ease forwards;
-}
-
-@keyframes about__contacts--enter {
-	0% {
-		opacity: .2;
-	}
-	100% {
-		opacity: 1;
-	}
-}*/
 .zoomWrapper {
 	position: absolute;
 	top:0;
@@ -40,7 +26,7 @@
 	width: 100%;
 	height: 7vh;
 	position: relative;
-	z-index: 40;
+	z-index: 10;
 	background-color: rgba(0,0,0,0);
 	color: white;
 	display: flex;
@@ -66,4 +52,16 @@
 .activeButton {
 	color: black;
 	text-decoration: underline;
+}
+
+
+.LogInButton {
+	position: absolute;
+	top: 25px;
+	right: 20px;
+	color: black;
+	font-size: 1rem;
+	font-family: 'Krona One';
+	z-index: 100;
+	cursor: pointer;
 }

@@ -2,48 +2,73 @@ import React, {Component} from 'react';
 import './Project.css';
 import Picture from './Picture/Picture.js';
 import MenuButton from '../../MenuButton/MenuButton.js';
+// import { firebaseDB } from '../../../functions/firebase';
 
 export default class Project extends Component {
 
 	state = {
 		pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures,
+		// pictures: null,
 		currentPictureIndex: 0,
-		prevPictureIndex: null,
 		isFullSize: false,
-		isLoadTime: false
+		isLoadTime: true,
 	}
+
+	// componentWillMount = () => {
+	// 	firebaseDB.ref('projects/' + this.props.match.params.projectName + '/').once('value')
+	// 	.then((snapshot) => {
+	// 		let arr = [];
+	// 		snapshot.forEach((item, i) => {
+	// 			arr.push(item.val())
+	// 		})
+	// 		this.setState({pictures: arr})
+	// 	})
+	// }
+
+	componentWillUpdate = (nextProps, nextState) => {
+		if (this.props.match.params.projectName !== nextProps.match.params.projectName) {
+		// 	let arr = [];
+	
+		// firebaseDB.ref('projects/' + nextProps.match.params.projectName + '/').once('value')
+		// .then((snapshot) => {
+		// 	snapshot.forEach((item, i) => {
+		// 		arr.push(item.val())
+		// 	})
+
+		// 	this.setState({pictures: arr})
+		// 	})
+
+		this.setState({pictures: window.GLOBAL_DATA.PROJECTS[nextProps.match.params.projectName].pictures})
+
+		
+		}
+	}
+
 	componentDidMount = () => {
-		setTimeout(() => {
-			this.setState({isLoadTime: true})
-		}, 500)
+			document.body.addEventListener('keydown', this.scrollOnClick)
 	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+		// firebaseDB.ref('Events/').off();
+	}
+
+	scrollOnClick = (e) => {
+		if(e.key === 'ArrowRight') this.showNext();
+		if(e.key === 'ArrowLeft') this.showPrev();
+	}
+	
 
 	showNext = () => {
-		let images = [...document.getElementsByClassName('Picture')];
-
-		if(this.state.currentPictureIndex === images.length - 1) return;
-
-		images[this.state.currentPictureIndex].classList.remove("current");
-		images[this.state.currentPictureIndex].classList.add("prev");
-		images[this.state.currentPictureIndex + 1].classList.remove("next");
-		images[this.state.currentPictureIndex + 1].classList.add("current");
+		if(this.state.currentPictureIndex >= this.state.pictures.length - 1) return;
 
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex + 1}
 		})
-	
 	};
 
 	showPrev = () => {
-		if(this.state.currentPictureIndex === 0) return;
+		if(this.state.currentPictureIndex <= 0) return;
 
-		let images = [...document.getElementsByClassName('Picture')];
-
-		images[this.state.currentPictureIndex].classList.remove("current");
-		images[this.state.currentPictureIndex].classList.add("next");
-		images[this.state.currentPictureIndex - 1].classList.add("current");
-		images[this.state.currentPictureIndex - 1].classList.remove("prev");
-		
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex - 1}
 		})
@@ -63,19 +88,20 @@ export default class Project extends Component {
 	render() {
 		let images = null;
 		if (this.state.pictures && this.state.isLoadTime) {
-			images = this.state.pictures.slice(1).map((img, i) => {
+			images = this.state.pictures.map((img, i) => {
 				
 				return (
 					<Picture key={img.url} 
 							 url={img.url}
 							 info={img.info}
-							 pos={i + 1}
+							 pos={i}
+							 currentIndex={this.state.currentPictureIndex}
 							 click={this.fullSizeImg}
 					 />	
 				)
 			})
 		}
-
+		if (this.state.pictures) {
 		return(
 			<div className='Project__MainWrapper Project__on-enter'>
 				<MenuButton color='black'/>
@@ -97,7 +123,7 @@ export default class Project extends Component {
 							<p>Maryna Herasymenko Art</p>
 						</div>
 						<div className='Project__picture' >
-							<Picture url={this.state.pictures[0].url} info={this.state.pictures[0].info} pos={0} click={this.fullSizeImg}/>
+							{/*<Picture  url={this.state.pictures[0].url} info={this.state.pictures[0].info} pos={0} click={this.fullSizeImg}/>*/}
 							{images}
 						</div>
 						<div className='Project__controls'> 
@@ -109,6 +135,7 @@ export default class Project extends Component {
 				</div>
 			</div>
 		)
+	} else return null
 	}
 }
 

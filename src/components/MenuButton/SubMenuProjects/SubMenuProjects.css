@@ -1,0 +1,14 @@
+
+#MenuProjectsContainer > div {
+	width: 100%;
+	height: 70px;
+	font-size: 3vh;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#MenuProjectsContainer > div:hover {
+	background-color: #3B3B3B;
+}
