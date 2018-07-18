@@ -26,17 +26,23 @@ export default class Contact extends Component {
 	}
 
 	submitMessage = (e) => {
+		e.preventDefault();
 		if(this.isValid()) {
 			let message = {
 				name: document.querySelector('.from-container--name input').value,
 				email: document.querySelector('.from-container--email input').value,
 				text: document.querySelector('.from-container--message textarea').value,
+				date: +new Date()
 			}
 			firebaseDB.ref('messages/').push({
+					date: message.date,
 					username: message.name,
 					email: message.email,
 					text: message.text
-			}).then(() => { this.setState({isSended: true, isValid: true}); })
+			}).then(() => { 
+				console.log('message has sended')
+				this.setState({isSended: true, isValid: true}); 
+			})
 			.catch((e) => {alert('Ups! Something went wrong. Try it agian.')})
 		}
 		else {

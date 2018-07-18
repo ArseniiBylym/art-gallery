@@ -2,28 +2,64 @@ import React, {Component} from 'react';
 import './Project.css';
 import Picture from './Picture/Picture.js';
 import MenuButton from '../../MenuButton/MenuButton.js';
+// import { firebaseDB } from '../../../functions/firebase';
 
 export default class Project extends Component {
 
 	state = {
 		pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures,
+		// pictures: null,
 		currentPictureIndex: 0,
 		isFullSize: false,
 		isLoadTime: true,
 	}
 
-	componentWillUpdate = (prevState, prevProps) => {
-		if (this.props.match.params.projectName !== prevState.match.params.projectName) {
+	// componentWillMount = () => {
+	// 	firebaseDB.ref('projects/' + this.props.match.params.projectName + '/').once('value')
+	// 	.then((snapshot) => {
+	// 		let arr = [];
+	// 		snapshot.forEach((item, i) => {
+	// 			arr.push(item.val())
+	// 		})
+	// 		this.setState({pictures: arr})
+	// 	})
+	// }
+
+	componentWillUpdate = (nextProps, nextState) => {
+		if (this.props.match.params.projectName !== nextProps.match.params.projectName) {
+		// 	let arr = [];
 	
-			this.setState((prevState) => {
-			return({pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures})
-			})
+		// firebaseDB.ref('projects/' + nextProps.match.params.projectName + '/').once('value')
+		// .then((snapshot) => {
+		// 	snapshot.forEach((item, i) => {
+		// 		arr.push(item.val())
+		// 	})
+
+		// 	this.setState({pictures: arr})
+		// 	})
+
+		this.setState({pictures: window.GLOBAL_DATA.PROJECTS[nextProps.match.params.projectName].pictures})
+
+		
 		}
+	}
+
+	componentDidMount = () => {
+			document.body.addEventListener('keydown', this.scrollOnClick)
+	}
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+		// firebaseDB.ref('Events/').off();
+	}
+
+	scrollOnClick = (e) => {
+		if(e.key === 'ArrowRight') this.showNext();
+		if(e.key === 'ArrowLeft') this.showPrev();
 	}
 	
 
 	showNext = () => {
-		if(this.state.currentPictureIndex === this.state.pictures - 1) return;
+		if(this.state.currentPictureIndex >= this.state.pictures.length - 1) return;
 
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex + 1}
@@ -31,7 +67,7 @@ export default class Project extends Component {
 	};
 
 	showPrev = () => {
-		if(this.state.currentPictureIndex === 0) return;
+		if(this.state.currentPictureIndex <= 0) return;
 
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex - 1}
@@ -65,7 +101,7 @@ export default class Project extends Component {
 				)
 			})
 		}
-
+		if (this.state.pictures) {
 		return(
 			<div className='Project__MainWrapper Project__on-enter'>
 				<MenuButton color='black'/>
@@ -99,6 +135,7 @@ export default class Project extends Component {
 				</div>
 			</div>
 		)
+	} else return null
 	}
 }
 

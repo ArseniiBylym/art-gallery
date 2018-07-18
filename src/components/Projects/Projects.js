@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Projects.css';
 import { Link } from 'react-router-dom';
 import MenuButton from '../MenuButton/MenuButton.js';
+import { firebaseDB } from '../../functions/firebase';
 
 
 
@@ -9,19 +10,35 @@ export default class Projects extends Component {
 	
 	state = {
 		proj: window.GLOBAL_DATA.PROJECT_LIST,
-		index: 1,
+		index: 0,
 		moving: null,
 		wheelRotation: 0
 	}
 
+	// componentWillMount = () => {
+	// 	firebaseDB.ref('projectList/').once('value')
+	// 	.then((snapshot) => {
+	// 		let arr = [];
+	// 		snapshot.forEach((item,i) => {
+	// 			arr.push(item.val())
+	// 		})
+	// 		this.setState({proj: arr})
+
+	// 	})
+	// }
+
 	componentDidMount = () => {
+		console.log('Projects did mount')
 			document.body.addEventListener('keydown', this.scrollOnClick)
 	}
 	componentWillUnmount = () => {
-		document.body.removeEventListener('keydown', this.scrollOnClick)
+		console.log('Projects will unmount');
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+		// firebaseDB.ref('projectList/').off();
 	}
 
 	scrollOnClick = (e) => {
+		console.log('key press')
 		if(e.key === 'ArrowUp') this.moveToTop();
 		if(e.key === 'ArrowDown') this.moveToDown();
 	}
@@ -121,7 +138,9 @@ export default class Projects extends Component {
 	
 
 	render() {
+		if (this.state.proj) {
 		return (
+			
 			<div className='MainWrapper on-enter' onKeyDown={this.keyProjectsItems}>
 				
 				<MenuButton color='black'/>
@@ -137,25 +156,29 @@ export default class Projects extends Component {
 							<div className='Gallery__projects--wrapperForItems'>
 								<SvgElem />
 								<ProjectsName mainClass='Gallery__projects--item' projects={this.state.proj} index={this.state.index} />
-								
 							</div>
 						</div>
+						<EventInfoAngleUp  />
+						<EventInfoAngleDown />
 						<div className='Gallery__projects--description'>
 							<Description desc={this.state.proj[this.state.index].description} />
 
 						</div>
 						<div className='Gallery__posters '> 
-							<Posters imgArr={this.state.proj} />
+							<Posters imgArr={this.state.proj} index={this.state.index}/>
 
 						</div>
-						<div className='toTheGallery showGalleryButton'>
+						<div className='toTheGallery'>
 							<Link to={`/Projects${this.state.proj[this.state.index].href}`}><p>TO THE GALLERY</p><SvgArrowRight/></Link>
 						</div>
 					
 					</div>
 				</div>
 			</div>
+			
 		)
+	} else return null
+
 	}
 }
 
@@ -190,8 +213,8 @@ function Posters(props) {
 
 	let posters = props.imgArr.map((item, i) => {
 		let addedClass = null;
-		if (i === 0) addedClass = 'hide-top';
-		if (i >= 2) addedClass = 'hide-bottom';
+		if (i > props.index) addedClass = 'hide-top';
+		if (i < props.index) addedClass = 'hide-bottom';
 		return (
 			<React.Fragment key={item.name}>
 				<img className={`img1 ${addedClass}`} src={props.imgArr[i].urls.img1} alt='img'/>
@@ -213,6 +236,19 @@ function SvgArrowRight() {
 			</svg>
 		)
 }
+
+function EventInfoAngleUp() {
+	return(
+<svg className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
+		)
+}
+
+function EventInfoAngleDown() {
+	return(
+<svg className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
+		)
+}
+
 function SvgElem(props) {
 	return(
 		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 478.703 478.703"  >

@@ -4,9 +4,9 @@ import './ModalMessage.css';
 export default function ModalMessage(props) {
 	return(
 		
-			<div onClick={props.click} className='ModalMessage'>
+			<div className='ModalMessage'>
 				{props.children} 
-				<button>OK</button>
+				<button onClick={props.click}>OK</button>
 			</div>
 	
 	)
