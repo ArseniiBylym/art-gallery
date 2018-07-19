@@ -128,3 +128,56 @@
 	height: 2vmin;
 }
 
+@media screen and (max-width: 768px) and (orientation: landscape){
+	.Project__controls--prev > svg, .Project__controls--next > svg {
+	transform: translateY(0);
+}
+}
+
+@media screen and (max-width: 480px) {
+	.Project__picture {
+		grid-column: 3 / -3;
+		position: relative;
+	}
+	.Project__name {
+		grid-column: 1 / 3;
+
+	}
+	.Project__description {
+		grid-column: -3 / -1;
+	}
+	.Project__logo {
+		grid-column: 3 / -1;
+		justify-content: center;
+	}
+	.Project__name > div {
+		border: none;
+		transform: rotate(-90deg) translateX(-100%) translateY(5px);
+	}
+	.Project__name p {
+		font-size: 10px;
+	}
+	.Project__description > div {
+		border: none;
+		font-size: 10px;
+		transform: rotate(90deg) translateY(-150%) translateX(20px);
+	}
+	.Project__description p {
+		font-size: 10px
+	}
+	.Project__description p:first-child {
+		font-size: 12px;
+	}
+	.Project__controls--prev > svg, .Project__controls--next > svg {
+	transform: translateY(1px);
+}
+}
+
+@media screen and (max-width: 320px) {
+	.Project__description p {
+		font-size: 8px
+	}
+	.Project__description p:first-child {
+		font-size: 10px;
+	}
+}

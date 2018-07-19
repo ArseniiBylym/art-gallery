@@ -4,7 +4,7 @@
 	justify-content: center;
 	position: fixed;
 	top: 0;
-	left: 1rem;
+	left: 2vw;
 	width: 8.33vh;
 	height: 8.33vh;
 	z-index: 100;
@@ -130,7 +130,6 @@
 #MenuProjectsContainer {
 	position: fixed;
 	top: 0;
-	/*right: 0;*/
 	left: 45vw;
 	width: 30%;
 	height: auto;
@@ -149,5 +148,36 @@
 	100% {
 		transform: translateX(0);
 		opacity: 1;
+	}
+}
+
+@media screen and (max-width: 768px) {
+#MenuOpenButton{
+	padding: 0;
+}	
+#MenuOpenButton.MenuOpenButton > div,
+#MenuOpenButton.MenuOpenButton:hover > div {
+	width: 60%;
+}
+.Gallery__logo {
+	margin-left: 0;
+}
+.MenuOpenLayout__container > div {
+	height: 70px;
+}
+}
+
+@media screen and (max-width: 480px) {
+
+#NavMenuButton {
+	top: 5px;
+	width: 50px;
+	height: 50px;
+}
+}
+
+@media screen and (max-width: 320px) {
+	#NavMenuButton {
+		top: 0;
 	}
 }

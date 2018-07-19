@@ -28,17 +28,14 @@ export default class Projects extends Component {
 	// }
 
 	componentDidMount = () => {
-		console.log('Projects did mount')
 			document.body.addEventListener('keydown', this.scrollOnClick)
 	}
 	componentWillUnmount = () => {
-		console.log('Projects will unmount');
 		document.body.removeEventListener('keydown', this.scrollOnClick);
 		// firebaseDB.ref('projectList/').off();
 	}
 
 	scrollOnClick = (e) => {
-		console.log('key press')
 		if(e.key === 'ArrowUp') this.moveToTop();
 		if(e.key === 'ArrowDown') this.moveToDown();
 	}
@@ -158,8 +155,8 @@ export default class Projects extends Component {
 								<ProjectsName mainClass='Gallery__projects--item' projects={this.state.proj} index={this.state.index} />
 							</div>
 						</div>
-						<EventInfoAngleUp  />
-						<EventInfoAngleDown />
+						<EventInfoAngleUp  click={this.moveToTop}/>
+						<EventInfoAngleDown click={this.moveToDown}/>
 						<div className='Gallery__projects--description'>
 							<Description desc={this.state.proj[this.state.index].description} />
 
@@ -237,15 +234,15 @@ function SvgArrowRight() {
 		)
 }
 
-function EventInfoAngleUp() {
+function EventInfoAngleUp(props) {
 	return(
-<svg className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
+<svg onClick={props.click} className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
 		)
 }
 
-function EventInfoAngleDown() {
+function EventInfoAngleDown(props) {
 	return(
-<svg className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
+<svg onClick={props.click} className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
 		)
 }
 

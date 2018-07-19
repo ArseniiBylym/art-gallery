@@ -16,6 +16,7 @@ import Admin from './Admin/Admin';
 class App extends Component {
   render() {
     return (
+    	//Before deploy add basename="/art-gallery/"
     	<BrowserRouter basename="/art-gallery/">
 	      	<div className="App">
       			<Switch>

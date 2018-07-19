@@ -39,6 +39,15 @@
 	}
 }
 
+@media screen and (max-width: 768px) {
+	.MainWrapper.on-exit{
+	animation: none;
+}
+.MainWrapper.on-enter{
+	transform: none;
+	animation: none;
+}
+}
 
 
 
