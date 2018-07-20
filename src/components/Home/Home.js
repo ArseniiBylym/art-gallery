@@ -8,22 +8,16 @@ export default function Home (props) {
 		if(path === props.location.pathname) return;
 
 		let container = document.querySelector('.Home__container');
-		let left = document.querySelector('.Home__blind-left');
-		let right = document.querySelector('.Home__blind-right');
 
+		container.classList.add('on-exit');
 		setTimeout(() => {
 			props.history.push(path)
-		}, 900)
-		left.classList.add('Home__blind-left--close');
-		right.classList.add('Home__blind-right--close');
-		container.classList.add('on-exit')
+		}, 500)
 
 	}
 
 		return(
 			<div className='Home__MainWrapper' > 
-				<div className='Home__blind-left Home__blind-left--open' />
-				<div className='Home__blind-right Home__blind-right--open' />
 				<div className='Home__container' >
 					<div className='Title-box'>
 						<div className='Title-box__name'>

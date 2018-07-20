@@ -57,7 +57,8 @@ export default class About__Contacts extends Component {
 
 	render() {
 		return(
-			<div className='About__Contacts__MainWrapper' onWheel={this.wheelClick}>
+			// <div className='About__Contacts__MainWrapper' onWheel={this.wheelClick}>
+			<div className='About__Contacts--wrapper MainWrapper on-enter' onWheel={this.wheelClick}>
 				<MenuButton color='black' 
 					side={this.state.side}
 					stateStyles={{time: 0}}

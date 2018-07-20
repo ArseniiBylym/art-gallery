@@ -12,10 +12,8 @@ export default function About (props) {
 					<p>Maryna</p><p>Herasymenko</p>
 				</div>
 				<div className='About__container--photo'>
-					<div className='tempLayout'/>
 				</div>
 				<div className='About__container--info' >
-					<div className='tempLayout'/>
 					<div id='artist__info' className='text' >
 						<p>Artist</p><br/>
 						<p> Education<br/>

@@ -1,3 +1,5 @@
+console.log(window.screen.width);
+console.log(window.screen.height)
 var GLOBAL_DATA = {
 
 	PROJECT_LIST: [

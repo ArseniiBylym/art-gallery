@@ -286,8 +286,87 @@ svg.Gallery__arrowDown:hover{
 	color: rgba(0,0,0,.6);
 }
 
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+	.toTheGallery a {
+		transform: translateY(-50px);
+	}
+}
 
 
+@media screen and (max-width: 768px) and (orientation: portrait){
+
+.Gallery__logo {
+	grid-column: 1 / -1;
+	justify-content: center;
+}
+.Gallery__projects--wrapper {
+	grid-column: 4 / -1;
+	grid-row: 2 / 5;
+}
+.Gallery__title p {
+	font-size: 1rem;
+	bottom: 35%;
+	left: 5px;
+}
+.Gallery__projects--wrapperForItems{
+	top: 5vh;
+}
+.toTheGallery {
+	grid-column: 4 / -2;
+	grid-row: 5 / 6;
+}
+.toTheGallery a {
+		transform: translateY(0);
+	}
+.Gallery__projects--description {
+	grid-column: 2 / 7;
+	grid-row: 5 / -1;
+	line-height: 1rem;
+}
+.Gallery__posters {
+	grid-column: 7 / -1;
+	grid-row: 6 / -2;
+	perspective: 1px;
+}
+.Gallery__posters .img1{
+	transform: translateZ(-3px) scale(2);
+	left:20px;
+	top: 10%;
+}
+.Gallery__posters .img2{
+	transform: translateZ(-5px) scale(2.4);
+	left: 150%;
+	top: 300%;
+
+}
+.Gallery__posters .img3{
+	transform: translateZ(-3px) scale(1.5);
+	left: 200%;
+	top: 50%;
+}
+.Gallery__posters .img1.hide-top {
+	transform: translateZ(-3px) translateY(-450%) scale(2);
+}
+.Gallery__posters .img2.hide-top {
+	transform: translateZ(-5px) translateY(-550%) scale(2.4);
+}
+.Gallery__posters .img3.hide-top {
+	transform: translateZ(-3px) translateY(-550%) scale(1.5);
+}
+.Gallery__posters .img1.hide-bottom {
+	transform: translateZ(-3px) translateY(450%) scale(2);
+}
+.Gallery__posters .img2.hide-bottom {
+	transform: translateZ(-5px) translateY(550%) scale(2.4);
+}
+.Gallery__posters .img3.hide-bottom {
+	transform: translateZ(-3px) translateY(550%) scale(1.5);
+}
+svg.Gallery__arrowUp,
+svg.Gallery__arrowDown {
+	transform: scale(.6) translateY(-130%);
+}
+}
 
 
 @media screen and (max-width: 768px) and (orientation: landscape){
@@ -300,9 +379,17 @@ svg.Gallery__arrowDown:hover{
 .Gallery__projects--description {
 	grid-row: 7 / -1;
 }
+.Gallery__projects--description .showDescription {
+	overflow-y: auto;
+}
+.toTheGallery a {
+		transform: translateY(0);
+	}
 .Gallery__projects--description p{
 	font-size: .6rem;
 	line-height: .7rem;
+	position: relative;
+	top: 10px;
 }
 .Gallery__posters .img1{
 transform: translateZ(-5px) scale(2);

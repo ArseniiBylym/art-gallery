@@ -1,3 +1,8 @@
+/*.Project__MainWrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}*/
 .zoomWrapper {
 	position: absolute;
 	top:0;
@@ -128,27 +133,51 @@
 	height: 2vmin;
 }
 
-@media screen and (max-width: 768px) and (orientation: landscape){
-	.Project__controls--prev > svg, .Project__controls--next > svg {
-	transform: translateY(0);
-}
-}
 
-@media screen and (max-width: 480px) {
-	.Project__picture {
+
+
+@media screen and (max-width: 768px) and (orientation: portrait){
+.Project__picture {
 		grid-column: 3 / -3;
 		position: relative;
-	}
-	.Project__name {
-		grid-column: 1 / 3;
-
 	}
 	.Project__description {
 		grid-column: -3 / -1;
 	}
+	.Project__description > div {
+		border: none;
+		padding-bottom: 30px;
+	}
+	.Project__description  p {
+		font-size: 1rem;
+	}
+	.Project__description  p:first-child {
+		font-size: 1.2rem;
+	}
+	.Project__logo {
+		grid-column: 1 / -1;
+		justify-content: center;
+	}
+	.Project__name {
+		grid-column: 1 / 3;
+	}
+	.Project__name > div {
+		height: 10vw;
+		border: none;
+		left: -20px;
+	}
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape){
+	.Project__controls--prev > svg, .Project__controls--next > svg {
+	transform: translateY(0);
+}
+
+}
+
+@media screen and (max-width: 480px) {
 	.Project__logo {
 		grid-column: 3 / -1;
-		justify-content: center;
 	}
 	.Project__name > div {
 		border: none;
@@ -158,9 +187,9 @@
 		font-size: 10px;
 	}
 	.Project__description > div {
-		border: none;
 		font-size: 10px;
 		transform: rotate(90deg) translateY(-150%) translateX(20px);
+		padding: 0;
 	}
 	.Project__description p {
 		font-size: 10px
@@ -172,6 +201,7 @@
 	transform: translateY(1px);
 }
 }
+
 
 @media screen and (max-width: 320px) {
 	.Project__description p {

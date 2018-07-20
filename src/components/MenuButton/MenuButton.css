@@ -151,29 +151,50 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
 #MenuOpenButton{
-	padding: 0;
-}	
-#MenuOpenButton.MenuOpenButton > div,
-#MenuOpenButton.MenuOpenButton:hover > div {
-	width: 60%;
+		padding: 0;
+	}	
+	#MenuOpenButton.MenuOpenButton > div,
+	#MenuOpenButton.MenuOpenButton:hover > div {
+		width: 60%;
+	}
 }
-.Gallery__logo {
+
+@media screen and (max-width: 768px) {
+	#MenuOpenButton{
+		padding: 0;
+	}	
+	#MenuOpenButton.MenuOpenButton > div,
+	#MenuOpenButton.MenuOpenButton:hover > div {
+		width: 60%;
+	}
+	/*.Gallery__logo {
 	margin-left: 0;
+	}*/
 }
-.MenuOpenLayout__container > div {
-	height: 70px;
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+	#NavMenuButton {
+		top: 5px;
+		width: 50px;
+		height: 50px;
+	}
+	.MenuOpenLayout__container > div {
+		height: 100px;
+	}
 }
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+	.MenuOpenLayout__container > div {
+		height: 70px;
+	}
 }
 
 @media screen and (max-width: 480px) {
-
-#NavMenuButton {
-	top: 5px;
-	width: 50px;
-	height: 50px;
-}
+	.MenuOpenLayout__container > div {
+		height: 70px;
+	}
 }
 
 @media screen and (max-width: 320px) {

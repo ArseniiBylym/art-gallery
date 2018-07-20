@@ -55,7 +55,21 @@
 	height: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (orientation: portrait) {
+	.EventInfo {
+		font-size: 16px;
+		padding: 40px 10px 0 10px;
+	}
+	.eventPlace,
+	.eventTime,
+	.hideShowButton {
+		padding: 5px 0 0 0;
+		display: flex;
+		flex-flow: column nowrap;
+	}
+} 
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
 	.EventInfo {
 		font-size: 12px;
 		padding: 5px;
@@ -70,12 +84,8 @@
 }
 
 @media screen and (max-width: 480px) {
-	
-	.eventPlace,
-	.eventTime,
-	.hideShowButton {
-		padding: 5px 0 0 0;
-		display: flex;
-		flex-flow: column nowrap;
+	.EventInfo {
+		font-size: 12px;
 	}
+	
 }
