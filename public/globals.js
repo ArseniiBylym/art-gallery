@@ -180,6 +180,119 @@ var GLOBAL_DATA = {
 	]
 }
 
+if (window.screen.width <= 768 && window.screen.height <=768) {
+	GLOBAL_DATA.PROJECTS = {
+		GRID: {
+			pictures: [
+				{
+					url: '/img/Gallery/GRID/small_screen/img1.jpg',
+					name: 'Error',
+					info: '70x90 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img2.jpg',
+					name: 'Hole',
+					info: '60x80 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img3.jpg',
+					name: 'Frame',
+					info: '60x80 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img4.jpg',
+					name: 'Сoordinate',
+					info: '60x70 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img5.jpg',
+					name: 'Line',
+					info: '80x60 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img6.jpg',
+					name: 'Element diptych',
+					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img7.jpg',
+					name: 'Element 2 diptych',
+					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img8.jpg',
+					name: 'Border diptych',
+					info: 'left side 60x80 right side 60x80 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img9.jpg',
+					name: 'Section',
+					info: '80x60 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/GRID/small_screen/img10.jpg',
+					name: 'Grid 2',
+					info: '70x100 acrylic on canvas 2017' 
+				},
+			]
+		},
+		CONNECTION: {
+			pictures: [
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img1.jpg',
+					name: 'Free',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img2.jpg',
+					name: 'Horizon',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img3.jpg',
+					name: 'Music',
+					info: '100x110 acrylic on canvas 2017' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img4.jpg',
+					name: 'Be silent',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img5.jpg',
+					name: 'Sound',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img6.jpg',
+					name: 'Northern Lights',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img7.jpg',
+					name: 'Horizon 2',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img8.jpg',
+					name: 'First',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img9.jpg',
+					name: 'Feedback',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+				{
+					url: '/img/Gallery/CONNECTION/small_screen/img10.jpg',
+					name: 'On the verge',
+					info: '100x110 acrylic on canvas 2018' 
+				},
+			]
+		}
+	}
+}
+
 
 
  

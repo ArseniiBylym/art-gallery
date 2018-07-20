@@ -18,7 +18,10 @@ let promise = new Promise((resolve) => {
 })
 
 promise.then(() => {
-	ReactDOM.render(<App />, document.getElementById('root'));
+	let height = Math.min(window.screen.height, 
+											 window.screen.availHeight,
+											 document.documentElement.clientHeight);
+	ReactDOM.render(<App height={height}/>, document.getElementById('root'));
 	registerServiceWorker();
 	
 })
