@@ -13,6 +13,8 @@ export default class Project extends Component {
 		isFullSize: false,
 		isLoadTime: true,
 	}
+	touchMoveStartX = 0;
+	deltaMoveX = 0;
 
 	// componentWillMount = () => {
 	// 	firebaseDB.ref('projects/' + this.props.match.params.projectName + '/').once('value')
@@ -45,11 +47,17 @@ export default class Project extends Component {
 	}
 
 	componentDidMount = () => {
-			document.body.addEventListener('keydown', this.scrollOnClick)
+			document.body.addEventListener('keydown', this.scrollOnClick);
+			
 	}
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
 		// firebaseDB.ref('Events/').off();
+		
+		// let project = document.getElementById('Project');
+		// project.removeEventListener('touchStart', this.startTouchWatch);
+		// project.removeEventListener('touchMove', this.continueTouchWatch);
+		// project.removeEventListener('touchEnd', this.stopTouchWatch);
 	}
 
 	scrollOnClick = (e) => {
@@ -85,6 +93,22 @@ export default class Project extends Component {
 		document.getElementById('MenuOpenButton').classList.toggle('hide-menuButton');
 	}
 
+	startTouchWatch = (e) => {
+		this.touchMoveStartX =  +e.touches[0].clientX.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveX = +e.touches[0].clientX.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		let diff = Math.abs(this.deltaMoveX - this.touchMoveStartX);
+		if (this.deltaMoveX !== 0 && diff > 50) {
+			this.deltaMoveX < this.touchMoveStartX ? this.showNext() : this.showPrev()
+		}
+		this.deltaMoveX = 0;
+	}
+
 	render() {
 		let images = null;
 		if (this.state.pictures && this.state.isLoadTime) {
@@ -103,10 +127,14 @@ export default class Project extends Component {
 		}
 		if (this.state.pictures) {
 		return(
-			<div className='Project__MainWrapper Project__on-enter'>
+			<div className='Project__MainWrapper Project__on-enter'> 
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
-					<div id="Project" className='Project' onWheel={this.scrollImages}>
+					<div id="Project" className='Project' 
+					onWheel={this.scrollImages}
+					onTouchStart={this.startTouchWatch} 
+					onTouchEnd={this.stopTouchWatch}
+					onTouchMove={this.continueTouchWatch} >
 						<div className='Project__name'>
 							<div>
 								<p>Project</p>

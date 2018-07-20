@@ -127,26 +127,32 @@
 	.About__container--photo {
 		grid-row: 2 / 4;
 		transform: translateY(-100%);
-		animation: show-about-photo 1s .5s ease forwards;
+		opacity: 0;
+		animation: show-about-photo .8s .5s ease forwards;
 	}
 	@keyframes show-about-photo {
 		0%{
+			opacity: 0;
 			transform: translateY(-100%);
 		}
 		100% {
+			opacity: 1;
 			transform: translateY(0);
 		}
 	}
 	.About__container--info {
 		grid-row: 4 / -1;
 		transform: translateY(-150%);
-		animation: show-about-info 1.5s 1s ease forwards;
+		opacity: 0;
+		animation: show-about-info 1s 1s ease forwards;
 	}
 	@keyframes show-about-info {
 		0%{
+			opacity: 0;
 			transform: translateY(-150%);
 		}
 		100% {
+			opacity: 1;
 			transform: translateY(0);
 		}
 	}

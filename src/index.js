@@ -13,7 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 let promise = new Promise((resolve) => {
 	let img = document.createElement('img');
-	img.src = "/static/media/img1_rsz.99d37f4f.jpg";
+	img.src = "./static/media/img1_rsz.99d37f4f.jpg";
 	resolve()
 })
 

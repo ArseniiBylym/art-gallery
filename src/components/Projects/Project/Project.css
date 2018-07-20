@@ -166,6 +166,9 @@
 		border: none;
 		left: -20px;
 	}
+	.Project__controls {
+		font-size: 5vmin;
+	}
 }
 
 @media screen and (max-width: 768px) and (orientation: landscape){
@@ -173,11 +176,13 @@
 	transform: translateY(0);
 }
 
+
 }
 
 @media screen and (max-width: 480px) {
 	.Project__logo {
 		grid-column: 3 / -1;
+		margin-top: 5px;
 	}
 	.Project__name > div {
 		border: none;
@@ -192,10 +197,10 @@
 		padding: 0;
 	}
 	.Project__description p {
-		font-size: 10px
+		font-size: 8px
 	}
 	.Project__description p:first-child {
-		font-size: 12px;
+		font-size: 10px;
 	}
 	.Project__controls--prev > svg, .Project__controls--next > svg {
 	transform: translateY(1px);
@@ -205,9 +210,9 @@
 
 @media screen and (max-width: 320px) {
 	.Project__description p {
-		font-size: 8px
+		font-size: 7px
 	}
 	.Project__description p:first-child {
-		font-size: 10px;
+		font-size: 9px;
 	}
 }

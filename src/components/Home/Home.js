@@ -2,7 +2,8 @@ import React from 'react';
 import './Home.css';
 
 export default function Home (props) {
-	
+
+
 	function navClick(e) {
 		let path = e.target.dataset.path;
 		if(path === props.location.pathname) return;

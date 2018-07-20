@@ -1,3 +1,7 @@
+#root {
+	background-color: black;
+	overflow: hidden;
+}
 .App {
 	position: relative;
 	width: 100vw;
@@ -55,6 +59,12 @@
 	transform: none;
 	animation: none;
 }
+}
+
+@media screen and (max-width: 480px) {
+	.App {
+		transform: scaleY(.92);
+	}
 }
 
 

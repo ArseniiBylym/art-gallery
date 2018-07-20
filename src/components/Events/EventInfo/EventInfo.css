@@ -58,7 +58,8 @@
 @media screen and (max-width: 768px) and (orientation: portrait) {
 	.EventInfo {
 		font-size: 16px;
-		padding: 40px 10px 0 10px;
+		padding: 10px;
+		background-color: rgb(220,220,220);
 	}
 	.eventPlace,
 	.eventTime,
@@ -86,6 +87,7 @@
 @media screen and (max-width: 480px) {
 	.EventInfo {
 		font-size: 12px;
+		padding: 5px;
 	}
 	
 }

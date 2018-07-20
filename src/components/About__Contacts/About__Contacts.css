@@ -88,7 +88,7 @@
 @media screen and (max-width: 480px) {
 	.LogInButton {
 		font-size: 10px;
-		top: 25px;
+		top: 20px;
 	}
 	.header{
 		height: 8.5vh;

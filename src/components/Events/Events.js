@@ -12,6 +12,8 @@ export default class Events extends Component {
 		timer: false,
 		isOpenDescription: false
 	}
+	touchMoveStartY = 0;
+	deltaMoveY = 0;
 
 	// componentWillMount = () => {
 	// 	firebaseDB.ref('Events/').once('value')
@@ -31,6 +33,23 @@ export default class Events extends Component {
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
 		// firebaseDB.ref('Events/').off();
+	}
+
+	startTouchWatch = (e) => {
+		this.touchMoveStartY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		console.log(this.touchMoveStartY, this.deltaMoveY)
+		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
+		if (this.deltaMoveY !== 0 && diff > 50) {
+			this.deltaMoveY < this.touchMoveStartY ? this.moveToTop() : this.moveToDown()
+		}
+		this.deltaMoveY = 0;
 	}
 
 	scrollOnClick = (e) => {
@@ -172,7 +191,11 @@ export default class Events extends Component {
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
 					<div className='Events__wrapper'>
-						<div className='Events' onWheel={this.wheelToCurrentEvent}>
+						<div id='Events' className='Events' 
+						onWheel={this.wheelToCurrentEvent}
+						onTouchStart={this.startTouchWatch} 
+						onTouchEnd={this.stopTouchWatch}
+						onTouchMove={this.continueTouchWatch}>
 							<div className='Events__logo'>
 								<p>Maryna Herasymenko Art</p>
 							</div>
