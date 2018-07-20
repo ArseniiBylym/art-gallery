@@ -1,3 +1,5 @@
+console.log(window.screen.width);
+console.log(window.screen.height)
 var GLOBAL_DATA = {
 
 	PROJECT_LIST: [
@@ -131,9 +133,6 @@ var GLOBAL_DATA = {
 					info: '100x110 acrylic on canvas 2018' 
 				},
 			]
-		},
-		oil: {
-
 		}
 	},
 
