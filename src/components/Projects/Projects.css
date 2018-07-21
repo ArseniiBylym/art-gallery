@@ -364,7 +364,7 @@ svg.Gallery__arrowDown:hover{
 }
 svg.Gallery__arrowUp,
 svg.Gallery__arrowDown {
-	transform: scale(.6) translateY(-130%);
+	transform: scale(.8) translateY(-100%);
 }
 }
 
@@ -424,6 +424,14 @@ top: 70%;
 }
 .Gallery__posters .img3.hide-bottom {
 	transform: translateZ(-4px) translateY(450%) scale(1.5);
+}
+svg.Gallery__arrowUp,
+svg.Gallery__arrowDown {
+	transform: scale(.7) translateY(-30%);
+}
+.toTheGallery svg {
+	width: .7rem;
+	height: .7rem;
 }
 }
 
@@ -497,7 +505,7 @@ top: 70%;
 }
 svg.Gallery__arrowUp,
 svg.Gallery__arrowDown {
-	transform: scale(.6) translateY(-130%);
+	transform: scale(1) translateY(-80%);
 }
 
 

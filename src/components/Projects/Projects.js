@@ -14,8 +14,7 @@ export default class Projects extends Component {
 		moving: null,
 		wheelRotation: 0
 	}
-	touchMoveStartY = 0;
-	deltaMoveY = 0;
+	
 
 	// componentWillMount = () => {
 	// 	firebaseDB.ref('projectList/').once('value')
@@ -35,30 +34,8 @@ export default class Projects extends Component {
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
 		// firebaseDB.ref('projectList/').off();
-		
-		// let elem = document.getElementById('Gallery');
-		// elem.removeEventListener('touchStart', this.startTouchWatch);
-		// elem.removeEventListener('touchMove', this.continueTouchWatch);
-		// elem.removeEventListener('touchEnd', this.stopTouchWatch);
 	}
 
-
-	startTouchWatch = (e) => {
-		this.touchMoveStartY = +e.touches[0].clientY.toFixed(0);
-	}
-
-	continueTouchWatch = (e) => {
-		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
-	}
-
-	stopTouchWatch = (e) => {
-		console.log(this.touchMoveStartY, this.deltaMoveY)
-		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
-		if (this.deltaMoveY !== 0 && diff > 50) {
-			this.deltaMoveY > this.touchMoveStartY ? this.moveToTop() : this.moveToDown()
-		}
-		this.deltaMoveY = 0;
-	}
 
 	scrollOnClick = (e) => {
 		if(e.key === 'ArrowUp') this.moveToTop();
@@ -168,10 +145,7 @@ export default class Projects extends Component {
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
 					<div id='Gallery' className='Gallery' 
-					onWheel={this.scrollProjectsItems} 
-					onTouchStart={this.startTouchWatch} 
-					onTouchEnd={this.stopTouchWatch}
-					onTouchMove={this.continueTouchWatch}>
+					onWheel={this.scrollProjectsItems}>
 						<div className='Gallery__logo'>
 							<p>Maryna Herasymenko Art</p>
 						</div>

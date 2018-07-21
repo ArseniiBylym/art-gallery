@@ -14,23 +14,10 @@ import Admin from './Admin/Admin';
 
 
 class App extends Component {
-
-	componentDidMount = () => {
-		window.addEventListener('orientationchange', () => {
-			console.log('changed');
-			let elem = document.querySelector('.App');
-			setTimeout(() => {
-				let newHeight = Math.min(window.screen.height, 
-																 window.screen.availHeight,
-																 document.documentElement.clientHeight);
-				elem.style.height = newHeight + 'px';
-			}, 200)
-		})
-	}
   render() {
     return (
     	<BrowserRouter basename="/art-gallery/">
-	      	<div className="App" style={{height: this.props.height + 'px'}}>
+	      	<div className="App" >
       			<Switch>
 			      	<Route path='/Home' component={Home}/>
 				    	<Route path='/Projects' exact component={Projects}/>
