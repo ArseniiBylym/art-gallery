@@ -1,5 +1,6 @@
 import React from 'react';
 import './Home.css';
+import FullscreenButton from './FullscreenButton/FullscreenButton';
 
 export default function Home (props) {
 
@@ -16,10 +17,22 @@ export default function Home (props) {
 		}, 500)
 
 	}
+	function fullscreenToggleIn(e) {
+		// console.log(window.webkitfullscreenElement);
+		console.log('full');
+		document.documentElement.webkitRequestFullscreen();
+	}
+	function fullscreenToggleOut(e) {
+		document.webkitExitFullscreen();
+		console.log('not-full');
+		
+		// document.documentElement.webkitExitFullscreen();
+	}
 
 		return(
 			<div className='Home__MainWrapper' > 
 				<div className='Home__container' >
+					<FullscreenButton />
 					<div className='Title-box'>
 						<div className='Title-box__name'>
 							<p>MARYNA</p>

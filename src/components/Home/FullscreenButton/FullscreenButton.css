@@ -1,0 +1,21 @@
+#FullscreenButton {
+	position: absolute;
+	width: 5vmin;
+	height: 5vmin;
+	top: 20px;
+	right: 20px;
+	cursor: pointer;
+	z-index: 500;
+}
+#FullscreenButton svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: rgba(0,0,0,.5);
+}
+
+@media screen and (min-width: 1024px) {
+	#FullscreenButton {
+		display: none;
+	}
+}
