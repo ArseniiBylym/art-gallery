@@ -9,8 +9,8 @@ export default class FullscreenButton extends Component {
 	fullscreenToggle = (e) => {
 		console.log('clicked')
 		console.log(this.state.isFullscreen)
-		this.state.isFullscreen ? document.documentElement.webkitRequestFullscreen()
-														: document.webkitExitFullscreen();
+		this.state.isFullscreen ? document.webkitExitFullscreen()
+														: document.documentElement.webkitRequestFullscreen();
 
 		this.setState((prevState) => {
 			return ({isFullscreen: !prevState.isFullscreen})
@@ -21,9 +21,9 @@ export default class FullscreenButton extends Component {
 		return(
 			<div id='FullscreenButton' onClick={this.fullscreenToggle} >
 				{this.state.isFullscreen ? (
-					<OpenFull/>
-					) : (
 					<CloseFull/>
+					) : (
+					<OpenFull/>
 					)}
 			</div>
 

@@ -13,7 +13,7 @@ export default function About (props) {
 				</div>
 				<div className='About__container--photo'>
 				</div>
-				<div className='About__container--info' >
+				<div className='About__container--info'>
 					<div id='artist__info' className='text' >
 						<p>Artist</p><br/>
 						<p> Education<br/>

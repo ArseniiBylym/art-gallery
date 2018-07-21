@@ -9,12 +9,37 @@ export default class About__Contacts extends Component {
 	state = {
 		side: this.props.match.params.side,
 	}
+	touchMoveStartY = 0;
+	deltaMoveY = 0;
+
+
 
 	componentDidMount = () => {
 			document.body.addEventListener('keydown', this.scrollOnClick)
 	}
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick)
+	}
+
+	startTouchWatch = (e) => {
+		this.touchMoveStartY =  +e.touches[0].clientY.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
+
+		if (this.deltaMoveY !== 0 && diff > 50) {
+			let event = new MouseEvent("click", {bubbles: true});
+
+			this.deltaMoveY < this.touchMoveStartY ? 
+			document.getElementById('contactButton').dispatchEvent(event) : 
+			document.getElementById('aboutButton').dispatchEvent(event)
+		}
+		this.deltaMoveY = 0;
 	}
 
 	scrollOnClick = (e) => {
@@ -62,7 +87,10 @@ export default class About__Contacts extends Component {
 					stateStyles={{time: 0}}
 					forceRoute={this.forceRoute}/>
 				<div className='zoomWrapper'>
-				<div id='About__Contacts' className='About__Contacts'>
+				<div id='About__Contacts' className='About__Contacts'
+					onTouchStart={this.startTouchWatch} 
+					onTouchEnd={this.stopTouchWatch}
+					onTouchMove={this.continueTouchWatch}>
 					<Header side={this.state.side} click={this.toggleSides} />
 					<LogInButton click={this.goToLoginForm} />
 					<About side={this.state.side}/>

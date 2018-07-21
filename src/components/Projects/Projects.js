@@ -14,7 +14,8 @@ export default class Projects extends Component {
 		moving: null,
 		wheelRotation: 0
 	}
-	
+	touchMoveStartY = 0;
+	deltaMoveY = 0;
 
 	// componentWillMount = () => {
 	// 	firebaseDB.ref('projectList/').once('value')
@@ -34,6 +35,23 @@ export default class Projects extends Component {
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
 		// firebaseDB.ref('projectList/').off();
+	}
+
+
+	startTouchWatch = (e) => {
+		this.touchMoveStartY =  +e.touches[0].clientY.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
+		if (this.deltaMoveY !== 0 && diff > 50) {
+			this.deltaMoveY < this.touchMoveStartY ? this.moveToDown() : this.moveToTop()
+		}
+		this.deltaMoveY = 0;
 	}
 
 
@@ -61,7 +79,7 @@ export default class Projects extends Component {
 		this.setState((prevState) => {
 			return {
 				index: prevState.index - 1,
-				wheelRotation: prevState.wheelRotation - 30 
+				wheelRotation: prevState.wheelRotation - 45 
 			};
 		})
 	}
@@ -75,7 +93,7 @@ export default class Projects extends Component {
 		this.setState((prevState) => {
 			return {
 				index: prevState.index + 1,
-				wheelRotation: prevState.wheelRotation + 30 
+				wheelRotation: prevState.wheelRotation + 45 
 			};
 		})
 	}
@@ -85,13 +103,13 @@ export default class Projects extends Component {
 			case 'up': {
 				
 				let wheel = document.getElementById('Capa_1');
-				wheel.style.transform = `rotate(${this.state.wheelRotation + 30}deg)`;
+				wheel.style.transform = `rotate(${this.state.wheelRotation + 45}deg)`;
 				break;
 			}
 			case 'down': {
 				
 				let wheel = document.getElementById('Capa_1');
-				wheel.style.transform = `rotate(${this.state.wheelRotation - 30}deg)`;
+				wheel.style.transform = `rotate(${this.state.wheelRotation - 45}deg)`;
 				break;
 			}
 			default: break;
@@ -145,7 +163,10 @@ export default class Projects extends Component {
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
 					<div id='Gallery' className='Gallery' 
-					onWheel={this.scrollProjectsItems}>
+					onWheel={this.scrollProjectsItems}
+					onTouchStart={this.startTouchWatch} 
+					onTouchEnd={this.stopTouchWatch}
+					onTouchMove={this.continueTouchWatch}>
 						<div className='Gallery__logo'>
 							<p>Maryna Herasymenko Art</p>
 						</div>
@@ -160,7 +181,8 @@ export default class Projects extends Component {
 						</div>
 						<EventInfoAngleUp  click={this.moveToTop}/>
 						<EventInfoAngleDown click={this.moveToDown}/>
-						<div className='Gallery__projects--description'>
+						<div className='Gallery__projects--description' 
+						onTouchStart={(e)=>{e.stopPropagation()}}>
 							<Description desc={this.state.proj[this.state.index].description} />
 
 						</div>
