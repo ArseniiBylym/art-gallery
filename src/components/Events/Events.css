@@ -63,13 +63,15 @@
 	grid-column: 3 / 6;
 	grid-row: 2 / -1;
 	background: white;
-	display: flex;
+	/*display: flex;
 	flex-flow: row nowrap;
-	align-items: center;
+	align-items: center;*/
 	z-index: 6;
+	overflow: hidden;
 }
 .EvnetItem__wrapper {
-	width: 100%;
+	overflow-y: auto;
+	width: calc(100% + 17px);
 	height: 100%;
 	padding: 50px 0;
 	display: flex;
@@ -79,8 +81,9 @@
 	color: rgba(0,0,0,.8);
 }
 .EventItem {
+	min-height: 70px;
 	width: 100%;
-	padding: 30px 20px;
+	padding: 10px 23px 10px 5px;
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
@@ -88,13 +91,16 @@
 	cursor: pointer;
 }
 .EventItem__name {
-	text-align: center;
-	font-size: 1.2rem;
+	text-align: start;
+	/*font-size: 1.2rem;*/
+	font-size: 16px;
 }
 .EventItem__date {
+	margin-left: 10px;
 	text-align: center;
 	letter-spacing: 1px;
 	color: black;
+	font-size: 14px;
 }
 
 .currentItem {
@@ -199,6 +205,7 @@
 	.Events {
 		grid-template-rows: repeat(12, 1fr);
 	}
+
 	.Events__logo {
 		justify-content: center;
 	}
@@ -211,7 +218,8 @@
 		overflow-y: auto;
 	}
 	.EventItem {
-		padding: 30px 20px;
+		padding-left: 20px;
+		padding-right: 37px;
 	}
 	.EvnetItem__wrapper {
 		padding: 10px 0;
@@ -251,13 +259,19 @@
 	}
 	
 	.EvnetItem__wrapper {
-		padding: 10px 0;
+		padding:0;
 	}
 	.EventItem {
-		padding: 10px 10px;
+		min-height: 60px;
 	}
-	.EventItem  div {
-		font-size: .8rem;
+	.EventItem__name {
+		font-size: 12px;
+	}
+	.EventItem__date {
+		font-size: 12px;
+	}
+	.Events__list {
+		grid-column: 3 / 7;
 	}
 
 	.Events__viewport {
@@ -275,7 +289,8 @@
 
 @media screen and (max-width: 480px) {
 	.EventItem {
-		padding: 20px 10px;
+		padding-left: 10px;
+		padding-right: 27px;
 	}
 	.EvnetItem__wrapper {
 		padding: 0;
@@ -284,14 +299,30 @@
 		overflow-y: auto;
 		font-size: 12px;
 	}
+	.Events__list {
+		grid-row: 2 / 7;
+	}
+	.Events__infoTable {
+	grid-row: 7 / 8;
+	}
+	.Events__viewport {
+		grid-row: 8 / -1;
+	}
+	.eventDescription--wrapper {
+		grid-row: 8 / -1;
+	}
 }
 
 @media screen and (max-width: 320px) {
 	.EventItem {
-		padding: 20px 10px;
+		min-height: 60px;
+		padding: 5px 23px 5px 5px;
 	}
-	.EventItem  div {
-		font-size: 1rem;
+	.EventItem__name{
+		font-size: 12px;
+	}
+	.EventItem__date {
+		font-size: 10px;
 	}
 	.hideShowButton {
 		text-align: center;

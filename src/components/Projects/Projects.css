@@ -217,6 +217,7 @@
 	transform: translateZ(-2px) scale(2);
 	opacity: 1;
 	transition: all .8s cubic-bezier(.5,0,.5,1);
+	/*will-change: transition;*/
 }
 .Gallery__posters .img2 {
 	left: 100%;
@@ -224,6 +225,7 @@
 	transform: translateZ(-3px) scale(2.4);
 	opacity: 1;
 	transition: all 1s cubic-bezier(.5,0,.5,1);
+	/*will-change: transition;*/
 }
 .Gallery__posters .img3 {
 	left: 100%;
@@ -231,34 +233,35 @@
 	transform: translateZ(-1px) scale(1.5);
 	opacity: 1;
 	transition: all 1.1s cubic-bezier(.5,0,.5,1);
+	/*will-change: transition;*/
 }
 
 
 .Gallery__posters .img1.hide-top {
 	transform: translateZ(-2px) translateY(-350%) scale(2);
-	opacity: .5;
+	opacity: 0;
 } 
 .Gallery__posters .img2.hide-top {
 	transform: translateZ(-3px) translateY(-600%) scale(2.4);
-	opacity: .5;
+	opacity: 0;
 } 
 .Gallery__posters .img3.hide-top  {
 	transform: translateZ(-1px) translateY(-350%) scale(1.5);
-	opacity: .5;
+	opacity: 0;
 }
 
 
 .Gallery__posters .img1.hide-bottom {
 	transform: translateZ(-2px) translateY(500%) scale(2);
-	opacity: .5;
+	opacity: 0;
 } 
 .Gallery__posters .img2.hide-bottom {
 	transform: translateZ(-3px) translateY(450%) scale(2.4);
-	opacity: .5;
+	opacity: 0;
 } 
 .Gallery__posters .img3.hide-bottom  {
 	transform: translateZ(-1px) translateY(400%) scale(1.5);
-	opacity: .5;
+	opacity: 0;
 }
 
 

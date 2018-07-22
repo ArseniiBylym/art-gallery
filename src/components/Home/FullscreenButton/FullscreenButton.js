@@ -6,9 +6,14 @@ export default class FullscreenButton extends Component {
 		isFullscreen: false
 	}
 
+	componentDidMount = () => {
+		let isFull = document.webkitFullscreenElement;
+		if(isFull) {
+			this.setState({isFullscreen: true})
+		}
+	}
+
 	fullscreenToggle = (e) => {
-		console.log('clicked')
-		console.log(this.state.isFullscreen)
 		this.state.isFullscreen ? document.webkitExitFullscreen()
 														: document.documentElement.webkitRequestFullscreen();
 

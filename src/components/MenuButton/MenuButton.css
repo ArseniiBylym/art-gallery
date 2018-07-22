@@ -161,22 +161,11 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
-	#MenuOpenButton{
-		padding: 0;
-	}	
-	#MenuOpenButton.MenuOpenButton > div,
-	#MenuOpenButton.MenuOpenButton:hover > div {
-		width: 60%;
-	}
-	/*.Gallery__logo {
-	margin-left: 0;
-	}*/
-}
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
 	#NavMenuButton {
-		top: 5px;
+		top: 20px;
+		left: 20px;
 		width: 50px;
 		height: 50px;
 	}
