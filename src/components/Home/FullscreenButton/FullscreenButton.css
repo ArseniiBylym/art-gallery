@@ -1,24 +1,27 @@
 #FullscreenButton {
 	position: absolute;
-	width: 5vmin;
-	height: 5vmin;
+	width: 20px;
+	height: 20px;
 	top: 20px;
 	right: 20px;
 	cursor: pointer;
 	z-index: 500;
 	opacity: 0;
-	transform: scale(1.2);
-	animation: show-fullscreenButton 1s 2s ease forwards;
+}
+
+#FullscreenButton.FullscreenButton--open {
+	animation: show-fullscreenButton 1s 3s ease forwards;
+}
+#FullscreenButton.FullscreenButton--close {
+	opacity: .6;
 }
 
 @keyframes show-fullscreenButton {
 	0%{
 		opacity: 0;
-		transform: scale(1.2);
 	}
 	100%{
-		opacity: 1;
-		transform: scale(1);
+		opacity: .6;
 	}
 }
 #FullscreenButton svg {
@@ -28,8 +31,11 @@
 	color: rgba(0,0,0,.5);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1025px) {
 	#FullscreenButton {
+		display: none;
+	}
+	.FullscreenPrompt {
 		display: none;
 	}
 }

@@ -14,19 +14,14 @@ export default function Home (props) {
 		container.classList.add('on-exit');
 		setTimeout(() => {
 			props.history.push(path)
-		}, 500)
+		}, 400)
 
 	}
 	function fullscreenToggleIn(e) {
-		// console.log(window.webkitfullscreenElement);
-		console.log('full');
 		document.documentElement.webkitRequestFullscreen();
 	}
 	function fullscreenToggleOut(e) {
 		document.webkitExitFullscreen();
-		console.log('not-full');
-		
-		// document.documentElement.webkitExitFullscreen();
 	}
 
 		return(

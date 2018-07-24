@@ -57,7 +57,6 @@ export default class Events extends Component {
 	}
 
 	wheelToCurrentEvent = (e) => {
-		console.log('wheel works')
 		if(this.state.timer) return;
 		setTimeout(() => {
 			this.setState(() => {

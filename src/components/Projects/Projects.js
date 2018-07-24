@@ -5,7 +5,6 @@ import MenuButton from '../MenuButton/MenuButton.js';
 import { firebaseDB } from '../../functions/firebase';
 
 
-
 export default class Projects extends Component {
 	
 	state = {
@@ -73,27 +72,24 @@ export default class Projects extends Component {
 
 	moveToTop = () => {
 		if(this.state.index === 0) return;
-		this.moveImgUp();
 		this.turnSvgWheel('down');
 
 		this.setState((prevState) => {
 			return {
 				index: prevState.index - 1,
-				wheelRotation: prevState.wheelRotation - 45 
+				wheelRotation: prevState.wheelRotation - 30 
 			};
 		})
 	}
 
 	moveToDown = () => {
-		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
-		if(this.state.index === projects.length - 1) return;
-		this.moveImgDown();
+		if(this.state.index === this.state.proj.length - 1) return;
 		this.turnSvgWheel('up');
 		
 		this.setState((prevState) => {
 			return {
 				index: prevState.index + 1,
-				wheelRotation: prevState.wheelRotation + 45 
+				wheelRotation: prevState.wheelRotation + 30 
 			};
 		})
 	}
@@ -103,56 +99,18 @@ export default class Projects extends Component {
 			case 'up': {
 				
 				let wheel = document.getElementById('Capa_1');
-				wheel.style.transform = `rotate(${this.state.wheelRotation + 45}deg)`;
+				wheel.style.transform = `rotate(${this.state.wheelRotation + 30}deg)`;
 				break;
 			}
 			case 'down': {
 				
 				let wheel = document.getElementById('Capa_1');
-				wheel.style.transform = `rotate(${this.state.wheelRotation - 45}deg)`;
+				wheel.style.transform = `rotate(${this.state.wheelRotation - 30}deg)`;
 				break;
 			}
 			default: break;
 		}
 	}
-
-	moveImgDown = (e) => {
-		let images = [...document.querySelectorAll('.Gallery__posters img')];
-		let imagesTop = [...document.querySelectorAll('.Gallery__posters .hide-top')];
-
-		images.forEach((img) => {
-			if(!img.classList.contains('hide-top') && !img.classList.contains('hide-bottom')) {
-				img.classList.add('hide-bottom');
-			}
-		})
-
-		if(imagesTop) {
-			for (let i=0; i<imagesTop.length; i++) {
-				if (i>imagesTop.length - 4) {
-					imagesTop[i].classList.remove('hide-top');
-				}
-			}
-		}
-	}
-
-	moveImgUp = (e) => {
-		let images = [...document.querySelectorAll('.Gallery__posters img')];
-		let imagesBottom = [...document.querySelectorAll('.Gallery__posters .hide-bottom')]
-		images.forEach((img) => {
-			if(!img.classList.contains('hide-top') && !img.classList.contains('hide-bottom')) {
-				img.classList.add('hide-top');
-			} 
-		})
-		if(imagesBottom) {
-			for(let i=0; i<imagesBottom.length; i++) {
-				if(i<3) {
-					imagesBottom[i].classList.remove('hide-bottom');
-				}
-			}
-		}
-	}	
-
-	
 
 	render() {
 		if (this.state.proj) {

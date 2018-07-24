@@ -264,7 +264,7 @@
 
 
 
-@media screen and (max-width: 768px) and (orientation: portrait) {
+@media screen and (max-width: 1024px) and (orientation: portrait) {
 	.Contact .aside,
 	.Contact .cork {
 		border: none;

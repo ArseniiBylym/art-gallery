@@ -118,7 +118,7 @@ export default class Contact extends Component {
 								<SvgPhone/>
 							</div>
 							<div className='to-container--phone-number'>
-								<p><a href='tel:+380-97-5192601'>+38 097 5192601</a></p>
+								<p><a href='tel:+380-97-1234567'>+38 097 1234567</a></p>
 							</div>
 						</div>
 						<div className='to-container--email'>
