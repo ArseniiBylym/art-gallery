@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Events.css';
 import MenuButton from '../MenuButton/MenuButton.js';
 import EventInfo from './EventInfo/EventInfo.js';
-import { firebaseDB } from '../../functions/firebase';
 
 export default class Events extends Component {
 	state = {
@@ -13,24 +12,11 @@ export default class Events extends Component {
 		isOpenDescription: false
 	}
 
-	// componentWillMount = () => {
-	// 	firebaseDB.ref('Events/').once('value')
-	// 	.then((snapshot) => {
-	// 		let arr = []
-	// 		snapshot.forEach((item, i) => {
-	// 			arr.push(item.val())
-	// 		})
-
-	// 		this.setState({events: arr})
-	// 	})
-	// }
-
 	componentDidMount = () => {
-			document.body.addEventListener('keydown', this.scrollOnClick)
+		document.body.addEventListener('keydown', this.scrollOnClick)
 	}
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
-		// firebaseDB.ref('Events/').off();
 	}
 
 	scrollOnClick = (e) => {

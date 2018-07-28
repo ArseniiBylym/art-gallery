@@ -40,7 +40,6 @@ export default class Contact extends Component {
 					email: message.email,
 					text: message.text
 			}).then(() => { 
-				console.log('message has sended')
 				this.setState({isSended: true, isValid: true}); 
 			})
 			.catch((e) => {alert('Ups! Something went wrong. Try it agian.')})

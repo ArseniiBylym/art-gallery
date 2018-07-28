@@ -1,6 +1,7 @@
 //Node modules
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { firebaseDB } from './functions/firebase';
 
 //Styles
 import './index.css';
@@ -11,7 +12,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 //Scripts
 
-let promise = new Promise((resolve) => {
+
+let promiseImg = new Promise((resolve) => {
 	let img = document.createElement('img');
 	
 	img.onload = function () {
@@ -20,7 +22,42 @@ let promise = new Promise((resolve) => {
 	img.src = "/static/media/img1_rsz.99d37f4f.jpg";
 })
 
-promise.then(() => {
+// let promiseData = new Promise((resolve) => {
+// 	window.GLOBAL_DATA = {};
+// 	firebaseDB.ref('/commonData').once('value')
+// 			.then((snapshot) => {
+
+// 				let eventsArr = [];
+// 				snapshot.child('events').forEach((event) => {
+// 					eventsArr.push(event.val());
+// 				})
+// 				window.GLOBAL_DATA.EVENTS = eventsArr.reverse();
+
+				
+// 				let projectsArr = {};
+// 				snapshot.child('projects').forEach((project) => {
+// 					let projectArr = [];
+// 					project.forEach((item) =>{
+// 						projectArr.push(item.val());
+// 					})
+// 					projectsArr[project.key] = projectArr;
+// 				});
+// 				window.GLOBAL_DATA.PROJECTS = projectsArr;
+
+
+// 				let projectsList = [];
+// 				snapshot.child('projectsList').forEach((item) => {
+// 					projectsList.push(item.val());
+// 				})
+// 				window.GLOBAL_DATA.PROJECT_LIST = projectsList;
+
+
+// 				console.log(window.GLOBAL_DATA);
+// 				resolve();
+// 			})
+// }) 
+
+Promise.all([promiseImg]).then(() => {
 	ReactDOM.render(<App />, document.getElementById('root'));
 	registerServiceWorker();
 })

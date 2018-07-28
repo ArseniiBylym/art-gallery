@@ -14,6 +14,7 @@ import Admin from './Admin/Admin';
 
 
 class App extends Component {
+
   render() {
     return (
     	<BrowserRouter basename="/art-gallery/">

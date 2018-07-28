@@ -123,6 +123,7 @@
 /*Slideside container with nav buttons*/
 
 /*Class for main layouts on each page. Use for div inside zoomWrapper elem*/ 
+
 .zoomedLayout {
 	transform: scale(1.17) !important;
 	overflow: hidden;
@@ -185,12 +186,14 @@
 		height: 70px;
 	}
 	#NavMenuButton {
-		top: 5px;
+		top: 3px;
+		left: 15px;
 	}
 }
 
 @media screen and (max-width: 320px) {
 	#NavMenuButton {
 		top: 0;
+		left: 10px;
 	}
 }

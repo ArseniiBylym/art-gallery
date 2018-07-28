@@ -38,7 +38,6 @@ export default class Admin extends Component {
 	// }
 
 	render() {
-		console.log(this.props)
 		let elem = null;
 		if(this.state.isAuth) {
 			elem = <AdminConsole click={this.adminLogOut}/>

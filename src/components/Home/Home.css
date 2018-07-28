@@ -97,6 +97,7 @@
 .Nav-box > div {
 	width: 100%;
 	height: 12vh;
+	overflow: hidden;
 	position: relative;
 }
 .Nav-box .linkBlindBox {

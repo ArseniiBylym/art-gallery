@@ -2,62 +2,54 @@ import React, {Component} from 'react';
 import './Project.css';
 import Picture from './Picture/Picture.js';
 import MenuButton from '../../MenuButton/MenuButton.js';
-// import { firebaseDB } from '../../../functions/firebase';
 
 export default class Project extends Component {
 
 	state = {
-		pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName].pictures,
-		// pictures: null,
+		pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName],
 		currentPictureIndex: 0,
-		isFullSize: false,
-		isLoadTime: true,
+		isFullSize: false
 	}
 	touchMoveStartX = 0;
 	deltaMoveX = 0;
+	isFullImgSize = (window.screen.width <= 768 && window.screen.height <=768) ? false : true;
 
-	// componentWillMount = () => {
-	// 	firebaseDB.ref('projects/' + this.props.match.params.projectName + '/').once('value')
-	// 	.then((snapshot) => {
-	// 		let arr = [];
-	// 		snapshot.forEach((item, i) => {
-	// 			arr.push(item.val())
-	// 		})
-	// 		this.setState({pictures: arr})
-	// 	})
-	// }
 
-	componentWillUpdate = (nextProps, nextState) => {
-		if (this.props.match.params.projectName !== nextProps.match.params.projectName) {
-		// 	let arr = [];
-	
-		// firebaseDB.ref('projects/' + nextProps.match.params.projectName + '/').once('value')
-		// .then((snapshot) => {
-		// 	snapshot.forEach((item, i) => {
-		// 		arr.push(item.val())
-		// 	})
-
-		// 	this.setState({pictures: arr})
-		// 	})
-
-		this.setState({pictures: window.GLOBAL_DATA.PROJECTS[nextProps.match.params.projectName].pictures})
-
-		
+	componentDidUpdate = (prevProps, prevState) => {
+		if(this.props.match.params.projectName !== prevProps.match.params.projectName){
+			this.setState({pictures: window.GLOBAL_DATA.PROJECTS[this.props.match.params.projectName]})
+			setTimeout(this.imagesLazyLoad,0)
 		}
 	}
 
 	componentDidMount = () => {
 			document.body.addEventListener('keydown', this.scrollOnClick);
-			
+			this.imagesLazyLoad();
 	}
+
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
-		// firebaseDB.ref('Events/').off();
-		
-		// let project = document.getElementById('Project');
-		// project.removeEventListener('touchStart', this.startTouchWatch);
-		// project.removeEventListener('touchMove', this.continueTouchWatch);
-		// project.removeEventListener('touchEnd', this.stopTouchWatch);
+	}
+
+	imagesLazyLoad = () => {
+		let currentImage = document.querySelector(`[data-position="${this.state.currentPictureIndex}"]`);
+		console.log(currentImage);
+		let img = document.createElement('img');
+
+		img.onload = function(){
+			console.log('image loaded')
+			let allImages = [...document.querySelectorAll('[data-url]')];
+			console.log(allImages);
+			let len = allImages.length;
+			for(let i=0; i<len; i++) {
+				allImages[i].style.backgroundImage = `url(${allImages[i].dataset.url})`;
+				allImages[i].removeAttribute('data-url');
+			}
+		}
+		img.src = currentImage.dataset.url;
+
+		currentImage.style.backgroundImage = `url(${currentImage.dataset.url})`;
+		currentImage.removeAttribute('data-url');
 	}
 
 	scrollOnClick = (e) => {
@@ -72,7 +64,7 @@ export default class Project extends Component {
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex + 1}
 		})
-	};
+	}
 
 	showPrev = () => {
 		if(this.state.currentPictureIndex <= 0) return;
@@ -80,7 +72,7 @@ export default class Project extends Component {
 		this.setState((prevState) => {
 			return {currentPictureIndex: prevState.currentPictureIndex - 1}
 		})
-	};
+	}
 
 	scrollImages = (e) => {
 		if (e.deltaY > 0) {
@@ -111,12 +103,14 @@ export default class Project extends Component {
 
 	render() {
 		let images = null;
-		if (this.state.pictures && this.state.isLoadTime) {
+		if (this.state.pictures) {
 			images = this.state.pictures.map((img, i) => {
-				
+				let imgUrl = this.isFullImgSize ? img.url : img.rsz_url;
+
 				return (
 					<Picture key={img.url} 
-							 url={img.url}
+							 dataUrl={imgUrl}
+							 url={imgUrl}
 							 info={img.info}
 							 pos={i}
 							 currentIndex={this.state.currentPictureIndex}
@@ -150,8 +144,7 @@ export default class Project extends Component {
 						<div className='Project__logo'> 
 							<p>Maryna Herasymenko Art</p>
 						</div>
-						<div className='Project__picture' >
-							{/*<Picture  url={this.state.pictures[0].url} info={this.state.pictures[0].info} pos={0} click={this.fullSizeImg}/>*/}
+						<div className='Project__picture'>
 							{images}
 						</div>
 						<div className='Project__controls'> 

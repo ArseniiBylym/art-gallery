@@ -15,27 +15,39 @@ export default class Projects extends Component {
 	}
 	touchMoveStartY = 0;
 	deltaMoveY = 0;
-
-	// componentWillMount = () => {
-	// 	firebaseDB.ref('projectList/').once('value')
-	// 	.then((snapshot) => {
-	// 		let arr = [];
-	// 		snapshot.forEach((item,i) => {
-	// 			arr.push(item.val())
-	// 		})
-	// 		this.setState({proj: arr})
-
-	// 	})
-	// }
+	isFullImgSize = (window.screen.width <= 768 && window.screen.height <=768) ? false : true;
 
 	componentDidMount = () => {
-			document.body.addEventListener('keydown', this.scrollOnClick)
-	}
-	componentWillUnmount = () => {
-		document.body.removeEventListener('keydown', this.scrollOnClick);
-		// firebaseDB.ref('projectList/').off();
+		document.body.addEventListener('keydown', this.scrollOnClick)
+		this.postersLazyLoad();
 	}
 
+	componentWillUnmount = () => {
+		document.body.removeEventListener('keydown', this.scrollOnClick);
+	}
+
+	postersLazyLoad = () => {
+		let posters = [...document.querySelectorAll('[data-src]')];
+		let len = posters.length;
+		let promiseArr = [];
+		for (let i=0; i<3; i++) {
+			posters[i].onload = function() {
+				promiseArr.push(() => {
+					return new Promise((resolve)=> {
+						resolve();
+					})
+				})
+			}
+			posters[i].src = posters[i].dataset.src;
+			posters[i].removeAttribute('data-src');
+		}
+		Promise.all(promiseArr).then(()=>{
+			for (let i=3; i<len; i++) {
+				posters[i].src = posters[i].dataset.src;
+				posters[i].removeAttribute('data-src'); 
+			}
+		})
+	}
 
 	startTouchWatch = (e) => {
 		this.touchMoveStartY =  +e.touches[0].clientY.toFixed(0);
@@ -53,18 +65,15 @@ export default class Projects extends Component {
 		this.deltaMoveY = 0;
 	}
 
-
 	scrollOnClick = (e) => {
 		if(e.key === 'ArrowUp') this.moveToTop();
 		if(e.key === 'ArrowDown') this.moveToDown();
 	}
 
 	scrollProjectsItems = (e) => {
-				
 		if (e.deltaY < 0) {
 			this.moveToTop();
 		}
-
 		if (e.deltaY > 0) {
 			this.moveToDown();
 		}
@@ -145,7 +154,7 @@ export default class Projects extends Component {
 
 						</div>
 						<div className='Gallery__posters '> 
-							<Posters imgArr={this.state.proj} index={this.state.index}/>
+							<Posters imgArr={this.state.proj} isFullsize={this.isFullImgSize} index={this.state.index}/>
 
 						</div>
 						<div className='toTheGallery'>
@@ -189,17 +198,18 @@ function Description(props) {
 		)
 }
 
-function Posters(props) {
+function Posters(props, isFullsize) {
 
 	let posters = props.imgArr.map((item, i) => {
 		let addedClass = null;
 		if (i > props.index) addedClass = 'hide-top';
 		if (i < props.index) addedClass = 'hide-bottom';
+		let url = props.isFullsize ? 'urls' : 'rsz_urls';
 		return (
 			<React.Fragment key={item.name}>
-				<img className={`img1 ${addedClass}`} src={props.imgArr[i].urls.img1} alt='img'/>
-				<img className={`img2 ${addedClass}`} src={props.imgArr[i].urls.img2} alt='img'/>
-				<img className={`img3 ${addedClass}`} src={props.imgArr[i].urls.img3} alt='img'/>
+				<img className={`img1 ${addedClass}`} data-src={props.imgArr[i][url].img1}  alt='img'/>
+				<img className={`img2 ${addedClass}`} data-src={props.imgArr[i][url].img2}  alt='img'/>
+				<img className={`img3 ${addedClass}`} data-src={props.imgArr[i][url].img3}  alt='img'/>
 			</React.Fragment>
 			)
 	})
