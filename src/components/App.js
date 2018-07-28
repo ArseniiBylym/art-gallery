@@ -14,10 +14,11 @@ import Admin from './Admin/Admin';
 
 
 class App extends Component {
+
   render() {
     return (
     	<BrowserRouter basename="/art-gallery/">
-	      	<div className="App">
+	      	<div className="App" >
       			<Switch>
 			      	<Route path='/Home' component={Home}/>
 				    	<Route path='/Projects' exact component={Projects}/>

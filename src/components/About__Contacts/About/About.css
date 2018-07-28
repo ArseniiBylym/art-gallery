@@ -1,7 +1,7 @@
 .About {
 	position: absolute;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	transform: translateY(-100%);
 	transition: transform 1s ease;
 	background-color: gray;
@@ -39,6 +39,20 @@
 	grid-row: 1 / 6;
 	position: relative;
 	background: url(../img/about_img/img1.jpg) right top/cover no-repeat;
+	transform: translateX(-10%);
+	opacity: 0;
+	animation: About-photo-show 1.5s .5s ease forwards;
+}
+
+@keyframes About-photo-show {
+	0%{
+		opacity: 0;
+		transform: translateX(-10%);
+	}
+	100%{
+		opacity: 1;
+		transform: translateX(0);
+	}
 }
 
 .About__container--info {
@@ -51,36 +65,104 @@
 	padding: 1rem;
 	font-family: 'Merriweather Sans';
 	position: relative;
+	opacity: 0;
+	transform: translateX(10%);
+	animation: About-info-show 1.5s .5s ease forwards;
 }
-
-.tempLayout {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	animation: move-to-left 1s .35s ease forwards;
-	background-color: white;
-}
-.About__container--info .tempLayout{
-	top: -1rem;
-	left: -1rem;
-	width: calc(100% + 1rem);
-	height: calc(100% + 1rem);
-	animation: move-to-right 1s .3s ease forwards;
-} 
-
-@keyframes move-to-left{
+@keyframes About-info-show {
 	0%{
+		opacity: 0;
+		transform: translateX(10%);
+	}
+	100%{
+		opacity: 1;
 		transform: translateX(0);
 	}
-	100% {
-		transform: translateX(-100%);
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+	.About__container{
+		overflow: hidden;
+		background-color: transparent;
+	}
+	.tempLayout {
+		display: none;
+	}
+	.About__container--logo {
+		grid-column: 1 / -1;
+		grid-row: 1 / 2;
+		z-index: 3;
+		background-color: white;
+		font-size: 5vh;
+	}
+	.About__container--photo {
+		grid-column: 1 / -1;
+		grid-row: 2 / 5;
+		z-index: 2;
+	}
+	.About__container--info {
+		grid-column: 1 / -1;
+		grid-row: 5 / -1;
+		z-index: 1;
+		overflow-y: auto;
+		font-size: 16px;
 	}
 }
-@keyframes move-to-right{
-	0%{
-		transform: translateX(0);
+
+
+
+@media screen and (max-width: 768px) and (orientation: landscape){
+	.About__container--info {
+		font-size: .55rem;
+		overflow-y: auto;
 	}
-	100% {
-		transform: translateX(100%);
+	.tempLayout {
+		display: none;
+	}
+	.About__container--logo {
+		font-size: 25px;
+	}
+
+}
+
+@media screen and (max-width: 480px) {
+	.About__container--logo {
+		font-size: 3vh;
+		padding: 10px;
+	}
+	.About__container--info {
+		font-size: .7rem;
+	}
+	.About__container--photo {
+		grid-row: 2 / 4;
+		transform: translateY(-100%);
+		opacity: 0;
+		animation: show-about-photo .8s .5s ease forwards;
+	}
+	@keyframes show-about-photo {
+		0%{
+			opacity: 0;
+			transform: translateY(-100%);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	.About__container--info {
+		grid-row: 4 / -1;
+		transform: translateY(-150%);
+		opacity: 0;
+		animation: show-about-info 1s 1s ease forwards;
+	}
+	@keyframes show-about-info {
+		0%{
+			opacity: 0;
+			transform: translateY(-150%);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 }

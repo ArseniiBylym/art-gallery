@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Events.css';
 import MenuButton from '../MenuButton/MenuButton.js';
 import EventInfo from './EventInfo/EventInfo.js';
-import { firebaseDB } from '../../functions/firebase';
 
 export default class Events extends Component {
 	state = {
@@ -13,24 +12,11 @@ export default class Events extends Component {
 		isOpenDescription: false
 	}
 
-	// componentWillMount = () => {
-	// 	firebaseDB.ref('Events/').once('value')
-	// 	.then((snapshot) => {
-	// 		let arr = []
-	// 		snapshot.forEach((item, i) => {
-	// 			arr.push(item.val())
-	// 		})
-
-	// 		this.setState({events: arr})
-	// 	})
-	// }
-
 	componentDidMount = () => {
-			document.body.addEventListener('keydown', this.scrollOnClick)
+		document.body.addEventListener('keydown', this.scrollOnClick)
 	}
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
-		// firebaseDB.ref('Events/').off();
 	}
 
 	scrollOnClick = (e) => {
@@ -57,7 +43,6 @@ export default class Events extends Component {
 	}
 
 	wheelToCurrentEvent = (e) => {
-		console.log('wheel works')
 		if(this.state.timer) return;
 		setTimeout(() => {
 			this.setState(() => {
@@ -172,7 +157,8 @@ export default class Events extends Component {
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
 					<div className='Events__wrapper'>
-						<div className='Events' onWheel={this.wheelToCurrentEvent}>
+						<div id='Events' className='Events' 
+						onWheel={this.wheelToCurrentEvent}>
 							<div className='Events__logo'>
 								<p>Maryna Herasymenko Art</p>
 							</div>

@@ -40,7 +40,6 @@ export default class Contact extends Component {
 					email: message.email,
 					text: message.text
 			}).then(() => { 
-				console.log('message has sended')
 				this.setState({isSended: true, isValid: true}); 
 			})
 			.catch((e) => {alert('Ups! Something went wrong. Try it agian.')})
@@ -118,7 +117,7 @@ export default class Contact extends Component {
 								<SvgPhone/>
 							</div>
 							<div className='to-container--phone-number'>
-								<p>+38 097 1234567</p>
+								<p><a href='tel:+380-97-1234567'>+38 097 1234567</a></p>
 							</div>
 						</div>
 						<div className='to-container--email'>
