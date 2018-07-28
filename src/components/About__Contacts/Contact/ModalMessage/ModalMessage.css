@@ -43,3 +43,11 @@
 .ModalMessage button:active {
 	box-shadow: none;
 }
+
+@media screen and (max-width: 480px) {
+	.ModalMessage {
+		width: 90%;
+		left: 5%;
+		padding: 10px;
+	}
+}

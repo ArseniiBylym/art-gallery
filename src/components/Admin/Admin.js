@@ -38,7 +38,6 @@ export default class Admin extends Component {
 	// }
 
 	render() {
-		console.log(this.props)
 		let elem = null;
 		if(this.state.isAuth) {
 			elem = <AdminConsole click={this.adminLogOut}/>
@@ -58,9 +57,9 @@ function AdminForm(props) {
 	return(
 		<div className='AdminForm__container'>
 			<div className='AdminForm__box'>
-				<h1>Your email</h1>
+				<h1>Email</h1>
 				<input type='email' name='email' placeholder='Enter your email'/>
-				<h1>Your password</h1>
+				<h1>Password</h1>
 				<input type='password' name='password' placeholder='Enter your password' />
 				<div>
 					<button type='submit' onClick={props.clickIn}>Log in</button>

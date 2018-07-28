@@ -9,6 +9,10 @@ export default class About__Contacts extends Component {
 	state = {
 		side: this.props.match.params.side,
 	}
+	touchMoveStartY = 0;
+	deltaMoveY = 0;
+
+
 
 	componentDidMount = () => {
 			document.body.addEventListener('keydown', this.scrollOnClick)
@@ -17,12 +21,32 @@ export default class About__Contacts extends Component {
 		document.body.removeEventListener('keydown', this.scrollOnClick)
 	}
 
+	startTouchWatch = (e) => {
+		this.touchMoveStartY =  +e.touches[0].clientY.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
+
+		if (this.deltaMoveY !== 0 && diff > 50) {
+			let event = new MouseEvent("click", {bubbles: true});
+
+			this.deltaMoveY < this.touchMoveStartY ? 
+			document.getElementById('contactButton').dispatchEvent(event) : 
+			document.getElementById('aboutButton').dispatchEvent(event)
+		}
+		this.deltaMoveY = 0;
+	}
+
 	scrollOnClick = (e) => {
 		let event = new MouseEvent("click", {bubbles: true});
 		if(e.key === 'ArrowDown') document.getElementById('contactButton').dispatchEvent(event);
 		if(e.key === 'ArrowUp') document.getElementById('aboutButton').dispatchEvent(event);
 	}
-
 
 	toggleSides = (e) => {
 		if (e.target.classList.contains('activeButton')) {
@@ -57,13 +81,16 @@ export default class About__Contacts extends Component {
 
 	render() {
 		return(
-			<div className='About__Contacts__MainWrapper' onWheel={this.wheelClick}>
+			<div className='About__Contacts--wrapper MainWrapper on-enter' onWheel={this.wheelClick}>
 				<MenuButton color='black' 
 					side={this.state.side}
 					stateStyles={{time: 0}}
 					forceRoute={this.forceRoute}/>
 				<div className='zoomWrapper'>
-				<div className='About__Contacts'>
+				<div id='About__Contacts' className='About__Contacts'
+					onTouchStart={this.startTouchWatch} 
+					onTouchEnd={this.stopTouchWatch}
+					onTouchMove={this.continueTouchWatch}>
 					<Header side={this.state.side} click={this.toggleSides} />
 					<LogInButton click={this.goToLoginForm} />
 					<About side={this.state.side}/>

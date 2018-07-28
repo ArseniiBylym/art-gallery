@@ -5,7 +5,6 @@ import MenuButton from '../MenuButton/MenuButton.js';
 import { firebaseDB } from '../../functions/firebase';
 
 
-
 export default class Projects extends Component {
 	
 	state = {
@@ -14,41 +13,67 @@ export default class Projects extends Component {
 		moving: null,
 		wheelRotation: 0
 	}
-
-	// componentWillMount = () => {
-	// 	firebaseDB.ref('projectList/').once('value')
-	// 	.then((snapshot) => {
-	// 		let arr = [];
-	// 		snapshot.forEach((item,i) => {
-	// 			arr.push(item.val())
-	// 		})
-	// 		this.setState({proj: arr})
-
-	// 	})
-	// }
+	touchMoveStartY = 0;
+	deltaMoveY = 0;
+	isFullImgSize = (window.screen.width <= 768 && window.screen.height <=768) ? false : true;
 
 	componentDidMount = () => {
-		console.log('Projects did mount')
-			document.body.addEventListener('keydown', this.scrollOnClick)
+		document.body.addEventListener('keydown', this.scrollOnClick)
+		this.postersLazyLoad();
 	}
+
 	componentWillUnmount = () => {
-		console.log('Projects will unmount');
 		document.body.removeEventListener('keydown', this.scrollOnClick);
-		// firebaseDB.ref('projectList/').off();
+	}
+
+	postersLazyLoad = () => {
+		let posters = [...document.querySelectorAll('[data-src]')];
+		let len = posters.length;
+		let promiseArr = [];
+		for (let i=0; i<3; i++) {
+			posters[i].onload = function() {
+				promiseArr.push(() => {
+					return new Promise((resolve)=> {
+						resolve();
+					})
+				})
+			}
+			posters[i].src = posters[i].dataset.src;
+			posters[i].removeAttribute('data-src');
+		}
+		Promise.all(promiseArr).then(()=>{
+			for (let i=3; i<len; i++) {
+				posters[i].src = posters[i].dataset.src;
+				posters[i].removeAttribute('data-src'); 
+			}
+		})
+	}
+
+	startTouchWatch = (e) => {
+		this.touchMoveStartY =  +e.touches[0].clientY.toFixed(0);
+	}
+
+	continueTouchWatch = (e) => {
+		this.deltaMoveY = +e.touches[0].clientY.toFixed(0);
+	}
+
+	stopTouchWatch = (e) => {
+		let diff = Math.abs(this.deltaMoveY - this.touchMoveStartY);
+		if (this.deltaMoveY !== 0 && diff > 50) {
+			this.deltaMoveY < this.touchMoveStartY ? this.moveToDown() : this.moveToTop()
+		}
+		this.deltaMoveY = 0;
 	}
 
 	scrollOnClick = (e) => {
-		console.log('key press')
 		if(e.key === 'ArrowUp') this.moveToTop();
 		if(e.key === 'ArrowDown') this.moveToDown();
 	}
 
 	scrollProjectsItems = (e) => {
-				
 		if (e.deltaY < 0) {
 			this.moveToTop();
 		}
-
 		if (e.deltaY > 0) {
 			this.moveToDown();
 		}
@@ -56,7 +81,6 @@ export default class Projects extends Component {
 
 	moveToTop = () => {
 		if(this.state.index === 0) return;
-		this.moveImgUp();
 		this.turnSvgWheel('down');
 
 		this.setState((prevState) => {
@@ -68,9 +92,7 @@ export default class Projects extends Component {
 	}
 
 	moveToDown = () => {
-		let projects = [...document.getElementsByClassName('Gallery__projects--item')];
-		if(this.state.index === projects.length - 1) return;
-		this.moveImgDown();
+		if(this.state.index === this.state.proj.length - 1) return;
 		this.turnSvgWheel('up');
 		
 		this.setState((prevState) => {
@@ -99,44 +121,6 @@ export default class Projects extends Component {
 		}
 	}
 
-	moveImgDown = (e) => {
-		let images = [...document.querySelectorAll('.Gallery__posters img')];
-		let imagesTop = [...document.querySelectorAll('.Gallery__posters .hide-top')];
-
-		images.forEach((img) => {
-			if(!img.classList.contains('hide-top') && !img.classList.contains('hide-bottom')) {
-				img.classList.add('hide-bottom');
-			}
-		})
-
-		if(imagesTop) {
-			for (let i=0; i<imagesTop.length; i++) {
-				if (i>imagesTop.length - 4) {
-					imagesTop[i].classList.remove('hide-top');
-				}
-			}
-		}
-	}
-
-	moveImgUp = (e) => {
-		let images = [...document.querySelectorAll('.Gallery__posters img')];
-		let imagesBottom = [...document.querySelectorAll('.Gallery__posters .hide-bottom')]
-		images.forEach((img) => {
-			if(!img.classList.contains('hide-top') && !img.classList.contains('hide-bottom')) {
-				img.classList.add('hide-top');
-			} 
-		})
-		if(imagesBottom) {
-			for(let i=0; i<imagesBottom.length; i++) {
-				if(i<3) {
-					imagesBottom[i].classList.remove('hide-bottom');
-				}
-			}
-		}
-	}	
-
-	
-
 	render() {
 		if (this.state.proj) {
 		return (
@@ -145,7 +129,11 @@ export default class Projects extends Component {
 				
 				<MenuButton color='black'/>
 				<div className='zoomWrapper'>
-					<div className='Gallery' onWheel={this.scrollProjectsItems} >
+					<div id='Gallery' className='Gallery' 
+					onWheel={this.scrollProjectsItems}
+					onTouchStart={this.startTouchWatch} 
+					onTouchEnd={this.stopTouchWatch}
+					onTouchMove={this.continueTouchWatch}>
 						<div className='Gallery__logo'>
 							<p>Maryna Herasymenko Art</p>
 						</div>
@@ -158,14 +146,15 @@ export default class Projects extends Component {
 								<ProjectsName mainClass='Gallery__projects--item' projects={this.state.proj} index={this.state.index} />
 							</div>
 						</div>
-						<EventInfoAngleUp  />
-						<EventInfoAngleDown />
-						<div className='Gallery__projects--description'>
+						<EventInfoAngleUp  click={this.moveToTop}/>
+						<EventInfoAngleDown click={this.moveToDown}/>
+						<div className='Gallery__projects--description' 
+						onTouchStart={(e)=>{e.stopPropagation()}}>
 							<Description desc={this.state.proj[this.state.index].description} />
 
 						</div>
 						<div className='Gallery__posters '> 
-							<Posters imgArr={this.state.proj} index={this.state.index}/>
+							<Posters imgArr={this.state.proj} isFullsize={this.isFullImgSize} index={this.state.index}/>
 
 						</div>
 						<div className='toTheGallery'>
@@ -209,17 +198,18 @@ function Description(props) {
 		)
 }
 
-function Posters(props) {
+function Posters(props, isFullsize) {
 
 	let posters = props.imgArr.map((item, i) => {
 		let addedClass = null;
 		if (i > props.index) addedClass = 'hide-top';
 		if (i < props.index) addedClass = 'hide-bottom';
+		let url = props.isFullsize ? 'urls' : 'rsz_urls';
 		return (
 			<React.Fragment key={item.name}>
-				<img className={`img1 ${addedClass}`} src={props.imgArr[i].urls.img1} alt='img'/>
-				<img className={`img2 ${addedClass}`} src={props.imgArr[i].urls.img2} alt='img'/>
-				<img className={`img3 ${addedClass}`} src={props.imgArr[i].urls.img3} alt='img'/>
+				<img className={`img1 ${addedClass}`} data-src={props.imgArr[i][url].img1}  alt='img'/>
+				<img className={`img2 ${addedClass}`} data-src={props.imgArr[i][url].img2}  alt='img'/>
+				<img className={`img3 ${addedClass}`} data-src={props.imgArr[i][url].img3}  alt='img'/>
 			</React.Fragment>
 			)
 	})
@@ -237,15 +227,15 @@ function SvgArrowRight() {
 		)
 }
 
-function EventInfoAngleUp() {
+function EventInfoAngleUp(props) {
 	return(
-<svg className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
+<svg onClick={props.click} className='Gallery__arrowUp' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg>
 		)
 }
 
-function EventInfoAngleDown() {
+function EventInfoAngleDown(props) {
 	return(
-<svg className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
+<svg onClick={props.click} className='Gallery__arrowDown' role="img" viewBox="0 0 320 512"><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg>
 		)
 }
 

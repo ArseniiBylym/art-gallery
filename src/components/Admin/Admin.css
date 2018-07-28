@@ -42,3 +42,15 @@
 	cursor: pointer;
 	background-color: #6BA6D0;
 }
+
+@media screen and (max-width: 768px) {
+	.AdminForm__box {
+		width: 90%;
+	}
+	.AdminForm__box > div {
+		display: flex;
+		flex-flow: column nowrap;
+		align-items: center;
+		justify-content: center;
+	}
+}
