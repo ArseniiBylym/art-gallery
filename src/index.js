@@ -19,45 +19,45 @@ let promiseImg = new Promise((resolve) => {
 	img.onload = function () {
 		resolve();
 	}
-	img.src = "/static/media/img1_rsz.99d37f4f.jpg";
+	img.src = "/art-gallery/static/media/img1_rsz.99d37f4f.jpg";
 })
 
-// let promiseData = new Promise((resolve) => {
-// 	window.GLOBAL_DATA = {};
-// 	firebaseDB.ref('/commonData').once('value')
-// 			.then((snapshot) => {
+let promiseData = new Promise((resolve) => {
+	window.GLOBAL_DATA = {};
+	firebaseDB.ref('/commonData').once('value')
+			.then((snapshot) => {
 
-// 				let eventsArr = [];
-// 				snapshot.child('events').forEach((event) => {
-// 					eventsArr.push(event.val());
-// 				})
-// 				window.GLOBAL_DATA.EVENTS = eventsArr.reverse();
+				let eventsArr = [];
+				snapshot.child('events').forEach((event) => {
+					eventsArr.push(event.val());
+				})
+				window.GLOBAL_DATA.EVENTS = eventsArr.reverse();
 
 				
-// 				let projectsArr = {};
-// 				snapshot.child('projects').forEach((project) => {
-// 					let projectArr = [];
-// 					project.forEach((item) =>{
-// 						projectArr.push(item.val());
-// 					})
-// 					projectsArr[project.key] = projectArr;
-// 				});
-// 				window.GLOBAL_DATA.PROJECTS = projectsArr;
+				let projectsArr = {};
+				snapshot.child('projects').forEach((project) => {
+					let projectArr = [];
+					project.forEach((item) =>{
+						projectArr.push(item.val());
+					})
+					projectsArr[project.key] = projectArr;
+				});
+				window.GLOBAL_DATA.PROJECTS = projectsArr;
 
 
-// 				let projectsList = [];
-// 				snapshot.child('projectsList').forEach((item) => {
-// 					projectsList.push(item.val());
-// 				})
-// 				window.GLOBAL_DATA.PROJECT_LIST = projectsList;
+				let projectsList = [];
+				snapshot.child('projectsList').forEach((item) => {
+					projectsList.push(item.val());
+				})
+				window.GLOBAL_DATA.PROJECT_LIST = projectsList;
 
 
-// 				console.log(window.GLOBAL_DATA);
-// 				resolve();
-// 			})
-// }) 
+				console.log(window.GLOBAL_DATA);
+				resolve();
+			})
+}) 
 
-Promise.all([promiseImg]).then(() => {
+Promise.all([promiseImg, promiseData]).then(() => {
 	ReactDOM.render(<App />, document.getElementById('root'));
 	registerServiceWorker();
 })
