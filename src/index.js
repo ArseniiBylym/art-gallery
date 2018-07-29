@@ -11,7 +11,7 @@ import App from './components/App.js';
 import registerServiceWorker from './registerServiceWorker';
 
 //Scripts
-import { dafaultData } from './functions/database';
+import { defaultData } from './functions/database';
 
 
 window.addEventListener('load',()=>{

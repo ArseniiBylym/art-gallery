@@ -1,4 +1,4 @@
-function dafaultData () {
+function defaultData () {
 	return {
 
 	PROJECT_LIST: [
@@ -209,4 +209,4 @@ function dafaultData () {
 }
 }
 
-export dafaultData;
+export { defaultData };
