@@ -36,10 +36,11 @@ let promiseImg = new Promise((resolve) => {
 let promiseData = new Promise((resolve) => {
 
 	if(window.navigator.onLine === false) {
-		window.GLOBAL_DATA = dafaultData();
+		window.GLOBAL_DATA = defaultData();
 		resolve();
 		return;
 	}
+	console.log('online')
 
 	window.GLOBAL_DATA = {};
 	firebaseDB.ref('/commonData').once('value')
@@ -68,8 +69,14 @@ let promiseData = new Promise((resolve) => {
 					projectsList.push(item.val());
 				})
 				window.GLOBAL_DATA.PROJECT_LIST = projectsList;
+				setTimeout(()=>{
+					resolve();
+				}, 3000)
 
 				resolve();
+			})
+			.catch((e)=> {
+				console.log(e.message);
 			})
 }) 
 
