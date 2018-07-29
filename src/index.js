@@ -17,7 +17,7 @@ import { defaultData } from './functions/database';
 window.addEventListener('load',()=>{
 	if('serviceWorker' in navigator) {
 		navigator.serviceWorker
-		.register('/sw.js')
+		.register('/art-gallery/sw.js')
 		.then(()=>{
 			console.log('Service worker is registered!');
 		})
