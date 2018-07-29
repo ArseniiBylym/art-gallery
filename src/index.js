@@ -11,7 +11,18 @@ import App from './components/App.js';
 import registerServiceWorker from './registerServiceWorker';
 
 //Scripts
+import { dafaultData } from './functions/database';
 
+
+window.addEventListener('load',()=>{
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker
+		.register('/sw.js')
+		.then(()=>{
+			console.log('Service worker is registered!');
+		})
+	}
+})
 
 let promiseImg = new Promise((resolve) => {
 	let img = document.createElement('img');
@@ -23,6 +34,13 @@ let promiseImg = new Promise((resolve) => {
 })
 
 let promiseData = new Promise((resolve) => {
+
+	if(window.navigator.onLine === false) {
+		window.GLOBAL_DATA = dafaultData();
+		resolve();
+		return;
+	}
+
 	window.GLOBAL_DATA = {};
 	firebaseDB.ref('/commonData').once('value')
 			.then((snapshot) => {
@@ -51,8 +69,6 @@ let promiseData = new Promise((resolve) => {
 				})
 				window.GLOBAL_DATA.PROJECT_LIST = projectsList;
 
-
-				console.log(window.GLOBAL_DATA);
 				resolve();
 			})
 }) 
