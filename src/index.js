@@ -11,9 +11,18 @@ import App from './components/App.js';
 import registerServiceWorker from './registerServiceWorker';
 
 //Scripts
-
+window.addEventListener('load',()=>{
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker
+		.register('/sw.js')
+		.then(()=>{
+			console.log('Service worker is registered!');
+		})
+	}
+})
 
 let promiseImg = new Promise((resolve) => {
+	console.log(window.navigator.onLine)
 	let img = document.createElement('img');
 	
 	img.onload = function () {
