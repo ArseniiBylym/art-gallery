@@ -14,6 +14,11 @@ export default class Events extends Component {
 
 	componentDidMount = () => {
 		document.body.addEventListener('keydown', this.scrollOnClick)
+		this.setState((prevState)=>{
+			return({events: prevState.events.sort((a, b)=> {
+				return b.date - a.date
+			})})
+		})
 	}
 	componentWillUnmount = () => {
 		document.body.removeEventListener('keydown', this.scrollOnClick);
