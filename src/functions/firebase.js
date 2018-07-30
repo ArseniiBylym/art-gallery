@@ -19,7 +19,3 @@ const config = {
  const firebaseStorage = firebase.storage();
 
  export {firebaseDB, firebaseAuth, firebaseStorage};
-
- 
-
- 
