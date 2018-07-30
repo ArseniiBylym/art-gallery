@@ -10,7 +10,7 @@
 }
 
 #FullscreenButton.FullscreenButton--open {
-	animation: show-fullscreenButton 1s 3s ease forwards;
+	animation: show-fullscreenButton 1s 2s ease forwards;
 }
 #FullscreenButton.FullscreenButton--close {
 	opacity: .6;

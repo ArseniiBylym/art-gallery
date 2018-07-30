@@ -6,7 +6,7 @@ self.addEventListener('install', function(e) {
 
 self.addEventListener('fetch', function(e) {
 
-	if(e.request.url.includes('img')) {
+	if(e.request.url.includes('img') || e.request.url.includes('images')) {
 		e.respondWith(
 			caches.match(e.request)
 			.then(function(response) {

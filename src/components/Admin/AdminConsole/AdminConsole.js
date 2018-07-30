@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AdminConsole.css';
-import {firebaseDB, firebaseAuth} from '../../../functions/firebase';
+import {firebaseDB, firebaseAuth, firebaseStorage} from '../../../functions/firebase';
 
 export default class AdminConsole extends Component {
 
@@ -41,74 +41,173 @@ export default class AdminConsole extends Component {
 
 	addNewEvent = (e) => {
 		e.preventDefault();
-		let event = {
-			name: document.querySelector('.addEvent--name input').value,
-			date: +new Date(document.querySelector('.addEvent--date input').value),
-			place: document.querySelector('.addEvent--place input').value,
-			description: document.querySelector('.addEvent--description textarea').value,
-			poster: document.querySelector('.addEvent--poster input').value
-		}
+		let event = {};
 
-		firebaseDB.ref('/commonData/events/').push({
-			name: event.name,
-			date: event.date,
-			place: event.place,
-			description: event.description,
-			poster: `url(./img/Events/${event.poster})`
-		}).then(()=>{
-			alert('New event was saved');
-		}).catch((e) => {
-			alert(e.message);
+		let file = document.querySelector('.addEvent--poster input').files[0];
+		let uploadFile = firebaseStorage.ref('/images/events').child(file.name).put(file);
+
+		uploadFile.on('state_changed', null, null, function(){
+			uploadFile.snapshot.ref.getDownloadURL()
+			.then(function(downloadURL) {
+				console.log('File loaded at: ', downloadURL);
+				event = {
+					name: document.querySelector('.addEvent--name input').value,
+					date: +new Date(document.querySelector('.addEvent--date input').value),
+					place: document.querySelector('.addEvent--place input').value,
+					description: document.querySelector('.addEvent--description textarea').value,
+					poster: downloadURL
+				};
+				return event
+			})
+			.then((event) => {
+				firebaseDB.ref('/commonData/events/').push({
+					name: event.name,
+					date: event.date,
+					place: event.place,
+					description: event.description,
+					poster: `url(${event.poster})`
+				}).then(()=>{
+					alert('New event was saved');
+				}).catch((e) => {
+					alert(e.message);
+				})
+			})
 		})
 	}
 
 	addNewProject = (e) => {
 		e.preventDefault();
-		let projectList = {
-			name: document.querySelector('.addProject--name input').value,
-			description: document.querySelector('.addProject--description textarea').value,
-			images: document.querySelector('.addProject--previews input').value.split('/')
-		}
+		let projectList = {}
+		let folderName = document.querySelector('.addProject--name input').value;
+		let imagesArrFull = [...document.querySelector('.addProject--previews--full input').files];
+		let imagesArrRsz = [...document.querySelector('.addProject--previews--rsz input').files];
+		let filesPathsFull = [];
+		let filesPathsRsz = [];
+		let promiseArr = [];
 
-		firebaseDB.ref('/commonData/projectsList/').push({
-			name: projectList.name,
-			href: `/${projectList.name}`,
-			description: projectList.description,
-			urls: {
-				img1: `./img/Gallery/${projectList.name}/Previews/${projectList.images[0]}`,
-				img2: `./img/Gallery/${projectList.name}/Previews/${projectList.images[1]}`,
-				img3:`./img/Gallery/${projectList.name}/Previews/${projectList.images[2]}`
+		imagesArrFull.forEach((img, i) => {
+			promiseArr.push(
+				new Promise((resolve) => {
+					let file = firebaseStorage.ref('/images/projectList/' + folderName).child(img.name).put(img)
+					
+					file.on('state_changed', null, null, function(){
+						file.snapshot.ref.getDownloadURL()
+							.then(function(downloadURL) {
+								filesPathsFull.push(downloadURL);
+								resolve()
+							})
+					})
+				})
+			)
+		})
+
+		imagesArrRsz.forEach((img, i) => {
+			promiseArr.push(
+				new Promise((resolve) => {
+					let file = firebaseStorage.ref('/images/projectList/' + folderName).child(img.name).put(img)
+					
+					file.on('state_changed', null, null, function(){
+						file.snapshot.ref.getDownloadURL()
+							.then(function(downloadURL) {
+								filesPathsRsz.push(downloadURL);
+								resolve()
+							})
+					})
+				})
+			)
+		})
+
+		Promise.all(promiseArr).then(() => {
+			projectList = {
+				name: folderName,
+				description: document.querySelector('.addProject--description textarea').value,
+				imagesFull: filesPathsFull,
+				imagesRsz: filesPathsRsz
 			}
-		}).then(() => {
-			alert('New project was added');
-			document.querySelector('.addProject--name input').value = null;
-			document.querySelector('.addProject--description textarea').value = null;
-			document.querySelector('.addProject--previews input').value = null;
 
-		}).catch((e) => {
-			alert(e.message);
+			firebaseDB.ref('/commonData/projectsList/').push({
+				name: projectList.name,
+				href: `/${projectList.name}`,
+				description: projectList.description,
+				urls: {
+					img1: projectList.imagesFull[0],
+					img2: projectList.imagesFull[1],
+					img3: projectList.imagesFull[2]
+				},
+				rsz_urls: {
+					img1: projectList.imagesRsz[0],
+					img2: projectList.imagesRsz[1],
+					img3: projectList.imagesRsz[2]
+				}
+			}).then(() => {
+				alert('New project was added');
+			}).catch((e) => {
+				alert(e.message);
+			})
+
 		})
 	}
 
 	addNewPictureToProject = (e) => {
 		e.preventDefault();
-		let newPicture = {
-			projectName: document.querySelector('.addPictureToExistedProject--projectName input').value,
-			name: document.querySelector('.addPictureToExistedProject--pictureName input').value,
-			info: document.querySelector('.addPictureToExistedProject--pictureInfo input').value,
-			url: document.querySelector('.addPictureToExistedProject--picture input').value,
-		}
-		console.log(newPicture);
-		firebaseDB.ref('/commonData/projects/' + newPicture.projectName + '/').push({
-			name: newPicture.name,
-			info: newPicture.info,
-			url: `/img/Gallery/${newPicture.projectName}/${newPicture.url}`
-		}).then(() => {
-			alert('New picture was added')
-		}).catch((e) => {
-			alert(e.message);
-		})
+		let newPicture = {};
+		let pictureFull = document.querySelector('.addPictureToExistedProject--picture--full input').files[0];
+		let pictureRsz = document.querySelector('.addPictureToExistedProject--picture--rsz input').files[0];
+		let projectName = document.querySelector('.addPictureToExistedProject--projectName input').value;
+		let fullImgPath = null;
+		let smallImgPath = null;
+		let promiseArr = [];
 
+		promiseArr.push(
+			new Promise((resolve)=>{
+				let file = firebaseStorage.ref('/images/projects/' + projectName + '/fullsize').child(pictureFull.name).put(pictureFull)
+					
+				file.on('state_changed', null, null, function(){
+					file.snapshot.ref.getDownloadURL()
+						.then(function(downloadURL) {
+							fullImgPath = downloadURL;
+							resolve()
+						})
+				})
+			})
+		)
+
+		promiseArr.push(
+			new Promise((resolve)=>{
+				let file = firebaseStorage.ref('/images/projects/' + projectName + '/smallsize').child(pictureRsz.name).put(pictureRsz)
+					
+				file.on('state_changed', null, null, function(){
+					file.snapshot.ref.getDownloadURL()
+						.then(function(downloadURL) {
+							smallImgPath = downloadURL;
+							resolve()
+						})
+				})
+			})
+		)
+
+		Promise.all(promiseArr).then((resolve)=>{
+			newPicture = {
+					projectName: projectName,
+					name: document.querySelector('.addPictureToExistedProject--pictureName input').value,
+					info: document.querySelector('.addPictureToExistedProject--pictureInfo input').value,
+					url: fullImgPath,
+					rsz_url: smallImgPath
+				};
+				return newPicture
+		})
+		.then((newPicture) => {
+			firebaseDB.ref('/commonData/projects/' + newPicture.projectName + '/').push({
+				name: newPicture.name,
+				info: newPicture.info,
+				url: newPicture.url,
+				rsz_url: newPicture.rsz_url
+			}).then(() => {
+				alert('New picture was added')
+			}).catch((e) => {
+				alert(e.message);
+			})
+		})
 	}
 	
 
@@ -147,14 +246,15 @@ export default class AdminConsole extends Component {
 					<div className='addEvent--date'>Date/time<input type='datetime-local'></input></div>
 					<div className='addEvent--place'>Place<input type='text'></input></div>
 					<div className='addEvent--description'>Description<textarea rows='5' cols='50' ></textarea></div>
-					<div className='addEvent--poster'>Poster name<input type='text' placeholder='img1.jpg'></input></div>
+					<div className='addEvent--poster'>Poster<input type='file' accept='.jpg, .jpeg, .png, .gif'></input></div>
 					<button onClick={this.addNewEvent}>Add event</button>
 				</div>
 				<div className='AdminConsole__addProject'>
 					<h3>Add new project</h3>
 					<div className='addProject--name'>Project name<input type='text'></input></div>
 					<div className='addProject--description'>Project description<textarea rows='5' cols='50' /></div>
-					<div className='addProject--previews'>Previews for this project<input type='text' placeholder='img1.jpg/img2.jpg/img3.jpg'/></div>
+					<div className='addProject--previews--full'>Previews (3 full size images)<input type='file' accept='.jpg, .jpeg, .png, .gif' multiple/></div>
+					<div className='addProject--previews--rsz'>Previews (3 small size images)<input type='file' accept='.jpg, .jpeg, .png, .gif' multiple/></div>
 					<button onClick={this.addNewProject}>Add Project</button>
 				</div>
 				<div className='AdminConsole__addPictureToExistedProject'>
@@ -162,7 +262,8 @@ export default class AdminConsole extends Component {
 					<div className='addPictureToExistedProject--projectName'>Project name<input type='text' /></div>
 					<div className='addPictureToExistedProject--pictureName'>Picture name<input type='text' /></div>
 					<div className='addPictureToExistedProject--pictureInfo'>Picture info<input type='text' /></div>
-					<div className='addPictureToExistedProject--picture'>Picture<input type='text' placeholder='img1.jpg'/></div>
+					<div className='addPictureToExistedProject--picture--full'>Picture full size<input type='file' accept='.jpg, .jpeg, .png, .gif'/></div>
+					<div className='addPictureToExistedProject--picture--rsz'>Picture small size<input type='file' accept='.jpg, .jpeg, .png, .gif'/></div>
 					<button onClick={this.addNewPictureToProject}>Add Picture</button>
 				</div>
 				<div className='AdminConsole__changeAdminPassword'>
