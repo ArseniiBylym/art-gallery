@@ -33,13 +33,10 @@ export default class Project extends Component {
 
 	imagesLazyLoad = () => {
 		let currentImage = document.querySelector(`[data-position="${this.state.currentPictureIndex}"]`);
-		console.log(currentImage);
 		let img = document.createElement('img');
 
 		img.onload = function(){
-			console.log('image loaded')
 			let allImages = [...document.querySelectorAll('[data-url]')];
-			console.log(allImages);
 			let len = allImages.length;
 			for(let i=0; i<len; i++) {
 				allImages[i].style.backgroundImage = `url(${allImages[i].dataset.url})`;

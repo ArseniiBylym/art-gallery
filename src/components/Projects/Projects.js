@@ -31,12 +31,13 @@ export default class Projects extends Component {
 		let len = posters.length;
 		let promiseArr = [];
 		for (let i=0; i<3; i++) {
-			promiseArr.push(new Promise((resolve) => {
-					posters[i].onload = function() {
-						resolve();
-					}
-				})
-			)
+
+		promiseArr.push(new Promise((resolve) => {
+				posters[i].onload = function() {
+					resolve();
+				}
+			})
+		)
 			posters[i].src = posters[i].dataset.src;
 			posters[i].removeAttribute('data-src');
 		}
