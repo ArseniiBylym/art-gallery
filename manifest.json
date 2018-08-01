@@ -3,6 +3,16 @@
 	"short_name": "MHArt",
 	"icons": [
 		{
+			"src": "/art-gallery/icons/icon16x16.png",
+			"type": "image/png",
+			"sizes": "16x16"
+		},
+		{
+			"src": "/art-gallery/icons/icon24x24.png",
+			"type": "image/png",
+			"sizes": "24x24"
+		},
+		{
 			"src": "/art-gallery/icons/icon32x32.png",
 			"type": "image/png",
 			"sizes": "32x32"
@@ -29,7 +39,6 @@
 		}
 	],
 	"start_url": "/art-gallery/index.html",
-	"scope": "/art-gallery/",
 	"display": "fullscreen",
 	"background_color": "#fff",
 	"theme_color": "#aaa",
