@@ -1,18 +1,6 @@
 self.addEventListener('install', function(e) {
 	e.waitUntil(
-		caches.open('art-gallery-storage').then(function(cache){
-			return cache.addAll([
-				"/art-gallery/index.html",
-				"/art-gallery/manifest.json",
-			  "/art-gallery/static/css/main.b03f73bd.css",
-			  "/art-gallery/static/css/main.b03f73bd.css.map",
-			  "/art-gallery/static/js/main.4162ab29.js",
-			  "/art-gallery/static/js/main.4162ab29.js.map",
-			  "/art-gallery/static/media/img1.a19def4a.jpg",
-			  "/art-gallery/static/media/img1_rsz.99d37f4f.jpg",
-			  "/art-gallery/static/media/rsz_1img1.c3a5ad94.jpg"
-			])
-		})
+		console.log("sw installed");
 	)
 })
 
