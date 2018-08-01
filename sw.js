@@ -1,8 +1,7 @@
 self.addEventListener('install', function(e) {
 	e.waitUntil(
-		caches.open('art-gallery-storage').then((cache) => {
+		caches.open('art-gallery-storage').then(function(cache){
 			return cache.addAll([
-				"/",
 				"/art-gallery/index.html",
 				"/art-gallery/manifest.json",
 			  "/art-gallery/static/css/main.b03f73bd.css",
