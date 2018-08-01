@@ -1,8 +1,4 @@
-self.addEventListener('install', function(e) {
-	e.waitUntil(
-		console.log("sw installed");
-	)
-})
+
 
 self.addEventListener('fetch', function(e) {
 	if (e.request.method === 'GET') {
